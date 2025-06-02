@@ -22,6 +22,7 @@ import { NgoRegisterComponent } from './register/ngo-register/ngo-register.compo
 import { HotelRegisterComponent } from './register/hotel-register/hotel-register.component';
 import { RouterLink } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminScreenComponent } from './admin/admin-screen/admin-screen.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgoListedHotelComponent,
     NgoNavbarComponent,
     NgoRegisterComponent,
-    HotelRegisterComponent
+    HotelRegisterComponent,
+    AdminScreenComponent
   ],
   imports: [
     BrowserModule,

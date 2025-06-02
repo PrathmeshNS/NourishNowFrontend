@@ -12,6 +12,7 @@ import { NgoAvailableFoodComponent } from './ngo/ngo-available-food/ngo-availabl
 import { NgoHistoryComponent } from './ngo/ngo-history/ngo-history.component';
 import { NgoListedHotelComponent } from './ngo/ngo-listed-hotel/ngo-listed-hotel.component';
 import { NgoBookMealComponent } from './ngo/ngo-book-meal/ngo-book-meal.component';
+import { AdminScreenComponent } from './admin/admin-screen/admin-screen.component';
 
 const routes: Routes = [
   {
@@ -63,6 +64,9 @@ const routes: Routes = [
         path: 'view-booked-meal', component: NgoBookMealComponent
       },
     ],
+  },
+  {
+    path:'admin',component:AdminScreenComponent
   }
 ];
 @NgModule({
