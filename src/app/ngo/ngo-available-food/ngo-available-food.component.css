@@ -1,0 +1,301 @@
+body {
+    background: url("/assets/ngo-background.jpg");
+    background-size: cover;
+}
+
+.card-container {
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    gap: 2rem;
+}
+
+.ngo-card {
+    flex: 1 1 300px;
+    max-width: 320px;
+    height: 480px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(20px);
+}
+
+.ngo-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+}
+
+.ngo-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+
+.ngo-card:hover::before {
+    opacity: 1;
+}
+
+.logo-section {
+    padding: 40px 20px 20px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    transition: all 0.4s ease;
+}
+
+.ngo-card:hover .logo-section {
+    transform: translateY(-20px);
+    opacity: 0.3;
+}
+
+.logo-icon img {
+    width: 114%;
+    max-width: 280px;
+    height: 100%;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
+    max-height: 13rem;
+    border-radius: 20px;
+}
+
+.title-section {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    transition: all 0.4s ease;
+}
+
+.ngo-card:hover .title-section {
+    transform: translateY(-30px);
+    opacity: 0.3;
+}
+
+.ngo-name {
+    font-size: 32px;
+    font-weight: 300;
+    color: #000000;
+    margin: 0 0 10px;
+    letter-spacing: 1px;
+}
+
+.hover-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    opacity: 0;
+    z-index: 3;
+    transition: all 0.4s ease;
+    pointer-events: none;
+}
+
+.ngo-card:hover .hover-content {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate(-50%, -50%) translateY(0);
+}
+
+.available-food {
+    width: auto;
+    height: 46%;
+    max-height: 46%;
+    word-wrap: break-word;
+    color: whitesmoke;
+    display: inline-grid;
+    text-align: center;
+    grid-column: auto;
+    align-items: center;
+}
+
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.accept-btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    min-width: 100px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    border: 1px dashed green;
+    background: none;
+    box-shadow: 7px 5px 42px #3d8b40;
+}
+
+.accept-btn:hover {
+    background: linear-gradient(135deg, #45a049, #3d8b40);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.delivery-type {
+    color: whitesmoke;
+    text-align: center;
+    margin: -16px 0 5px;
+
+}
+
+.contact-info {
+    color: white;
+    text-align: center;
+    animation: slideUp 0.6s ease forwards;
+}
+
+.ngo-card:hover,
+.ngo-card.active {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+}
+
+.ngo-card:hover::before,
+.ngo-card.active::before {
+    opacity: 1;
+}
+
+.ngo-card:hover .logo-section,
+.ngo-card.active .logo-section {
+    transform: translateY(-20px);
+    opacity: 0.3;
+}
+
+.ngo-card:hover .title-section,
+.ngo-card.active .title-section {
+    transform: translateY(-30px);
+    opacity: 0.3;
+}
+
+.ngo-card:hover .hover-content,
+.ngo-card.active .hover-content {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate(-50%, -50%) translateY(0);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.address-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #ecf0f1;
+}
+
+.address-text {
+    font-size: 13px;
+    line-height: 1.4;
+    color: #bdc3c7;
+}
+
+.contact-number {
+    font-size: 14px;
+    font-weight: 500;
+    color: #ecf0f1;
+}
+
+.location-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #bdc3c7;
+}
+
+.city,
+.pincode {
+    font-weight: 500;
+}
+
+/* ------------------ Responsive Enhancements ------------------ */
+
+@media (max-width: 1024px) {
+    .card-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-container {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 30px 15px;
+    }
+
+    .ngo-card {
+        max-width: 72%;
+        height: 100%;
+        width: 70%;
+        max-height: 22rem;
+    }
+
+    .logo-section {
+        padding: 30px 10px 15px;
+    }
+
+    .ngo-name {
+        font-size: 24px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .accept-btn,
+    .reject-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .ngo-name {
+        font-size: 20px;
+    }
+
+    .logo-icon img {
+        max-width: 13rem;
+        height: 100%;
+    }
+
+    .address-text,
+    .contact-number,
+    .city,
+    .pincode {
+        font-size: 12px;
+    }
+}

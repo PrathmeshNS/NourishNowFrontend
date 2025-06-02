@@ -1,0 +1,21 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-links">
+      <a
+        *ngFor="let link of navLinks"
+        [routerLink]="link.route"
+        routerLinkActive="active"
+        class="nav-link"
+        [class.active]="link.active"
+        (click)="setActive(navLinks.indexOf(link))"
+      >
+        {{ link.name }}
+      </a>
+    </div>
+    <div class="profile">
+      <div class="logo-container">
+        <img src="./assets/Support.png" alt="NGO Logo" class="logo" />
+      </div>
+    </div>
+  </div>
+</nav>

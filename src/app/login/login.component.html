@@ -1,0 +1,54 @@
+<div class="login-container">
+    <div class="login-card">
+      <h1 class="welcome-text">Welcome User</h1>
+      
+      <div class="login-content">
+        <div class="illustration-container">
+          <div class="illustration">
+              <img src="./assets/loginWomen.svg" alt="" width="380rem">
+          </div>
+        </div>
+        
+        <div class="form-container">
+          <form method="post" (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+            <div class="form-group">
+              <input 
+                type="email" 
+                formControlName="email" 
+                placeholder="Enter Your Email"
+                class="first-input"
+                [ngClass]="{'invalid': email?.invalid && email?.touched}"
+              >
+              <div class="error-message" *ngIf="email?.invalid && email?.touched" style="color: red;">
+                <span *ngIf="email?.errors?.['required']">Email is required</span>
+                <span *ngIf="email?.errors?.['email']">Please enter a valid email</span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <input 
+                type="password" 
+                formControlName="password" 
+                placeholder="Enter Your Password"
+                [ngClass]="{'invalid': password?.invalid && password?.touched}"
+              >
+              <div class="error-message" *ngIf="password?.invalid && password?.touched" style="color: red;">
+                <span *ngIf="password?.errors?.['required']" >Password is required</span>
+                <span *ngIf="password?.errors?.['minlength']">Password must be at least 8 characters</span>
+              </div>
+            </div>
+            
+            <div class="forgot-password">
+              <a href="#">Forget Password?</a>
+            </div>
+            
+            <button type="submit" (click)="loginUser()" class="login-button" style="background:none;">Login</button>
+            
+            <div class="register-link">
+              Don't Have Account? <a href="#">Register Here</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

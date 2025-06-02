@@ -1,0 +1,29 @@
+<body>
+  <app-hotel-navbar></app-hotel-navbar>
+  <div class="container">
+    <h2 class="thank-you-heading">Thank For Contributing</h2>
+    <div class="content-card">
+
+      <table class="contributions-table">
+        <thead>
+          <tr>
+            <th>Sr. No.</th>
+            <th>Date</th>
+            <th>Ngo Name</th>
+            <th>Type</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let contribution of contributions">
+            <td>{{ contribution.id }}.</td>
+            <td>{{ contribution.date }}</td>
+            <td>{{ contribution.ngoName }}</td>
+            <td>{{ contribution.type }}</td>
+            <td>{{ contribution.time }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>

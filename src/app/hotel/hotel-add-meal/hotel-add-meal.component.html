@@ -1,0 +1,78 @@
+<body>
+  <div class="hotel-navbar">
+    <app-hotel-navbar></app-hotel-navbar>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="form-container">
+      <div class="instruction">
+          <p>Please Separate Item with the comma(,)*</p>
+      </div>
+
+      <div class="input-container">
+        <input
+          type="text"
+          placeholder="Enter your Food item......"
+          [(ngModel)]="foodItems"
+          class="food-input"
+          required
+        />
+        <input
+          type="submit"
+          (click)="addFood()"
+          value="add food"
+          class="add-food"
+        />
+      </div>
+      <hr> 
+
+      <div
+        class="show-added-food"
+        *ngIf="foodContainer != null; then showAddeditem"
+      ></div>
+
+      <ng-template #showAddeditem>
+        <div class="added-food">
+          <table class="table" style="background: none;">
+            <tbody *ngFor="let food of foodContainer" style="background: none;">
+              <tr >
+                <th scope="row">{{ foodContainer.indexOf(food) + 1 }}</th>
+                <td>{{ food }}</td>
+                <td>
+                  <button class="action-button">delete</button>
+                  <button class="action-button">edit</button>
+                </td>
+                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ng-template>
+      <hr>
+      <div class="form-options">
+        <div class="delivery-type">
+          <span class="label">Delivery Type :</span>
+          <select [(ngModel)]="deliveryType">
+            <option value="Delivery" selected>Delivery</option>
+            <option value="Pickup">Pickup</option>
+          </select>
+        </div>
+
+        <div class="person-count">
+          <span class="label">Approx person Can Eat :</span>
+          <input
+            type="number"
+            placeholder="Number"
+            [(ngModel)]="personCount"
+            class="number-input"
+            required
+          />
+        </div>
+
+        <button class="add-button" (click)="addItem()">
+          <span class="plus-icon">+</span> Add Item
+        </button>
+      </div>
+    </div>
+  </div>
+</body>

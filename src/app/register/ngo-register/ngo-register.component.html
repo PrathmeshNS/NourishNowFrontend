@@ -1,0 +1,84 @@
+<div class="register-container">
+  <div class="register-card">
+    <h1 class="title">Welcome Ngo's</h1>
+    <h2 class="subtitle">Join Us With Register your Self</h2>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="form-group">
+          <input
+            type="text"
+            formControlName="name"
+            placeholder="Enter Your Name"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="email"
+            formControlName="email"
+            placeholder="Enter Your Email"
+          />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <input
+            type="password"
+            formControlName="password"
+            placeholder="Enter Your Password"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            formControlName="registerNo"
+            placeholder="Enter Your Register No."
+          />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <input
+            type="text"
+            formControlName="address"
+            placeholder="Enter Your Address"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="number"
+            formControlName="contactNo"
+            placeholder="Enter Your ContactNo"
+          />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <input type="text" formControlName="city" placeholder="City" />
+        </div>
+        <div class="form-group">
+          <input
+            type="url"
+            formControlName="website"
+            placeholder="Enter Your Website Url"
+          />
+        </div>
+      </div>
+
+      <div class="form-row submit-row">
+        <button type="submit" class="register-btn">Register</button>
+      </div>
+
+      <div  class="login-link">Have Account? <a  [routerLink]="['/login']" >Login Here</a></div>
+    </form>
+
+    <!-- This is where you should place your background image -->
+    <div class="background-image">
+      <!-- Place your image here -->
+      <img src="./assets/NGORegBack.svg" alt="Background illustration" />
+    </div>
+  </div>
+</div>

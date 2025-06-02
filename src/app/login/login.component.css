@@ -1,0 +1,267 @@
+/* Base styles and variables */
+:root {
+    --primary-color: #ff9f43;
+    --secondary-color: #ff6b6b;
+    --text-color: #333;
+    --light-text: #666;
+    --border-radius: 20px;
+    --input-radius: 12px;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Login container - full screen with centered content */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 50px 40px;
+}
+
+/* Card styling with gradient border */
+.login-card {
+    position: relative;
+    width: 150%;
+    max-width: 1000px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    border: 1px solid #333;
+    line-height: 50px;
+    border-radius: 21px;
+}
+
+/* Create gradient border effect */
+.login-card::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    z-index: -1;
+    border-radius: calc(var(--border-radius) + 2px);
+}
+
+/* Welcome text styling */
+.welcome-text {
+    text-align: center;
+    color: var(--text-color);
+    margin: 60px 0;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+/* Content layout */
+.login-content {
+    display: flex;
+    flex-direction: row;
+    padding: 21px 20px 44px;
+}
+
+/* Illustration container */
+.illustration-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.illustration {
+    position: relative;
+    max-width: 27rem;
+    width: 27rem;
+    height: 24rem;
+    max-height: 26rem;
+}
+
+.illustration>img {
+    max-width: 28rem;
+    width: 27rem;
+    height: 23rem;
+    max-height: 24rem;
+}
+
+.person-image {
+    width: 100%;
+    height: auto;
+}
+
+/* Form container */
+.form-container {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Form styling */
+.form-group {
+    margin-bottom: 10px;
+}
+
+
+input {
+    width: 90%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: var(--input-radius);
+    font-size: 16px;
+    transition: var(--transition);
+    border-radius: 8px;
+}
+
+.first-input {
+    margin: 1.5rem 0 0 0;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(255, 159, 67, 0.2);
+}
+
+input.invalid {
+    border-color: var(--secondary-color);
+}
+
+.error-message {
+    font-size: 14px;
+    margin: -5px 0;
+}
+
+/* Forgot password link */
+.forgot-password {
+    text-align: right;
+    margin: -1rem 3rem 0 20px;
+}
+
+.forgot-password a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+/* Login button */
+.login-button {
+    width: 37%;
+    padding: 3px;
+    border: 1.5px solid grey !important;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: orange;
+    cursor: pointer;
+    transition: var(--transition);
+    margin: 0 calc(100% - 20rem) 0;
+}
+
+
+.login-button:hover {
+    background-color: #f39423 !important;
+    transform: translateY(-2px);
+    color: black;
+    border: none !important;
+}
+
+.login-button:active {
+    transform: translateY(0);
+}
+
+/* Register link */
+.register-link {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--light-text);
+    font-size: 14px;
+}
+
+.register-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .login-content {
+        flex-direction: column;
+    }
+
+    .illustration-container {
+        margin-bottom: 20px;
+    }
+
+    .illustration {
+        max-width: 200px;
+    }
+
+    .lock-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .lock-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .welcome-text {
+        font-size: 24px;
+        margin: 20px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-card {
+        border-radius: calc(var(--border-radius) / 2);
+    }
+
+    .login-card::before {
+        border-radius: calc(var(--border-radius) / 2 + 2px);
+    }
+
+    .illustration {
+        max-width: 150px;
+    }
+
+    .lock-icon {
+        width: 40px;
+        height: 40px;
+        top: 15%;
+    }
+
+    .lock-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    input,
+    .login-button {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .welcome-text {
+        font-size: 20px;
+        margin: 15px 0;
+    }
+}

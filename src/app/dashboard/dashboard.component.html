@@ -1,0 +1,74 @@
+<div class="nav">
+  <app-navbar></app-navbar>
+</div>
+<div class="hero-section">
+  <div class="illustration-container">
+    <!-- Use your SVG image here -->
+    <img
+      src="./assets/HomePage.svg"
+      alt="Charity illustration"
+      class="charity-svg"
+    />
+  </div>
+</div>
+<section class="stats-section">
+  <div class="side-img">
+    <img src="./assets/sidebar.svg" alt="" />
+  </div>
+  <div class="motivational-text">
+    Every meal not wasted is a chance to feed hope. Small actions, shared
+    together, create big change.
+  </div>
+
+  <div class="live-data-container">
+    <div class="live-data-header">Live Data</div>
+
+    <div class="stats-grid">
+      <div
+        class="stat-card left"
+        *ngFor="let stat of statistics"
+        [ngClass]="stat.position"
+      >
+        <div class="stat-content">
+          <div class="stat-text">
+            <div class="stat-title">{{ stat.title }}</div>
+            <div class="stat-count">Count : {{ stat.count }}</div>
+          </div>
+          <div class="stat-image">
+            <div class="squircle">
+              <img src="./assets/HomePage.svg" alt="" co />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="about-us-container">
+  <a href="#about">
+    <div class="background-shape">
+      <img src="./assets/LeftSideBar.svg" alt="Left Side Bar Not Found!!" />
+    </div>
+    <div class="content-container">
+      <div class="header">
+        <div class="about-us-badge">ABOUT US</div>
+      </div>
+      <div class="about-text">
+        <p>
+          At Nourish Now, we believe that every meal has the power to make a
+          difference.
+        </p>
+        <p>
+          Surplus food from hotels becomes a source of hope for those in need.
+        </p>
+        <p>
+          We bridge the gap between giving and receiving — instantly and
+          impactfully.
+        </p>
+        <p>No food wasted. No life forgotten.</p>
+        <p>Together, we nourish lives — now.</p>
+      </div>
+    </div>
+  </a>
+</section>
+<router-outlet></router-outlet>

@@ -1,0 +1,36 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="logo">
+      <!-- You can add your logo here -->
+    </div>
+    
+    <button class="menu-toggle" (click)="toggleMenu()" *ngIf="isMobile">
+      <span class="menu-icon" [class.open]="isMenuOpen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </button>
+
+    
+    <div class="nav-links" [class.active]="isMenuOpen">
+      <a [routerLink]="['./dashboard']" class="nav-link">Home</a>
+      <a href="#" class="nav-link">Donate</a>
+      <a href="#" class="nav-link">Contact Us</a>
+      <a href="#about" class="nav-link">About Us</a>
+      
+      <div class="dropdown">
+        <a href="#" class="nav-link register-link" (click)="toggleRegisterDropdown($event)" (mouseenter)="!isMobile ? isRegisterDropdownOpen = true : null">
+          Register
+          <span class="dropdown-arrow">▼</span>
+        </a>
+        <div class="dropdown-menu" [class.show]="isRegisterDropdownOpen" (mouseleave)="!isMobile ? isRegisterDropdownOpen = false : null">
+          <a routerLink="./register/ngo" class="dropdown-item">NGO Register</a>
+          <a [routerLink]="['./register/hotel']" class="dropdown-item">Hotel Register</a>
+        </div>
+      </div>
+      <a (click)="goToLoginComponent()" class="nav-link login-link">Login</a>
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>
