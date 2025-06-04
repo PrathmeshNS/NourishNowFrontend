@@ -1,0 +1,315 @@
+.registration-card {
+    display: flex;
+    width: 53%;
+    max-width: 777px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    position: absolute;
+    float: right;
+}
+
+/* Left sidebar styles */
+.card-sidebar {
+    float: right;
+    width: 240px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-sidebar::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 100px;
+    height: 100px;
+    background-color: rgba(92, 219, 202, 0.1);
+    border-radius: 50%;
+}
+
+.card-sidebar::after {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    left: -30px;
+    width: 80px;
+    height: 80px;
+    background-color: rgba(92, 219, 202, 0.05);
+    border-radius: 50%;
+}
+
+.brand-container {
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.brand {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #5cdbca;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.brand-underline {
+    width: 40px;
+    height: 3px;
+    background-color: #5cdbca;
+    margin-top: 8px;
+    border-radius: 2px;
+}
+
+.joining-info {
+    margin-top: auto;
+}
+
+.joining-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+}
+
+.joining-date {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Right content styles */
+.card-content {
+    flex: 1;
+    padding: 2rem;
+    position: relative;
+}
+
+.registration-header {
+    margin-bottom: 2rem;
+}
+
+.registration-number {
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.details-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.detail-row {
+    display: flex;
+    gap: 2rem;
+}
+
+.detail-row.full-width .detail-item {
+    width: 100%;
+}
+
+.detail-item {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+}
+
+.detail-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background-color: rgba(92, 219, 202, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.detail-icon::before {
+    font-size: 1.2rem;
+    color: #5cdbca;
+}
+
+.email-icon::before {
+    content: "@";
+}
+
+.phone-icon::before {
+    content: "☏";
+}
+
+.address-icon::before {
+    content: "⌂";
+}
+
+.city-icon::before {
+    content: "🏙️";
+}
+
+.pin-icon::before {
+    content: "📍";
+}
+
+.detail-text {
+    flex: 1;
+}
+
+.label {
+    font-size: 0.9rem;
+    color: #666;
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.value {
+    font-weight: 600;
+    color: #333;
+}
+
+/* Separator */
+.separator {
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.separator-line {
+    flex: 1;
+    height: 1px;
+    background-color: #e0e0e0;
+}
+
+.separator-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #5cdbca;
+    margin: 0 8px;
+}
+
+/* Action buttons */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.btn {
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 140px;
+}
+
+.btn-text {
+    margin-right: 8px;
+}
+
+.btn-icon {
+    font-size: 0.9rem;
+}
+
+.accept-btn {
+    background-color: #00e676;
+    color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 12px rgba(0, 230, 118, 0.3);
+}
+
+.accept-btn:hover {
+    background-color: #00c853;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 230, 118, 0.4);
+}
+
+.decline-btn {
+    background-color: #ff3d00;
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 61, 0, 0.3);
+}
+
+.decline-btn:hover {
+    background-color: #dd2c00;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 61, 0, 0.4);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .registration-card {
+        flex-direction: column;
+        max-width: 500px;
+    }
+
+    .card-sidebar {
+        width: 100%;
+        padding: 1.5rem;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .brand-container {
+        margin-bottom: 0;
+    }
+
+    .joining-info {
+        margin-top: 0;
+        text-align: right;
+    }
+
+    .detail-row {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-content {
+        padding: 1.5rem;
+    }
+
+    .card-sidebar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .brand-container {
+        margin-bottom: 1rem;
+    }
+
+    .joining-info {
+        text-align: left;
+    }
+
+    .registration-number {
+        font-size: 1rem;
+    }
+
+    .detail-icon {
+        width: 32px;
+        height: 32px;
+    }
+}

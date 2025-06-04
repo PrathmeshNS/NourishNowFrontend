@@ -13,6 +13,8 @@ import { NgoHistoryComponent } from './ngo/ngo-history/ngo-history.component';
 import { NgoListedHotelComponent } from './ngo/ngo-listed-hotel/ngo-listed-hotel.component';
 import { NgoBookMealComponent } from './ngo/ngo-book-meal/ngo-book-meal.component';
 import { AdminScreenComponent } from './admin/admin-screen/admin-screen.component';
+import { AdminNavbarComponent } from './admin/admin-navbar/admin-navbar.component';
+import { AdminHotelCheckComponent } from './admin/admin-hotel-check/admin-hotel-check.component';
 
 const routes: Routes = [
   {
@@ -66,7 +68,17 @@ const routes: Routes = [
     ],
   },
   {
-    path:'admin',component:AdminScreenComponent
+    path: 'admin', children: [
+      {
+        path: '', component: AdminScreenComponent, pathMatch:'full'
+      },
+      {
+        path: 'navbar', component: AdminNavbarComponent
+      },
+      {
+        path:'hotel-verified',component:AdminHotelCheckComponent
+      }
+    ]
   }
 ];
 @NgModule({

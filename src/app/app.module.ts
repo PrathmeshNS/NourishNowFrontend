@@ -22,7 +22,17 @@ import { NgoRegisterComponent } from './register/ngo-register/ngo-register.compo
 import { HotelRegisterComponent } from './register/hotel-register/hotel-register.component';
 import { RouterLink } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { AdminScreenComponent } from './admin/admin-screen/admin-screen.component';
+import { AdminNavbarComponent } from './admin/admin-navbar/admin-navbar.component';
+import { AdminHotelCheckComponent } from './admin/admin-hotel-check/admin-hotel-check.component';
+import { AdminNgoCheckComponent } from './admin/admin-ngo-check/admin-ngo-check.component';
+import { AdminHotelAddedMealComponent } from './admin/admin-hotel-added-meal/admin-hotel-added-meal.component';
+import { AdminNgoHotelMealHistoryComponent } from './admin/admin-ngo-hotel-meal-history/admin-ngo-hotel-meal-history.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +53,13 @@ import { AdminScreenComponent } from './admin/admin-screen/admin-screen.componen
     NgoNavbarComponent,
     NgoRegisterComponent,
     HotelRegisterComponent,
-    AdminScreenComponent
+    AdminScreenComponent,
+    AdminNavbarComponent,
+    AdminHotelCheckComponent,
+    AdminNgoCheckComponent,
+    AdminHotelAddedMealComponent,
+    AdminNgoHotelMealHistoryComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -51,7 +67,12 @@ import { AdminScreenComponent } from './admin/admin-screen/admin-screen.componen
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

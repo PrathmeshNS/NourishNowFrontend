@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
+
 
 interface NavigationItem {
   name: string;
@@ -9,19 +10,15 @@ interface NavigationItem {
   subItems?: string[];
 }
 
-interface StatsCard {
-  title: string;
-  verified: number;
-  unverified: number;
-  color: string;
-}
-
 @Component({
-  selector: 'app-admin-screen',
-  templateUrl: './admin-screen.component.html',
-  styleUrls: ['./admin-screen.component.css']
+  selector: 'app-admin-navbar',
+  templateUrl: './admin-navbar.component.html',
+  styleUrls: ['./admin-navbar.component.css']
 })
-export class AdminScreenComponent {
+  
+  
+export class AdminNavbarComponent {
+
   adminName = 'Admin!!!';
   currentDate = 'Jun 2, 2025';
   searchQuery = '';
@@ -35,23 +32,7 @@ export class AdminScreenComponent {
     { name: 'History', icon: '🕐', active: false },
     { name: 'Donation', icon: '🎁', active: false }
   ];
-
-  statsCards: StatsCard[] = [
-    {
-      title: 'Ngo',
-      verified: 65,
-      unverified: 5,
-      color: 'pink'
-    },
-    {
-      title: 'Hotel',
-      verified: 65,
-      unverified: 5,
-      color: 'blue'
-    }
-  ];
-
-  constructor(@Inject(DOCUMENT) private document: Document,private router:Router) { }
+  constructor(@Inject(DOCUMENT) private document: Document, private router: Router) { }
 
   ngOnInit(): void {
     // Check if dark mode was previously enabled
