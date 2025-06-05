@@ -1,1 +1,73 @@
-<p>admin-hotel-added-meal works!</p>
+<div class="app-container" [class.dark-mode]="isDarkMode">
+  <app-admin-navbar (themeToggle)="toggleTheme()"></app-admin-navbar>
+  <main class="main-content">
+    <div class="card-container" >
+      <div class="card" *ngFor="let hotel of hotels">
+        <!-- Header with gradient background -->
+        <div class="card-header">
+          <div class="status-badge">{{ hotel.status }}</div>
+        </div>
+
+        <div class="card-content">
+          <!-- Hotel Name -->
+          <div class="hotel-name">
+            <h2>{{ hotel.name }}</h2>
+            <div class="underline"></div>
+          </div>
+
+          <!-- Food Items Section -->
+          <div class="food-section">
+            <div class="section-header">
+              <div class="icon-container">
+                <i class="material-icons">restaurant</i>
+              </div>
+              <h3>Available Food Items</h3>
+            </div>
+
+            <div class="food-grid">
+              <div class="food-item" *ngFor="let item of hotel.foodItems">
+                <div class="food-category">{{ item.category }}</div>
+                <div class="food-details">{{ item.items }}</div>
+              </div>
+            </div>
+
+            <!-- Quantity Info -->
+            <div class="quantity-info">
+              <i class="material-icons">people</i>
+              <span class="serving-text">
+                <span class="bold">Serves {{ hotel.servingCapacity }}</span>
+              </span>
+              <div class="freshness">
+                <i class="material-icons">access_time</i>
+                <span>{{ hotel.freshness }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Information -->
+          <div class="contact-section">
+            <div class="contact-item">
+              <div class="icon-container blue">
+                <i class="material-icons">phone</i>
+              </div>
+              <div class="contact-details">
+                <div class="contact-label">Contact</div>
+                <div class="contact-value">{{ hotel.contact }}</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="icon-container purple">
+                <i class="material-icons">place</i>
+              </div>
+              <div class="contact-details">
+                <div class="contact-label">Location</div>
+                <div class="contact-value">{{ hotel.location }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

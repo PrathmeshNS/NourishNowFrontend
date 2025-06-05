@@ -1,92 +1,16 @@
-<body>
-  <app-admin-navbar></app-admin-navbar>
-  <div class="registration-card" @cardAnimation>
-    <!-- Left sidebar -->
-    <div class="card-sidebar">
-      <div class="brand-container">
-        <h1 class="brand">Blue Own</h1>
-        <div class="brand-underline"></div>
-      </div>
+<div class="app-container" [class.dark-mode]="isDarkMode">
+  <app-admin-navbar (themeToggle)="toggleTheme()"></app-admin-navbar>
+  <main class="main-content">
+    <div *ngIf="verified then verifiedHotel; else unVerifiedHotel">
 
-      <div class="joining-info">
-        <p class="joining-label">Date of Joining :</p>
-        <p class="joining-date">{{ registrationDetails.dateOfJoining }}</p>
-      </div>
     </div>
+  </main>
+</div>
 
-    <!-- Right content -->
-    <div class="card-content" @contentAnimation>
-      <div class="registration-header">
-        <div class="registration-number">
-          <span class="label">Registration No. : </span>
-          <span class="value">{{ registrationDetails.registrationNo }}</span>
-        </div>
-      </div>
+<ng-template #verifiedHotel>
+  <app-verified-card></app-verified-card>
+</ng-template>
 
-      <div class="details-grid">
-        <div class="detail-row">
-          <div class="detail-item">
-            <div class="detail-icon email-icon"></div>
-            <div class="detail-text">
-              <span class="label">Email : </span>
-              <span class="value">{{ registrationDetails.email }}</span>
-            </div>
-          </div>
-
-          <div class="detail-item">
-            <div class="detail-icon phone-icon"></div>
-            <div class="detail-text">
-              <span class="label">Contact No. : </span>
-              <span class="value">{{ registrationDetails.contactNo }}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="detail-row full-width">
-          <div class="detail-item">
-            <div class="detail-icon address-icon"></div>
-            <div class="detail-text">
-              <span class="label">Full Address : </span>
-              <span class="value">{{ registrationDetails.fullAddress }}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="detail-row">
-          <div class="detail-item">
-            <div class="detail-icon city-icon"></div>
-            <div class="detail-text">
-              <span class="label">City : </span>
-              <span class="value">{{ registrationDetails.city }}</span>
-            </div>
-          </div>
-
-          <div class="detail-item">
-            <div class="detail-icon pin-icon"></div>
-            <div class="detail-text">
-              <span class="label">Pincode : </span>
-              <span class="value">{{ registrationDetails.pincode }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="separator">
-        <div class="separator-dot"></div>
-        <div class="separator-line"></div>
-        <div class="separator-dot"></div>
-      </div>
-
-      <div class="action-buttons">
-        <button class="btn accept-btn" (click)="onAccept()">
-          <span class="btn-text">Accept</span>
-          <span class="btn-icon">✓</span>
-        </button>
-        <button class="btn decline-btn" (click)="onDecline()">
-          <span class="btn-text">Decline</span>
-          <span class="btn-icon">✕</span>
-        </button>
-      </div>
-    </div>
-  </div>
-</body>
+<ng-template #unVerifiedHotel>
+  <app-unverified-card [cardData]="cards"></app-unverified-card>
+</ng-template>

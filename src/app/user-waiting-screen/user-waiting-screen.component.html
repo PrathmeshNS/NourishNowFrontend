@@ -1,20 +1,77 @@
-<div class="verification-container">
-  <div class="content-wrapper">
-    <div class="left-section">
-        <img src="./assets/VerificationImage.svg" alt="">
-    </div>
+<div class="waiting-screen-container">
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="content-wrapper">
+      <div class="content-card">
+        <div class="content-grid">
+          <!-- Left Side - Image Area -->
+          <div class="image-section">
+            <div class="image-container">
+              <!-- Placeholder for your SVG image -->
+              <div class="image-placeholder">
+                <img src="./assets/VerificationImage.svg" alt="" />
+              </div>
+            </div>
+          </div>
 
-    <div class="right-section">
-      <h1>Welcome to Nourish Now!</h1>
-      <p>
-        We're reviewing your details to create a safe and impactful experience
-        for all.
-        Your journey toward reducing food waste and feeding those in need is
-        just beginning.
-      </p>
-      <p class="thank-you">
-        Thank you for being a part of something that truly matters.
-      </p>
+          <!-- Right Side - Content -->
+          <div class="text-section">
+            <!-- Welcome Message -->
+            <div class="welcome-content">
+              <div class="welcome-header">
+                <h2 class="welcome-title">
+                  Welcome to <span class="gradient-text">Nourish Now!</span>
+                </h2>
+
+                <div class="welcome-description">
+                  <p class="description-main">
+                    We're reviewing your details to create a safe and impactful
+                    experience for all.
+                  </p>
+                  <p class="description-secondary">
+                    Your journey toward reducing food waste and feeding those in
+                    need is just beginning.
+                  </p>
+                </div>
+              </div>
+
+              <div class="thank-you-card">
+                <p class="thank-you-text">
+                  Thank you for being a part of something that truly matters.
+                </p>
+              </div>
+            </div>
+
+            <!-- Message to Admin Section -->
+            <div class="admin-message-card">
+              <form (ngSubmit)="onSubmit()" class="message-form">
+                <div class="form-group">
+                  <label for="admin-message" class="form-label"
+                    >Message To Admin</label
+                  >
+                  <textarea
+                    id="admin-message"
+                    [(ngModel)]="adminMessage"
+                    name="adminMessage"
+                    placeholder="Share any questions, concerns, or additional information with our admin team..."
+                    class="form-textarea"
+                    rows="4"
+                  >
+                  </textarea>
+                </div>
+                <button type="submit" class="submit-button">
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+
+  <!-- Loading Animation -->
+  <div class="loading-indicator">
+    <div class="loading-spinner"></div>
   </div>
 </div>

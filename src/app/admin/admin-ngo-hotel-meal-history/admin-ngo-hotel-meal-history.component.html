@@ -1,1 +1,96 @@
-<p>admin-ngo-hotel-meal-history works!</p>
+<div class="app-container" [class.dark-mode]="isDarkMode">
+  <app-admin-navbar (themeToggle)="toggleTheme()"></app-admin-navbar>
+  <main class="main-content">
+    <div class="history-container">
+      <div class="header-section">
+        <h1 class="page-title">
+          <i class="material-icons">history</i>
+          Donation History
+        </h1>
+        <p class="page-subtitle">
+          Track all food donations between hotels and NGOs
+        </p>
+      </div>
+
+      <div class="table-wrapper">
+        <div class="table-header">
+          <div class="table-info">
+            <span class="total-records"
+              >Total Records: {{ donationHistory.length }}</span
+            >
+          </div>
+          <div class="legend">
+            <span class="legend-item">
+              <span class="legend-dot pickup"></span>
+              Pickup
+            </span>
+            <span class="legend-item">
+              <span class="legend-dot delivery"></span>
+              Delivery
+            </span>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th class="sr-no-col">Sr. No.</th>
+                <th class="hotel-col">Hotel Name</th>
+                <th class="ngo-col">NGO Name</th>
+                <th class="date-col">Date</th>
+                <th class="time-col">Time</th>
+                <th class="type-col">Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let record of donationHistory; let i = index"
+                class="table-row"
+                [class.even-row]="i % 2 === 1"
+              >
+                <td class="sr-no">{{ record.srNo }}</td>
+                <td class="hotel-name">
+                  <div class="hotel-info">
+                    <i class="material-symbols-outlined">room_service</i>
+                    <span>{{ record.hotelName }}</span>
+                  </div>
+                </td>
+                <td class="ngo-name">
+                  <div class="ngo-info">
+                    <i class="material-symbols-outlined">concierge</i>
+                    <span>{{ record.ngoName }}</span>
+                  </div>
+                </td>
+                <td class="date">{{ formatDate(record.date) }}</td>
+                <td class="time">{{ record.time }}</td>
+                <td class="type">
+                  <span
+                    class="type-badge"
+                    [ngClass]="getTypeClass(record.type)"
+                  >
+                    <i class="material-icons">
+                      {{
+                        record.type === "Pickup"
+                          ? "local_shipping"
+                          : "delivery_dining"
+                      }}
+                    </i>
+                    {{ record.type }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Empty state (if no records) -->
+        <div class="empty-state" *ngIf="donationHistory.length === 0">
+          <i class="material-icons">inbox</i>
+          <h3>No donation history found</h3>
+          <p>Start tracking donations to see them here</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

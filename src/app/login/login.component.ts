@@ -2,38 +2,60 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+interface LoginData {
+  email: string;
+  password: string;
+}
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  loginData: LoginData = {
+    email: '',
+    password: ''
+  };
 
-  loginForm: FormGroup;
+  showPassword: boolean = false;
+  isLoading: boolean = false;
 
-  constructor(private fb: FormBuilder,  private router: Router) {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
-    });
-  }
+  constructor() { }
 
-  onSubmit() {
-    if (this.loginForm.valid) {
-      console.log('Form submitted:', this.loginForm.value);
-      // Add your authentication logic here
-    } else {
-      // Mark all fields as touched to trigger validation messages
-      Object.keys(this.loginForm.controls).forEach(key => {
-        const control = this.loginForm.get(key);
-        control?.markAsTouched();
-      });
+  onLogin(): void {
+    if (this.loginData.email && this.loginData.password) {
+      this.isLoading = true;
+
+      // Simulate API call
+      setTimeout(() => {
+        console.log('Login attempt:', this.loginData);
+        this.isLoading = false;
+
+        // Handle successful login here
+        // For example: this.router.navigate(['/dashboard']);
+        alert('Login successful!');
+      }, 2000);
     }
   }
-  loginUser() {
-    this.router.navigate(['./hotel/'])
+
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
   }
 
-  get email() { return this.loginForm.get('email'); }
-  get password() { return this.loginForm.get('password'); }
+  onForgotPassword(event: Event): void {
+    event.preventDefault();
+    console.log('Forgot password clicked');
+    // Handle forgot password logic
+    alert('Forgot password functionality would be implemented here');
+  }
+
+  onRegister(event: Event): void {
+    event.preventDefault();
+    console.log('Register clicked');
+    // Handle navigation to register page
+    // For example: this.router.navigate(['/register']);
+    alert('Register functionality would be implemented here');
+  }
 }

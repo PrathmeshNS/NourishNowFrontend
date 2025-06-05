@@ -1,5 +1,4 @@
 import { Component, HostListener } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,42 +6,26 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+  isMenuOpen = false
+  isMobile = false
 
-  isMenuOpen = false;
-  isRegisterDropdownOpen = false;
-  isMobile = false;
-
-  constructor(private router: Router, private active: ActivatedRoute) {
-
-    this.checkScreenSize();
+  constructor() {
+    this.checkScreenSize()
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener("window:resize", ["$event"])
   onResize() {
-    this.checkScreenSize();
+    this.checkScreenSize()
   }
 
   checkScreenSize() {
-    this.isMobile = window.innerWidth < 768;
+    this.isMobile = window.innerWidth < 768
     if (!this.isMobile) {
-      this.isMenuOpen = false;
+      this.isMenuOpen = false
     }
   }
 
   toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
-
-  toggleRegisterDropdown(event: Event) {
-    event.preventDefault();
-    this.isRegisterDropdownOpen = !this.isRegisterDropdownOpen;
-  }
-
-  closeDropdown() {
-    this.isRegisterDropdownOpen = false;
-  }
-
-  goToLoginComponent() {
-    this.router.navigate(['/login']).finally
+    this.isMenuOpen = !this.isMenuOpen
   }
 }

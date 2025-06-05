@@ -1,84 +1,520 @@
 <div class="register-container">
-  <div class="register-card">
-    <h1 class="title">Welcome Ngo's</h1>
-    <h2 class="subtitle">Join Us With Register your Self</h2>
+  <!-- Background Elements -->
+  <div class="bg-decoration bg-decoration-1"></div>
+  <div class="bg-decoration bg-decoration-2"></div>
+  <div class="bg-decoration bg-decoration-3"></div>
+  <div class="bg-decoration bg-decoration-4"></div>
 
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <div class="form-row">
-        <div class="form-group">
-          <input
-            type="text"
-            formControlName="name"
-            placeholder="Enter Your Name"
-          />
-        </div>
-        <div class="form-group">
-          <input
-            type="email"
-            formControlName="email"
-            placeholder="Enter Your Email"
-          />
+  <div class="register-wrapper">
+    <div class="register-card">
+      <!-- Header -->
+      <div class="register-header">
+        <h1 class="welcome-title">
+          <span class="welcome-text">Welcome</span>
+          <span class="ngo-text">NGO's</span>
+        </h1>
+        <p class="welcome-subtitle">
+          Join us and register yourself to make a difference
+        </p>
+        <div class="progress-indicator">
+          <div class="progress-step active">
+            <div class="step-number">1</div>
+            <span class="step-label">Personal Info</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step">
+            <div class="step-number">2</div>
+            <span class="step-label">Verification</span>
+          </div>
         </div>
       </div>
 
-      <div class="form-row">
-        <div class="form-group">
-          <input
-            type="password"
-            formControlName="password"
-            placeholder="Enter Your Password"
-          />
+      <div class="register-content">
+        <!-- Left Side - Illustration -->
+        <div class="illustration-section">
+          <div class="illustration-container">
+            <!-- Person Illustration -->
+            <div class="person-illustration">
+              <div class="person-body">
+                <div class="person-head">
+                  <div class="person-hair"></div>
+                  <div class="person-face">
+                    <div class="eye eye-left"></div>
+                    <div class="eye eye-right"></div>
+                    <div class="smile"></div>
+                  </div>
+                </div>
+                <div class="person-torso"></div>
+                <div class="person-arms">
+                  <div class="arm arm-left"></div>
+                  <div class="arm arm-right"></div>
+                </div>
+                <div class="person-legs">
+                  <div class="leg leg-left"></div>
+                  <div class="leg leg-right"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating Elements -->
+            <div class="floating-element element-1">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </div>
+            <div class="floating-element element-2">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+            </div>
+            <div class="floating-element element-3">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path
+                  d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                />
+                <polyline points="3.27,6.96 12,12.01 20.73,6.96" />
+                <line x1="12" y1="22.08" x2="12" y2="12" />
+              </svg>
+            </div>
+
+            <!-- Decorative Circles -->
+            <div class="decorative-circle circle-1"></div>
+            <div class="decorative-circle circle-2"></div>
+            <div class="decorative-circle circle-3"></div>
+          </div>
         </div>
-        <div class="form-group">
-          <input
-            type="text"
-            formControlName="registerNo"
-            placeholder="Enter Your Register No."
-          />
+
+        <!-- Right Side - Registration Form -->
+        <div class="form-section">
+          <form
+            (ngSubmit)="onRegister()"
+            class="register-form"
+            #registerForm="ngForm"
+          >
+            <div class="form-grid">
+              <!-- Row 1 -->
+              <div class="form-group">
+                <label for="name" class="form-label">Full Name</label>
+                <div class="input-wrapper">
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    [(ngModel)]="registerData.name"
+                    placeholder="Enter your full name"
+                    class="form-input"
+                    required
+                    #nameInput="ngModel"
+                  />
+                  <div class="input-icon">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  class="error-message"
+                  *ngIf="nameInput.invalid && nameInput.touched"
+                >
+                  Full name is required
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="form-label">Email Address</label>
+                <div class="input-wrapper">
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    [(ngModel)]="registerData.email"
+                    placeholder="Enter your email"
+                    class="form-input"
+                    required
+                    #emailInput="ngModel"
+                  />
+                  <div class="input-icon">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <path
+                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                      />
+                      <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  class="error-message"
+                  *ngIf="emailInput.invalid && emailInput.touched"
+                >
+                  Please enter a valid email address
+                </div>
+              </div>
+
+              <!-- Row 2 -->
+              <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <div class="input-wrapper">
+                  <input
+                    [type]="showPassword ? 'text' : 'password'"
+                    id="password"
+                    name="password"
+                    [(ngModel)]="registerData.password"
+                    placeholder="Create a strong password"
+                    class="form-input"
+                    required
+                    minlength="6"
+                    #passwordInput="ngModel"
+                  />
+                  <button
+                    type="button"
+                    class="password-toggle"
+                    (click)="togglePassword()"
+                  >
+                    <svg
+                      *ngIf="!showPassword"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                    <svg
+                      *ngIf="showPassword"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <path
+                        d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"
+                      />
+                      <line x1="1" y1="1" x2="23" y2="23" />
+                    </svg>
+                  </button>
+                </div>
+                <div
+                  class="error-message"
+                  *ngIf="passwordInput.invalid && passwordInput.touched"
+                >
+                  Password must be at least 6 characters
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="registerNo" class="form-label"
+                  >Registration Number</label
+                >
+                <div class="input-wrapper">
+                  <input
+                    type="text"
+                    id="registerNo"
+                    name="registerNo"
+                    [(ngModel)]="registerData.registerNo"
+                    placeholder="NGO registration number"
+                    class="form-input"
+                    required
+                    #registerNoInput="ngModel"
+                  />
+                  <div class="input-icon">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <path
+                        d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                      />
+                      <polyline points="14,2 14,8 20,8" />
+                      <line x1="16" y1="13" x2="8" y2="13" />
+                      <line x1="16" y1="17" x2="8" y2="17" />
+                      <polyline points="10,9 9,9 8,9" />
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  class="error-message"
+                  *ngIf="registerNoInput.invalid && registerNoInput.touched"
+                >
+                  Registration number is required
+                </div>
+              </div>
+
+              <!-- Row 3 -->
+              <div class="form-group">
+                <label for="address" class="form-label">Address</label>
+                <div class="input-wrapper">
+                  <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    [(ngModel)]="registerData.address"
+                    placeholder="Enter your address"
+                    class="form-input"
+                    required
+                    #addressInput="ngModel"
+                  />
+                  <div class="input-icon">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <path
+                        d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                      />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  class="error-message"
+                  *ngIf="addressInput.invalid && addressInput.touched"
+                >
+                  Address is required
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contactNo" class="form-label">Contact Number</label>
+                <div class="input-wrapper">
+                  <input
+                    type="tel"
+                    id="contactNo"
+                    name="contactNo"
+                    [(ngModel)]="registerData.contactNo"
+                    placeholder="Enter contact number"
+                    class="form-input"
+                    required
+                    #contactInput="ngModel"
+                  />
+                  <div class="input-icon">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <path
+                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  class="error-message"
+                  *ngIf="contactInput.invalid && contactInput.touched"
+                >
+                  Contact number is required
+                </div>
+              </div>
+
+              <!-- Row 4 -->
+              <div class="form-group">
+                <label for="city" class="form-label">City</label>
+                <div class="input-wrapper">
+                  <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    [(ngModel)]="registerData.city"
+                    placeholder="Enter your city"
+                    class="form-input"
+                    required
+                    #cityInput="ngModel"
+                  />
+                  <div class="input-icon">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <path d="M3 21h18" />
+                      <path d="M5 21V7l8-4v18" />
+                      <path d="M19 21V9.5l-6-2.7" />
+                      <path d="M9 9v.01" />
+                      <path d="M9 12v.01" />
+                      <path d="M9 15v.01" />
+                      <path d="M9 18v.01" />
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  class="error-message"
+                  *ngIf="cityInput.invalid && cityInput.touched"
+                >
+                  City is required
+                </div>
+              </div>
+
+              <!-- New Pincode Field -->
+              <div class="form-group">
+                <label for="pincode" class="form-label">Pincode</label>
+                <div class="input-wrapper">
+                  <input
+                    type="text"
+                    id="pincode"
+                    name="pincode"
+                    [(ngModel)]="registerData.pincode"
+                    placeholder="Enter your pincode"
+                    class="form-input"
+                    required
+                    pattern="[0-9]{5,6}"
+                    #pincodeInput="ngModel"
+                  />
+                  <div class="input-icon">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                      <line x1="9" y1="9" x2="15" y2="9" />
+                      <line x1="9" y1="12" x2="15" y2="12" />
+                      <line x1="9" y1="15" x2="15" y2="15" />
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  class="error-message"
+                  *ngIf="pincodeInput.invalid && pincodeInput.touched"
+                >
+                  <span *ngIf="pincodeInput.errors?.['required']"
+                    >Pincode is required</span
+                  >
+                  <span *ngIf="pincodeInput.errors?.['pattern']"
+                    >Enter a valid 5-6 digit pincode</span
+                  >
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="website" class="form-label">Website URL</label>
+                <div class="input-wrapper">
+                  <input
+                    type="url"
+                    id="website"
+                    name="website"
+                    [(ngModel)]="registerData.website"
+                    placeholder="https://your-website.com"
+                    class="form-input"
+                    #websiteInput="ngModel"
+                  />
+                  <div class="input-icon">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="2" y1="12" x2="22" y2="12" />
+                      <path
+                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  class="error-message"
+                  *ngIf="websiteInput.invalid && websiteInput.touched"
+                >
+                  Please enter a valid URL
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <div class="terms-checkbox">
+                <input
+                  type="checkbox"
+                  id="terms"
+                  name="terms"
+                  [(ngModel)]="acceptTerms"
+                  required
+                  #termsInput="ngModel"
+                />
+                <label for="terms" class="checkbox-label">
+                  I agree to the
+                  <a href="#" class="terms-link">Terms & Conditions</a> and
+                  <a href="#" class="terms-link">Privacy Policy</a>
+                </label>
+              </div>
+              <div
+                class="error-message"
+                *ngIf="termsInput.invalid && termsInput.touched"
+              >
+                Please accept the terms and conditions
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="register-button"
+              [disabled]="registerForm.invalid || isLoading"
+              [class.loading]="isLoading"
+            >
+              <span *ngIf="!isLoading">Register Now</span>
+              <span *ngIf="isLoading" class="loading-spinner"></span>
+            </button>
+
+            <div class="login-link">
+              <span>Already have an account?</span>
+              <a href="#" (click)="onLogin($event)" class="login-button"
+                >Sign In Here</a
+              >
+            </div>
+          </form>
         </div>
       </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <input
-            type="text"
-            formControlName="address"
-            placeholder="Enter Your Address"
-          />
-        </div>
-        <div class="form-group">
-          <input
-            type="number"
-            formControlName="contactNo"
-            placeholder="Enter Your ContactNo"
-          />
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <input type="text" formControlName="city" placeholder="City" />
-        </div>
-        <div class="form-group">
-          <input
-            type="url"
-            formControlName="website"
-            placeholder="Enter Your Website Url"
-          />
-        </div>
-      </div>
-
-      <div class="form-row submit-row">
-        <button type="submit" class="register-btn">Register</button>
-      </div>
-
-      <div  class="login-link">Have Account? <a  [routerLink]="['/login']" >Login Here</a></div>
-    </form>
-
-    <!-- This is where you should place your background image -->
-    <div class="background-image">
-      <!-- Place your image here -->
-      <img src="./assets/NGORegBack.svg" alt="Background illustration" />
     </div>
   </div>
 </div>

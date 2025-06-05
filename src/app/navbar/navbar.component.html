@@ -1,36 +1,34 @@
 <nav class="navbar">
   <div class="navbar-container">
-    <div class="logo">
-      <!-- You can add your logo here -->
+    <div class="navbar-brand">
+      <a href="#" class="logo">NourishHope</a>
     </div>
     
-    <button class="menu-toggle" (click)="toggleMenu()" *ngIf="isMobile">
-      <span class="menu-icon" [class.open]="isMenuOpen">
-        <span></span>
-        <span></span>
-        <span></span>
-      </span>
+    <button class="navbar-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen">
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
-
     
-    <div class="nav-links" [class.active]="isMenuOpen">
-      <a [routerLink]="['./dashboard']" class="nav-link">Home</a>
-      <a href="#" class="nav-link">Donate</a>
-      <a href="#" class="nav-link">Contact Us</a>
-      <a href="#about" class="nav-link">About Us</a>
-      
-      <div class="dropdown">
-        <a href="#" class="nav-link register-link" (click)="toggleRegisterDropdown($event)" (mouseenter)="!isMobile ? isRegisterDropdownOpen = true : null">
-          Register
-          <span class="dropdown-arrow">▼</span>
-        </a>
-        <div class="dropdown-menu" [class.show]="isRegisterDropdownOpen" (mouseleave)="!isMobile ? isRegisterDropdownOpen = false : null">
-          <a routerLink="./register/ngo" class="dropdown-item">NGO Register</a>
-          <a [routerLink]="['./register/hotel']" class="dropdown-item">Hotel Register</a>
-        </div>
+    <div class="navbar-menu" [class.active]="isMenuOpen">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a href="#" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Donate</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Contact Us</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">About Us</a>
+        </li>
+      </ul>
+      <div class="navbar-auth">
+        <a href="#" class="auth-link register">Register</a>
+        <a [routerLink]="['login']" class="auth-link login">Login</a>
       </div>
-      <a (click)="goToLoginComponent()" class="nav-link login-link">Login</a>
     </div>
   </div>
 </nav>
-<router-outlet></router-outlet>

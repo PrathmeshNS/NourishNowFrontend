@@ -1,0 +1,476 @@
+.card-section {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 0 0.5rem;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+    position: relative;
+}
+
+[data-theme="dark"] .section-title {
+    color: #ecf0f1;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 2px;
+}
+
+.section-stats {
+    display: flex;
+    gap: 2rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    color: white;
+    min-width: 80px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 2rem;
+    padding: 0 0.5rem;
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+[data-theme="dark"] .card {
+    background: #34495e;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 2rem;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    transform: rotate(45deg);
+}
+
+.brand-section {
+    position: relative;
+    z-index: 1;
+}
+
+.brand-logo {
+    position: relative;
+}
+
+.brand-text {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4ecdc4;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+}
+
+.brand-underline {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+    margin-top: 0.5rem;
+    border-radius: 2px;
+}
+
+.registration-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: relative;
+    z-index: 1;
+}
+
+.registration-label {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    margin-bottom: 0.25rem;
+}
+
+.registration-number {
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    backdrop-filter: blur(10px);
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="dark"] .info-item {
+    background: #2c3e50;
+}
+
+.info-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .info-item:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.info-item.full-width {
+    grid-column: 1 / -1;
+}
+
+.info-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.email-icon {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.contact-icon {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.address-icon {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.city-icon {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.pincode-icon {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+}
+
+.info-label {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    font-weight: 500;
+}
+
+[data-theme="dark"] .info-label {
+    color: #bdc3c7;
+}
+
+.info-value {
+    font-size: 0.9rem;
+    color: #2c3e50;
+    font-weight: 600;
+    word-break: break-all;
+}
+
+[data-theme="dark"] .info-value {
+    color: #ecf0f1;
+}
+
+.joining-date {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.joining-date::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shimmer 2s infinite;
+}
+
+.date-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.date-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.card-footer {
+    display: flex;
+    gap: 1rem;
+    padding: 12px 2rem 2rem;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.action-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.accept-btn {
+    background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);
+}
+
+.accept-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 184, 148, 0.4);
+}
+
+.decline-btn {
+    background: linear-gradient(135deg, #e17055 0%, #fd79a8 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(225, 112, 85, 0.3);
+}
+
+.decline-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(225, 112, 85, 0.4);
+}
+
+/* Animations */
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0;
+    }
+
+    .section-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .card-header {
+        padding: 1.5rem;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .registration-info {
+        align-items: flex-start;
+    }
+
+    .brand-text {
+        font-size: 1.5rem;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .info-item {
+        padding: 0.75rem;
+    }
+
+    .info-icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .joining-date {
+        padding: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .card-footer {
+        flex-direction: column;
+        padding: 0 1.5rem 1.5rem;
+    }
+
+    .action-btn {
+        padding: 0.75rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 1.25rem;
+    }
+
+    .stat-item {
+        padding: 0.75rem;
+        min-width: 60px;
+    }
+
+    .stat-number {
+        font-size: 1.25rem;
+    }
+
+    .brand-text {
+        font-size: 1.25rem;
+    }
+
+    .registration-number {
+        font-size: 0.8rem;
+    }
+
+    .info-value {
+        font-size: 0.8rem;
+    }
+}

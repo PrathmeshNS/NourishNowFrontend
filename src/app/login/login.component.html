@@ -1,54 +1,150 @@
 <div class="login-container">
+  <!-- Background Elements -->
+  <div class="bg-decoration bg-decoration-1"></div>
+  <div class="bg-decoration bg-decoration-2"></div>
+  <div class="bg-decoration bg-decoration-3"></div>
+
+  <div class="login-wrapper">
     <div class="login-card">
-      <h1 class="welcome-text">Welcome User</h1>
-      
+      <!-- Header -->
+      <div class="login-header">
+        <h1 class="welcome-title">
+          <span class="welcome-text">Welcome</span>
+          <span class="user-text">User</span>
+        </h1>
+        <p class="welcome-subtitle">Sign in to continue your journey</p>
+      </div>
+
       <div class="login-content">
-        <div class="illustration-container">
-          <div class="illustration">
-              <img src="./assets/loginWomen.svg" alt="" width="380rem">
+        <!-- Left Side - Illustration -->
+        <div class="illustration-section">
+          <div class="illustration-container">
+            <!-- Person Illustration -->
+            <div class="person-illustration">
+              <div class="person-body">
+                <div class="person-head">
+                  <div class="person-hair"></div>
+                  <div class="person-face"></div>
+                </div>
+                <div class="person-torso"></div>
+                <div class="person-arms">
+                  <div class="arm arm-left"></div>
+                  <div class="arm arm-right"></div>
+                </div>
+                <div class="person-legs">
+                  <div class="leg leg-left"></div>
+                  <div class="leg leg-right"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Laptop Illustration -->
+            <div class="laptop-illustration">
+              <div class="laptop-screen">
+                <div class="screen-content">
+                  <div class="screen-line screen-line-1"></div>
+                  <div class="screen-line screen-line-2"></div>
+                  <div class="screen-line screen-line-3"></div>
+                </div>
+              </div>
+              <div class="laptop-base"></div>
+              <div class="laptop-keyboard"></div>
+            </div>
+
+            <!-- Security Icon -->
+            <div class="security-icon">
+              <div class="lock-body">
+                <div class="lock-shackle"></div>
+                <div class="lock-keyhole"></div>
+              </div>
+              <div class="security-pulse"></div>
+            </div>
+
+            <!-- Connecting Line -->
+            <div class="connection-line"></div>
           </div>
         </div>
-        
-        <div class="form-container">
-          <form method="post" (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+
+        <!-- Right Side - Login Form -->
+        <div class="form-section">
+          <form (ngSubmit)="onLogin()" class="login-form" #loginForm="ngForm">
             <div class="form-group">
-              <input 
-                type="email" 
-                formControlName="email" 
-                placeholder="Enter Your Email"
-                class="first-input"
-                [ngClass]="{'invalid': email?.invalid && email?.touched}"
-              >
-              <div class="error-message" *ngIf="email?.invalid && email?.touched" style="color: red;">
-                <span *ngIf="email?.errors?.['required']">Email is required</span>
-                <span *ngIf="email?.errors?.['email']">Please enter a valid email</span>
+              <label for="email" class="form-label">Email Address</label>
+              <div class="input-wrapper">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  [(ngModel)]="loginData.email"
+                  placeholder="Enter your email"
+                  class="form-input"
+                  required
+                  #emailInput="ngModel">
+                <div class="input-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="error-message" *ngIf="emailInput.invalid && emailInput.touched">
+                Please enter a valid email address
               </div>
             </div>
-            
+
             <div class="form-group">
-              <input 
-                type="password" 
-                formControlName="password" 
-                placeholder="Enter Your Password"
-                [ngClass]="{'invalid': password?.invalid && password?.touched}"
-              >
-              <div class="error-message" *ngIf="password?.invalid && password?.touched" style="color: red;">
-                <span *ngIf="password?.errors?.['required']" >Password is required</span>
-                <span *ngIf="password?.errors?.['minlength']">Password must be at least 8 characters</span>
+              <label for="password" class="form-label">Password</label>
+              <div class="input-wrapper">
+                <input
+                  [type]="showPassword ? 'text' : 'password'"
+                  id="password"
+                  name="password"
+                  [(ngModel)]="loginData.password"
+                  placeholder="Enter your password"
+                  class="form-input"
+                  required
+                  #passwordInput="ngModel">
+                <button
+                  type="button"
+                  class="password-toggle"
+                  (click)="togglePassword()">
+                  <svg *ngIf="!showPassword" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                  <svg *ngIf="showPassword" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                    <line x1="1" y1="1" x2="23" y2="23"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="error-message" *ngIf="passwordInput.invalid && passwordInput.touched">
+                Password is required
               </div>
             </div>
-            
-            <div class="forgot-password">
-              <a href="#">Forget Password?</a>
+
+            <div class="form-actions">
+              <a href="#" class="forgot-password" (click)="onForgotPassword($event)">
+                Forgot Password?
+              </a>
             </div>
-            
-            <button type="submit" (click)="loginUser()" class="login-button" style="background:none;">Login</button>
-            
+
+            <button
+              type="submit"
+              class="login-button"
+              [disabled]="loginForm.invalid || isLoading"
+              [class.loading]="isLoading">
+              <span *ngIf="!isLoading">Login</span>
+              <span *ngIf="isLoading" class="loading-spinner"></span>
+            </button>
+
             <div class="register-link">
-              Don't Have Account? <a href="#">Register Here</a>
+              <span>Don't have an account?</span>
+              <a href="#" (click)="onRegister($event)" class="register-button">Register Here</a>
             </div>
           </form>
         </div>
       </div>
     </div>
   </div>
+</div>

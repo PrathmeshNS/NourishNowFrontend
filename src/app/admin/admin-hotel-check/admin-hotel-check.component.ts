@@ -1,61 +1,109 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { trigger, state, style, animate, transition } from "@angular/animations"
+import { Component, EventEmitter, Output } from "@angular/core"
+import { NavbarClickService } from "../service/navbar-click.service";
 
-export interface RegistrationDetails {
-  registrationNo: string
-  email: string
-  contactNo: string
-  fullAddress: string
-  city: string
-  pincode: string
-  dateOfJoining: string
+
+interface CardData {
+  id: string;
+  registrationNo: string;
+  name: string
+  email: string;
+  contactNo: string;
+  fullAddress: string;
+  city: string;
+  pincode: string;
+  dateOfJoining: string;
 }
 
 @Component({
   selector: 'app-admin-hotel-check',
   templateUrl: './admin-hotel-check.component.html',
   styleUrls: ['./admin-hotel-check.component.css'],
-  animations: [
-    trigger("cardAnimation", [
-      state(
-        "void",
-        style({
-          opacity: 0,
-          transform: "translateY(20px)",
-        }),
-      ),
-      transition("void => *", [animate("0.4s ease-out")]),
-    ]),
-    trigger("contentAnimation", [
-      state(
-        "void",
-        style({
-          opacity: 0,
-        }),
-      ),
-      transition("void => *", [animate("0.5s 0.2s ease-out")]),
-    ]),
-  ],
 })
 export class AdminHotelCheckComponent {
-  @Input() registrationDetails: RegistrationDetails = {
-    registrationNo: "87456dafsd45123ffdgdf",
-    email: "blue@gmail.com",
-    contactNo: "9788******",
-    fullAddress: "Sambhaji Chauk, Burud Galli, Vinchur",
-    city: "Nashik",
-    pincode: "420123",
-    dateOfJoining: "28-march-2025",
+  isDarkMode = false;
+  verified: boolean = true;
+  myLink: string = ''
+
+  constructor(private navClick: NavbarClickService) {
+    this.checkNavbarClick()
   }
 
-  @Output() accept = new EventEmitter<void>()
-  @Output() decline = new EventEmitter<void>()
 
-  onAccept(): void {
-    this.accept.emit()
+  toggleTheme() {
+    this.isDarkMode = !this.isDarkMode;
+    document.documentElement.setAttribute('data-theme', this.isDarkMode ? 'dark' : 'light');
   }
 
-  onDecline(): void {
-    this.decline.emit()
+
+  private checkNavbarClick() {
+    this.navClick.linkData$.subscribe({
+      next: (value) => {
+        this.myLink = value;
+      },
+    })
+    this.navClick.subLinkData$.subscribe({
+      next: (value) => {
+        this.myLink += value
+        this.changeCard(this.myLink)
+        this.myLink = ""
+      },
+    })
   }
+
+  private changeCard(linkDataValue: String) {
+    console.log(linkDataValue)
+    if (linkDataValue === "hotelverified" || linkDataValue === "verified") {
+      this.verified = true
+    }
+    else {
+      this.verified = false
+    }
+  }
+
+  cards: CardData[] = [
+    {
+      id: '8',
+      registrationNo: '87sadf32v520.x',
+      name:"Samaj Kalyan",
+      email: 'kinara@gmail.com',
+      contactNo: '7951******',
+      fullAddress: 'Samaj Kalyan, Adgaon.',
+      city: 'Nashik',
+      pincode: '422003',
+      dateOfJoining: '2-march-2015'
+    },
+    {
+      id: '2',
+      registrationNo: '87456dafsd45123ffdgdf',
+      name:"Tarangan",
+      email: 'tarangan@gmail.com',
+      contactNo: '8288******',
+      fullAddress: 'Sambhaji Chauk, Burud Galli, Vinchur',
+      city: 'Nashik',
+      pincode: '420123',
+      dateOfJoining: '28-march-2025'
+    },
+    {
+      id: '10',
+      registrationNo: '32d3wde1321dsf32',
+      name: "MyWish",
+      email: 'my.wish@gmail.com',
+      contactNo: '8745******',
+      fullAddress: 'Wish Nagar, Wish Wadi, Wish.',
+      city: 'Wish',
+      pincode: '143143',
+      dateOfJoining: '28-may-2025'
+    },
+    {
+      id: '23',
+      registrationNo: '1434dsfsd42dfdsd',
+      name: "Pranvi",
+      email: 'pranvi@gmail.com',
+      contactNo: '852******',
+      fullAddress: 'Sambhaji Chauk, Burud Galli, Vinchur',
+      city: 'Nashik',
+      pincode: '422305',
+      dateOfJoining: '08-may-2025'
+    }
+  ];
 }

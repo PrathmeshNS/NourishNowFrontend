@@ -13,8 +13,11 @@ import { NgoHistoryComponent } from './ngo/ngo-history/ngo-history.component';
 import { NgoListedHotelComponent } from './ngo/ngo-listed-hotel/ngo-listed-hotel.component';
 import { NgoBookMealComponent } from './ngo/ngo-book-meal/ngo-book-meal.component';
 import { AdminScreenComponent } from './admin/admin-screen/admin-screen.component';
-import { AdminNavbarComponent } from './admin/admin-navbar/admin-navbar.component';
 import { AdminHotelCheckComponent } from './admin/admin-hotel-check/admin-hotel-check.component';
+import { AdminNgoCheckComponent } from './admin/admin-ngo-check/admin-ngo-check.component';
+import { AdminHotelAddedMealComponent } from './admin/admin-hotel-added-meal/admin-hotel-added-meal.component';
+import { AdminNgoHotelMealHistoryComponent } from './admin/admin-ngo-hotel-meal-history/admin-ngo-hotel-meal-history.component';
+import { UserWaitingScreenComponent } from './user-waiting-screen/user-waiting-screen.component';
 
 const routes: Routes = [
   {
@@ -22,6 +25,9 @@ const routes: Routes = [
   },
   {
     path: 'login', component: LoginComponent, pathMatch: 'full'
+  },
+  {
+    path: 'verification', component: UserWaitingScreenComponent, pathMatch: 'full'
   },
   {
     path: "register", children: [
@@ -33,7 +39,6 @@ const routes: Routes = [
       },
     ]
   },
-
   {
     path: 'hotel', children: [
       {
@@ -70,14 +75,20 @@ const routes: Routes = [
   {
     path: 'admin', children: [
       {
-        path: '', component: AdminScreenComponent, pathMatch:'full'
+        path: '', component: AdminScreenComponent, pathMatch: 'full'
       },
       {
-        path: 'navbar', component: AdminNavbarComponent
+        path: 'admin-hotel-verified', component: AdminHotelCheckComponent
       },
       {
-        path:'hotel-verified',component:AdminHotelCheckComponent
-      }
+        path: 'admin-ngo-verified', component: AdminNgoCheckComponent
+      },
+      {
+        path: 'admin-hotel-meal', component: AdminHotelAddedMealComponent
+      },
+      {
+        path: 'admin-history', component: AdminNgoHotelMealHistoryComponent
+      },
     ]
   }
 ];

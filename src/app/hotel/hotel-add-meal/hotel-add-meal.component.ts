@@ -11,9 +11,7 @@ export class HotelAddMealComponent {
   foodItems: string = '';
   deliveryType: string = 'Delivery';
   personCount: number | null = null;
-  foodContainer: string[] = ["79dfsaff", "sgfdf5422", "dfsf64553w", "saf79541", "574sfsadfa",
-    "fssafsaf75421", "5742sfdas"
-  ];
+  foodContainer: string[] = ['Rice', 'Curry', 'Bread', 'Rice '];
 
 
   addItem(): void {

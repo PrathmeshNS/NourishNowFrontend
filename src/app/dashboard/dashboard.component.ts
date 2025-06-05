@@ -6,10 +6,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-
-  statistics = [
-    { title: 'Listed Ngo', count: 455, position: 'left' },
-    { title: 'Listed Hotel', count: 455, position: 'right' },
-    { title: 'Active Doner', count: 455, position: 'left' }
-  ];
+  donationStats = [
+    {
+      title: "Unused Ngos",
+      count: 20,
+      icon: "ngo-icon.svg",
+    },
+    {
+      title: "Food Packet Shared",
+      count: 45,
+      icon: "food-icon.svg",
+    },
+    {
+      title: "Active Donors",
+      count: 30,
+      icon: "donor-icon.svg",
+    },
+  ]
 }
