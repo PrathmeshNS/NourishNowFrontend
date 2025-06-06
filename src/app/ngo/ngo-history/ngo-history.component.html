@@ -1,29 +1,190 @@
 <body>
   <app-ngo-navbar></app-ngo-navbar>
-  <div class="container">
-    <div class="content-card">
-      <h2 class="thank-you-heading">Thank For Feeding</h2>
+  <div class="contribution-tracker">
+    <!-- Header Section -->
+    <div class="header-section text-center mb-5">
+      <div class="d-flex align-items-center justify-content-center mb-3">
+        <i class="bi bi-heart-fill text-orange me-2"></i>
+        <h1 class="gradient-text">Thanks for Making a Difference</h1>
+      </div>
+      <p class="text-muted mx-auto description">
+        Your dedication to serving those in need brings hope and nourishment to
+        many. View your contributions and see the lives you’ve touched.
+      </p>
+    </div>
 
-      <table class="contributions-table">
-        <thead>
-          <tr>
-            <th>Sr. No.</th>
-            <th>Date</th>
-            <th>Hotel Name</th>
-            <th>Type</th>
-            <th>Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let contribution of contributions">
-            <td>{{ contribution.id }}.</td>
-            <td>{{ contribution.date }}</td>
-            <td>{{ contribution.ngoName }}</td>
-            <td>{{ contribution.type }}</td>
-            <td>{{ contribution.time }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Controls Section -->
+    <div class="card shadow mb-4 controls-card">
+      <div class="card-body p-4" style="padding: 2rem !important">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-text bg-white">
+                <i class="bi bi-search"></i>
+              </span>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search by NGO name or type..."
+                [(ngModel)]="searchTerm"
+                (input)="onSearchChange($event)"
+              />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="input-group">
+              <span class="input-group-text bg-white">
+                <i class="bi bi-funnel"></i>
+              </span>
+              <select
+                class="form-select"
+                [(ngModel)]="filterType"
+                (change)="onFilterChange($event)"
+              >
+                <option
+                  *ngFor="let type of contributionTypes"
+                  [value]="type.value"
+                >
+                  {{ type.label }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3 text-md-end">
+            <button class="btn btn-gradient w-100" [routerLink]="['/hotel']">
+              <i class="bi bi-plus-lg me-2"></i>
+              Add Contribution
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="card shadow mb-4">
+      <div class="card-header gradient-bg text-white p-4">
+        <h2 class="card-title mb-0 d-flex align-items-center">
+          <i class="bi bi-heart me-2"></i>
+          Support Received History
+        </h2>
+      </div>
+      <div class="card-body p-0">
+        <!-- Desktop Table -->
+        <div class="table-responsive d-none d-md-block">
+          <table class="table table-hover mb-0">
+            <thead class="table-light">
+              <tr>
+                <th class="px-4 py-3">Sr. No.</th>
+                <th class="px-4 py-3">Date</th>
+                <th class="px-4 py-3">NGO Name</th>
+                <th class="px-4 py-3">Type</th>
+                <th class="px-4 py-3">Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let contribution of filteredContributions;
+                  let i = index
+                "
+                [ngClass]="{ 'table-light': i % 2 !== 0 }"
+              >
+                <td class="px-4 py-3">{{ contribution.id }}</td>
+                <td class="px-4 py-3">
+                  <i class="bi bi-calendar3 me-2 text-muted"></i>
+                  {{ contribution.date }}
+                </td>
+                <td class="px-4 py-3 fw-medium">{{ contribution.ngoName }}</td>
+                <td class="px-4 py-3">
+                  <span
+                    class="badge rounded-pill"
+                    [ngClass]="getTypeClass(contribution.type)"
+                  >
+                    {{ contribution.type }}
+                  </span>
+                </td>
+                <td class="px-4 py-3">
+                  <i class="bi bi-clock me-2 text-muted"></i>
+                  {{ contribution.time }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Mobile Cards -->
+        <div class="d-md-none p-3">
+          <div
+            class="card mb-3"
+            *ngFor="let contribution of filteredContributions"
+          >
+            <div class="card-body p-3">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <span class="text-muted">#{{ contribution.id }}</span>
+                <span
+                  class="badge rounded-pill"
+                  [ngClass]="getTypeClass(contribution.type)"
+                >
+                  {{ contribution.type }}
+                </span>
+              </div>
+              <h5 class="card-title mb-3">{{ contribution.ngoName }}</h5>
+              <div class="d-flex justify-content-between text-muted">
+                <div>
+                  <i class="bi bi-calendar3 me-1"></i>
+                  {{ contribution.date }}
+                </div>
+                <div>
+                  <i class="bi bi-clock me-1"></i>
+                  {{ contribution.time }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- No Results -->
+        <div
+          *ngIf="filteredContributions.length === 0"
+          class="text-center py-5"
+        >
+          <i class="bi bi-heart display-4 text-muted"></i>
+          <h4 class="mt-3 text-muted">No contributions found</h4>
+          <p class="text-muted">
+            Try adjusting your search or filter criteria.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="row g-4" style="width: 77%; margin: 0 auto">
+      <div class="col-md-4">
+        <div class="card shadow h-100 bg-success text-white">
+          <div class="card-body text-center p-4">
+            <h3 class="display-4 fw-bold">{{ contributions.length }}</h3>
+            <p class="mb-0">Total Contributions</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow h-100 bg-primary text-white">
+          <div class="card-body text-center p-4">
+            <h3 class="display-4 fw-bold">{{ getTotalNgos() }}</h3>
+            <p class="mb-0">NGOs Supported</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow h-100 bg-purple text-white">
+          <div class="card-body text-center p-4">
+            <h3 class="display-4 fw-bold">{{ getTotalTypes() }}</h3>
+            <p class="mb-0">Contribution Types</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </body>

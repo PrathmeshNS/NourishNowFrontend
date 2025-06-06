@@ -1,28 +1,47 @@
 <body>
-  <div class="nav-bar">
-    <app-ngo-navbar></app-ngo-navbar>
-  </div>
-  <div class="card-container">
-    <div class="ngo-card" onclick="this.classList.toggle('active')">
-      <!-- Logo Section -->
-      <div class="logo-section">
-        <div class="logo-icon">
-          <img src="./assets/HomePage.svg" alt="" />
-        </div>
-      </div>
-
-      <!-- Title Section -->
-      <div class="title-section">
-        <h1 class="ngo-name">Blue Owens</h1>
-      </div>
-      <div class="related-info">
-        <div class="contact-details">
-          <p class="contact-number">Contact No. : 93595******</p>
+  <app-ngo-navbar></app-ngo-navbar>
+  <div class="container">
+    <div class="cards-grid">
+      <div class="address-card" *ngFor="let card of addressCards">
+        <div class="card-header">
+          <div class="illustration">
+            <div class="icon icon-heart"></div>
+            <div class="icon icon-egg"></div>
+            <div class="icon icon-circle"></div>
+            <div class="donate-button">DONATE</div>
+          </div>
         </div>
 
-        <div class="location-details">
-          <span class="city">City : Nashik</span>
-          <span class="pincode">Pincode : 422305</span>
+        <div class="card-content">
+          <h2 class="name">{{ card.name }}</h2>
+
+          <div class="contact-info">
+            <span class="label">Contact No.</span>
+            <span class="value">{{ card.contactNo }}</span>
+          </div>
+
+          <h3 class="section-title">Address Details</h3>
+
+          <div class="address-grid">
+            <div class="address-item">
+              <span class="address-label">CITY</span>
+              <span class="address-value">{{ card.city }}</span>
+            </div>
+
+            <div class="address-item">
+              <span class="address-label">PINCODE</span>
+              <span class="address-value">{{ card.pincode }}</span>
+            </div>
+
+            <div class="address-item full-width">
+              <span class="address-label">ADDRESS</span>
+              <span class="address-value">{{ card.fullAddress }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <div class="decorative-line"></div>
         </div>
       </div>
     </div>

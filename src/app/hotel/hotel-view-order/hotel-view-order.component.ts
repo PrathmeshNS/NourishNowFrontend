@@ -13,8 +13,6 @@ interface NGO {
   featured: boolean;
   status: 'pending' | 'accepted' | 'rejected';
   backgroundImage: string;
-  totalDonations: number;
-  peopleHelped: number;
   yearsActive: number;
 }
 
@@ -39,8 +37,6 @@ export class HotelViewOrderComponent {
       featured: true,
       status: 'pending',
       backgroundImage: '/placeholder.svg?height=400&width=350',
-      totalDonations: 1250,
-      peopleHelped: 5600,
       yearsActive: 8
     },
     {
@@ -56,8 +52,6 @@ export class HotelViewOrderComponent {
       featured: false,
       status: 'pending',
       backgroundImage: '/placeholder.svg?height=400&width=350',
-      totalDonations: 890,
-      peopleHelped: 3200,
       yearsActive: 12
     },
     {
@@ -73,8 +67,6 @@ export class HotelViewOrderComponent {
       featured: false,
       status: 'pending',
       backgroundImage: '/placeholder.svg?height=400&width=350',
-      totalDonations: 2100,
-      peopleHelped: 8900,
       yearsActive: 15
     },
     {
@@ -90,44 +82,9 @@ export class HotelViewOrderComponent {
       featured: false,
       status: 'pending',
       backgroundImage: '/placeholder.svg?height=400&width=350',
-      totalDonations: 450,
-      peopleHelped: 1200,
+      
       yearsActive: 5
     },
-    {
-      id: '5',
-      name: 'Helping Hands',
-      address: 'Connaught Place, New Delhi',
-      phone: '9445566778',
-      city: 'New Delhi',
-      pincode: '110001',
-      category: 'Community Service',
-      rating: 4.7,
-      verified: true,
-      featured: true,
-      status: 'pending',
-      backgroundImage: '/placeholder.svg?height=400&width=350',
-      totalDonations: 1800,
-      peopleHelped: 6700,
-      yearsActive: 10
-    },
-    {
-      id: '6',
-      name: 'Smile Foundation',
-      address: 'Park Street, Kolkata',
-      phone: '9334455667',
-      city: 'Kolkata',
-      pincode: '700016',
-      category: 'Child Welfare',
-      rating: 4.5,
-      verified: true,
-      featured: false,
-      status: 'pending',
-      backgroundImage: '/placeholder.svg?height=400&width=350',
-      totalDonations: 950,
-      peopleHelped: 4100,
-      yearsActive: 7
-    }
   ];
 
   hasMoreNgos: boolean = true;
@@ -182,8 +139,6 @@ export class HotelViewOrderComponent {
           featured: false,
           status: 'pending',
           backgroundImage: '/placeholder.svg?height=400&width=350',
-          totalDonations: 720,
-          peopleHelped: 2800,
           yearsActive: 6
         }
       ];

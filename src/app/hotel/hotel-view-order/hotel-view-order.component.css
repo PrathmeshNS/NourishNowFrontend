@@ -87,7 +87,7 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
-    height: 400px;
+    height: 25.5rem;
 }
 
 .ngo-card:hover {

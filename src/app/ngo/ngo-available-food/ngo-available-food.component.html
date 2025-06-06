@@ -1,63 +1,107 @@
 <body>
-  <div class="nav-bar">
-    <app-ngo-navbar></app-ngo-navbar>
-  </div>
-  <div class="card-container">
+  <app-ngo-navbar> </app-ngo-navbar>
+  <div
+    class="container-fluid min-vh-100 d-flex align-items-center justify-content-center"
+  >
+    <div class="row justify-content-center w-100">
+      <div class="col-12 col-sm-10 col-md-6 col-lg-5 col-xl-4">
+        <div class="main-card shadow-lg">
+          <!-- Header Section -->
+          <div class="card-header-section">
+            <div class="illustration-container">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-8Mkbwnlmk0O69uer7L63Uanl16cY01.png"
+                alt="Blue Owens Charity"
+                class="illustration-img"
+              />
+            </div>
+            <h3 class="card-title">Blue Owens</h3>
+          </div>
 
-    <div class="ngo-card" onclick="this.classList.toggle('active')">
-      <!-- Logo Section -->
-      <div class="logo-section">
-        <div class="logo-icon">
-          <img src="./assets/HomePage.svg" alt="" />
-        </div>
-      </div>
+          <!-- Content Section -->
+          <div class="card-body-section">
+            <!-- Food Items -->
+            <div class="food-section mb-3">
+              <div class="food-grid">
+                <div
+                  class="food-item"
+                  *ngFor="let item of foodItems; let i = index"
+                >
+                  <span class="item-number">{{ i + 1 }}</span>
+                  <span class="item-name">{{ item }}</span>
+                </div>
+              </div>
+            </div>
 
-      <!-- Title Section -->
-      <div class="title-section">
-        <h1 class="ngo-name">Blue Owens</h1>
-      </div>
+            <!-- Action Button -->
+            <div class="action-section mb-3">
+              <button
+                class="btn btn-request w-100"
+                (click)="requestFood()"
+                [disabled]="isLoading"
+              >
+                <span *ngIf="!isLoading">
+                  <i class="fas fa-heart me-2"></i>
+                  REQUEST A FOOD
+                </span>
+                <span *ngIf="isLoading">
+                  <i class="fas fa-spinner fa-spin me-2"></i>
+                  Processing...
+                </span>
+              </button>
+            </div>
 
-      <!-- Hover Content -->
-      <div class="hover-content">
-        <div class="available-food" *ngFor="let item of foodItem">
-          <p>{{ foodItem.indexOf(item) + 1 + "." + item + "," }} &nbsp;</p>
-        </div>
-        <!-- Action Buttons -->
-        <div class="action-buttons">
-          <button class="accept-btn" (click)="onAccept()">
-            Request A Food
-          </button>
-        </div>
+            <!-- Complete Address Section -->
+            <div class="address-section">
+              <div class="address-header mb-2">
+                <i class="fas fa-map-marker-alt me-2"></i>
+                <span>Complete Address</span>
+              </div>
 
-        <div class="contact-info">
-          <div class="delivery-type">Delivery : Pick</div>
-
-          <div class="location-details">
-            <span class="city">City : Nashik</span>
-            <span class="pincode">Pincode : 422305</span>
+              <div class="address-details">
+                <div class="row g-2">
+                  <div class="col-6">
+                    <div class="info-item">
+                      <small class="info-label">Delivery</small>
+                      <div class="info-value">{{ deliveryMethod }}</div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="info-item">
+                      <small class="info-label">City</small>
+                      <div class="info-value">{{ address.city }}</div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="info-item">
+                      <small class="info-label">State</small>
+                      <div class="info-value">{{ address.state }}</div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="info-item">
+                      <small class="info-label">Pincode</small>
+                      <div class="info-value">{{ address.pincode }}</div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="info-item">
+                      <small class="info-label">Street Address</small>
+                      <div class="info-value">{{ address.street }}</div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="info-item">
+                      <small class="info-label">Landmark</small>
+                      <div class="info-value">{{ address.landmark }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  
 </body>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const cards = document.querySelectorAll(".ngo-card");
-
-    cards.forEach((card) => {
-      card.addEventListener("click", function (e) {
-        // Close other cards
-        cards.forEach((c) => {
-          if (c !== card) c.classList.remove("active");
-        });
-
-        // Toggle current card
-        card.classList.toggle("active");
-      });
-    });
-  });
-</script>

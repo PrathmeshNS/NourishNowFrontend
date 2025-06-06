@@ -1,68 +1,173 @@
 <body>
-  <div class="nav-bar">
-    <app-ngo-navbar></app-ngo-navbar>
-  </div>
-  <div class="card-container">
+  <app-ngo-navbar></app-ngo-navbar>
 
-    <div class="ngo-card" onclick="this.classList.toggle('active')">
-      <!-- Logo Section -->
-      <div class="logo-section">
-        <div class="logo-icon">
-          <img src="./assets/HomePage.svg" alt="" />
+  <div class="min-vh-100 d-flex align-items-center justify-content-center p-4">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+      <!-- Main Card -->
+      <div
+        class="card border-0 shadow-lg position-relative overflow-hidden"
+        style="
+          background: linear-gradient(
+            135deg,
+            #1e293b 0%,
+            #334155 50%,
+            #0f172a 100%
+          );
+          border-radius: 1.5rem;
+        "
+      >
+        <!-- Decorative Elements -->
+        <div
+          class="position-absolute top-0 end-0 rounded-circle"
+          style="
+            width: 8rem;
+            height: 8rem;
+            background: radial-gradient(
+              circle,
+              rgba(251, 191, 36, 0.2) 0%,
+              transparent 70%
+            );
+            transform: translate(4rem, -4rem);
+          "
+        ></div>
+
+        <div
+          class="position-absolute bottom-0 start-0 rounded-circle"
+          style="
+            width: 6rem;
+            height: 6rem;
+            background: radial-gradient(
+              circle,
+              rgba(251, 146, 60, 0.2) 0%,
+              transparent 70%
+            );
+            transform: translate(-3rem, 3rem);
+          "
+        ></div>
+
+        <!-- Header Section -->
+        <div class="card-header border-0 bg-transparent p-4 pb-2">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div
+              class="rounded-circle d-flex align-items-center justify-content-center shadow"
+              style="
+                width: 3rem;
+                height: 3rem;
+                background: linear-gradient(45deg, #f59e0b, #ea580c);
+              "
+            >
+              <i class="fas fa-truck text-white"></i>
+            </div>
+            <div>
+              <h2 class="text-white mb-1 h5 fw-bold">Hotel Delivery</h2>
+              <p class="mb-0 small" style="color: #fbbf24">Fresh & Hot Meals</p>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <!-- Title Section -->
-      <div class="title-section">
-        <h1 class="ngo-name">Blue Owens</h1>
-      </div>
-
-      <!-- Hover Content -->
-      <div class="hover-content">
-        <p>Hotel Provide :</p>
-        <div class="available-food" *ngFor="let item of foodItem">
-          <p>{{ foodItem.indexOf(item) + 1 + "." + item + "," }} &nbsp;</p>
+        <!-- Menu Items -->
+        <div class="px-4 pb-3">
+          <div
+            class="p-3 rounded-3 border"
+            style="
+              background: rgba(51, 65, 85, 0.5);
+              border-color: rgba(71, 85, 105, 0.5) !important;
+              backdrop-filter: blur(4px);
+            "
+          >
+            <h3 class="h6 fw-semibold mb-3" style="color: #fcd34d">
+              Today's Menu
+            </h3>
+            <div class="row g-2">
+              <div class="col-6" *ngFor="let item of menuItems">
+                <div class="d-flex align-items-center gap-2">
+                  <span
+                    class="rounded-circle"
+                    style="
+                      width: 0.5rem;
+                      height: 0.5rem;
+                      background-color: #f59e0b;
+                    "
+                  ></span>
+                  <span class="text-light small">{{ item }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <!-- Action Buttons -->
-        <div class="acceptance-status">
-          <p>Meal Status : Accepted</p>
-        </div>
 
-        <div class="delivery-type">Delivery : Pick</div>
-        <!-- Contact Information -->
-        <div class="contact-info">
-          <div class="address-section">
-            <p class="address-label">Complete Address :</p>
-            <p class="address-text">Sambhaji Chauk, Burud Galli, Vinchur</p>
+        <!-- Status Section -->
+        <div class="px-4 pb-3">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div class="d-flex align-items-center gap-2">
+              <i class="fas fa-check-circle text-success"></i>
+              <span class="text-white fw-medium">Meal Status</span>
+            </div>
+            <span class="badge bg-success px-3 py-2 rounded-pill shadow"
+              >Accepted</span
+            >
           </div>
 
-          <div class="contact-details">
-            <p class="contact-number">Contact No. : 93595******</p>
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-2">
+              <i class="fas fa-truck text-primary"></i>
+              <span class="text-white fw-medium">Delivery</span>
+            </div>
+            <span class="badge bg-primary px-3 py-2 rounded-pill shadow"
+              >Pick</span
+            >
           </div>
+        </div>
 
-          <div class="location-details">
-            <span class="city">City : Nashik</span>
-            <span class="pincode">Pincode : 422305</span>
+        <!-- Address Section -->
+        <div class="px-4 pb-3">
+          <div
+            class="p-3 rounded-3 border"
+            style="
+              background: rgba(51, 65, 85, 0.3);
+              border-color: rgba(71, 85, 105, 0.3) !important;
+            "
+          >
+            <div class="d-flex gap-3">
+              <i class="fas fa-map-marker-alt text-danger mt-1"></i>
+              <div>
+                <h4 class="text-white fw-medium mb-1 h6">Complete Address</h4>
+                <p class="text-light small mb-0 lh-base">{{ address }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="px-4 pb-3">
+          <div class="d-flex align-items-center gap-3">
+            <i class="fas fa-phone text-success"></i>
+            <div>
+              <span class="text-white fw-medium">Contact No.</span>
+              <p class="mb-0" style="color: #fbbf24; font-family: monospace">
+                {{ contactNumber }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="px-4 pb-4">
+          <div
+            class="d-flex justify-content-between align-items-center pt-3 border-top"
+            style="border-color: rgba(71, 85, 105, 0.5) !important"
+          >
+            <div>
+              <span class="text-muted small">City</span>
+              <p class="text-white fw-medium mb-0">{{ city }}</p>
+            </div>
+            <div class="text-end">
+              <span class="text-muted small">Pincode</span>
+              <p class="text-white fw-medium mb-0">{{ pincode }}</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </body>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const cards = document.querySelectorAll(".ngo-card");
-
-    cards.forEach((card) => {
-      card.addEventListener("click", function (e) {
-        // Close other cards
-        cards.forEach((c) => {
-          if (c !== card) c.classList.remove("active");
-        });
-        // Toggle current card
-        card.classList.toggle("active");
-      });
-    });
-  });
-</script>
