@@ -1,0 +1,369 @@
+<body>
+
+    <app-navbar></app-navbar>
+    
+  <div class="about-container">
+    <!-- Hero Section -->
+    <div class="about-hero">
+      <div class="hero-background">
+        <div class="floating-elements">
+          <div
+            class="floating-icon"
+            *ngFor="let icon of floatingIcons; let i = index"
+            [style.animation-delay]="i * 1.2 + 's'"
+          >
+            <i [class]="icon.class"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-heart"></i>
+          <span>Our Mission</span>
+        </div>
+        <h1 class="hero-title">About NourishNow</h1>
+        <p class="hero-subtitle">
+          Bridging the gap between food surplus and food insecurity, one meal at
+          a time. Together, we're building a world where no food goes to waste
+          and no one goes hungry.
+        </p>
+        <div class="hero-stats">
+          <div class="stat-item" [@countUp]>
+            <div class="stat-number">{{ stats.mealsServed }}</div>
+            <div class="stat-label">Meals Served</div>
+          </div>
+          <div class="stat-item" [@countUp]>
+            <div class="stat-number">{{ stats.partnersJoined }}</div>
+            <div class="stat-label">Partners Joined</div>
+          </div>
+          <div class="stat-item" [@countUp]>
+            <div class="stat-number">{{ stats.citiesCovered }}</div>
+            <div class="stat-label">Cities Covered</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Our Story Section -->
+    <div class="story-section">
+      <div class="container">
+        <div class="story-content">
+          <div class="story-text">
+            <div class="section-badge">
+              <i class="fas fa-book-open"></i>
+              <span>Our Journey</span>
+            </div>
+            <h2 class="section-title">The Story Behind NourishNow</h2>
+            <div class="story-timeline">
+              <div
+                class="timeline-item"
+                *ngFor="let item of timeline; let i = index"
+                [@fadeInUp]="{ value: '', params: { delay: i * 200 + 'ms' } }"
+              >
+                <div class="timeline-year">{{ item.year }}</div>
+                <div class="timeline-content">
+                  <h4>{{ item.title }}</h4>
+                  <p>{{ item.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="story-visual">
+            <div class="story-image">
+              <div class="image-placeholder">
+                <i class="fas fa-users"></i>
+                <span>Community Impact</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mission Vision Values Section -->
+    <div class="mvv-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Our Foundation</h2>
+          <p class="section-subtitle">
+            The principles that guide everything we do
+          </p>
+        </div>
+
+        <div class="mvv-grid">
+          <div
+            class="mvv-card mission-card"
+            [@fadeInUp]="{ value: '', params: { delay: '0ms' } }"
+          >
+            <div class="mvv-icon">
+              <i class="fas fa-bullseye"></i>
+            </div>
+            <h3>Our Mission</h3>
+            <p>
+              To eliminate food waste and hunger by creating an efficient
+              platform that connects food donors with those in need, ensuring
+              every surplus meal finds its way to someone who needs it.
+            </p>
+          </div>
+
+          <div
+            class="mvv-card vision-card"
+            [@fadeInUp]="{ value: '', params: { delay: '200ms' } }"
+          >
+            <div class="mvv-icon">
+              <i class="fas fa-eye"></i>
+            </div>
+            <h3>Our Vision</h3>
+            <p>
+              A world where food security is guaranteed for all, where surplus
+              food becomes a resource for community nourishment, and where
+              technology serves humanity's most basic needs.
+            </p>
+          </div>
+
+          <div
+            class="mvv-card values-card"
+            [@fadeInUp]="{ value: '', params: { delay: '400ms' } }"
+          >
+            <div class="mvv-icon">
+              <i class="fas fa-gem"></i>
+            </div>
+            <h3>Our Values</h3>
+            <div class="values-list">
+              <div class="value-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Compassion & Empathy</span>
+              </div>
+              <div class="value-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Transparency & Trust</span>
+              </div>
+              <div class="value-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Innovation & Efficiency</span>
+              </div>
+              <div class="value-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Community & Collaboration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Section -->
+    <div class="team-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Meet Our Team</h2>
+          <p class="section-subtitle">
+            The passionate individuals making NourishNow possible
+          </p>
+        </div>
+
+        <div class="team-grid">
+          <div
+            class="team-member"
+            *ngFor="let member of teamMembers; let i = index"
+            [@fadeInUp]="{ value: '', params: { delay: i * 150 + 'ms' } }"
+          >
+            <div class="member-avatar">
+              <div class="avatar-placeholder">
+                <i [class]="member.icon"></i>
+              </div>
+              <div class="member-social">
+                <a
+                  href="#"
+                  class="social-link linkedin"
+                  (click)="openSocialProfile(member.name, 'linkedin')"
+                >
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a
+                  href="#"
+                  class="social-link twitter"
+                  (click)="openSocialProfile(member.name, 'twitter')"
+                >
+                  <i class="fab fa-twitter"></i>
+                </a>
+              </div>
+            </div>
+            <div class="member-info">
+              <h4>{{ member.name }}</h4>
+              <p class="member-role">{{ member.role }}</p>
+              <p class="member-bio">{{ member.bio }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Impact Statistics Section -->
+    <div class="impact-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Our Impact</h2>
+          <p class="section-subtitle">
+            Real numbers, real change, real lives touched
+          </p>
+        </div>
+
+        <div class="impact-grid">
+          <div
+            class="impact-card"
+            *ngFor="let impact of impactStats; let i = index"
+            [@fadeInUp]="{ value: '', params: { delay: i * 100 + 'ms' } }"
+          >
+            <div
+              class="impact-icon"
+              [ngStyle]="{ background: impact.gradient }"
+            >
+              <i [class]="impact.icon"></i>
+            </div>
+            <div class="impact-number" [@countUp]>{{ impact.value }}</div>
+            <div class="impact-label">{{ impact.label }}</div>
+            <div class="impact-description">{{ impact.description }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="how-it-works-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">How NourishNow Works</h2>
+          <p class="section-subtitle">Simple steps to make a big difference</p>
+        </div>
+
+        <div class="process-flow">
+          <div
+            class="process-step"
+            *ngFor="let step of processSteps; let i = index"
+            [@fadeInUp]="{ value: '', params: { delay: i * 200 + 'ms' } }"
+          >
+            <div class="step-number">{{ i + 1 }}</div>
+            <div class="step-icon">
+              <i [class]="step.icon"></i>
+            </div>
+            <h4>{{ step.title }}</h4>
+            <p>{{ step.description }}</p>
+            <div class="step-connector" *ngIf="i < processSteps.length - 1">
+              <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Partners Section -->
+    <div class="partners-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Our Partners</h2>
+          <p class="section-subtitle">
+            Working together to create lasting change
+          </p>
+        </div>
+
+        <div class="partners-categories">
+          <div
+            class="partner-category"
+            *ngFor="let category of partnerCategories"
+            [@fadeInUp]="{ value: '', params: { delay: '0ms' } }"
+          >
+            <div class="category-header">
+              <div class="category-icon">
+                <i [class]="category.icon"></i>
+              </div>
+              <h3>{{ category.name }}</h3>
+            </div>
+            <div class="partner-logos">
+              <div
+                class="partner-logo"
+                *ngFor="let partner of category.partners"
+              >
+                <div class="logo-placeholder">
+                  <i [class]="partner.icon"></i>
+                  <span>{{ partner.name }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action Section -->
+    <div class="cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <div class="cta-text">
+            <h2>Ready to Make a Difference?</h2>
+            <p>
+              Join thousands of restaurants, NGOs, and individuals who are
+              already part of the NourishNow community. Together, we can end
+              food waste and hunger.
+            </p>
+          </div>
+          <div class="cta-buttons">
+            <button
+              class="cta-btn primary-btn"
+              (click)="navigateToRegister('donor')"
+            >
+              <i class="fas fa-utensils"></i>
+              Become a Food Donor
+            </button>
+            <button
+              class="cta-btn secondary-btn"
+              (click)="navigateToRegister('ngo')"
+            >
+              <i class="fas fa-hands-helping"></i>
+              Register Your NGO
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <div class="newsletter-section">
+      <div class="container">
+        <div class="newsletter-content">
+          <div class="newsletter-text">
+            <h3>Stay Updated</h3>
+            <p>Get the latest news about our impact and community stories</p>
+          </div>
+          <form
+            class="newsletter-form"
+            (ngSubmit)="subscribeNewsletter()"
+            #newsletterForm="ngForm"
+          >
+            <div class="form-group">
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                [(ngModel)]="newsletterEmail"
+                name="email"
+                required
+                class="newsletter-input"
+              />
+              <button
+                type="submit"
+                class="newsletter-btn"
+                [disabled]="!newsletterForm.form.valid || isSubscribing"
+              >
+                <span *ngIf="!isSubscribing">Subscribe</span>
+                <span *ngIf="isSubscribing">
+                  <i class="fas fa-spinner fa-spin"></i>
+                </span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

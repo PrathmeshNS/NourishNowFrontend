@@ -1,23 +1,312 @@
-<!-- <app-navbar></app-navbar> -->
-<section class="dashboard-section">
+<body>
+  <app-navbar></app-navbar>
   <div class="dashboard-container">
-    <div class="dashboard-header">
-      <p class="dashboard-intro">
-        Every meal not wasted is a chance to feed hope. Small actions, shared together, create big change.
-      </p>
-      <h2 class="dashboard-title">Live Data</h2>
-    </div>
-    
-    <div class="stats-container">
-      <div class="stat-card" *ngFor="let stat of donationStats">
-        <div class="stat-icon">
-          <img src="/assets/images/{{stat.icon}}" alt="{{stat.title}} icon">
+    <!-- Hero Section with Animation -->
+    <div class="hero-section">
+      <div class="hero-background">
+        <div
+          class="floating-food"
+          *ngFor="let food of floatingFoods; let i = index"
+          [style.animation-delay]="i * 0.5 + 's'"
+        >
+          {{ food }}
         </div>
-        <div class="stat-info">
-          <h3 class="stat-title">{{stat.title}}</h3>
-          <p class="stat-count">Count: {{stat.count}}</p>
+      </div>
+      <div class="hero-content">
+        <div class="hero-logo">
+          <div class="logo-circle">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h1 class="app-name">NourishNow</h1>
+        </div>
+        <div class="hero-quote">
+          <div class="quote-container">
+            <i class="fas fa-quote-left quote-icon"></i>
+            <p class="quote-text">
+              Every meal not wasted is a chance to feed hope.
+            </p>
+            <p class="quote-subtext">
+              Small actions, shared together, create big change.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Stats with Images -->
+    <div class="live-stats-section">
+      <div class="section-title">
+        <h2>Live Impact Dashboard</h2>
+        <div class="pulse-indicator"></div>
+      </div>
+
+      <div class="stats-grid">
+        <!-- NGO Card -->
+        <div class="stat-card ngo-card" [@slideInLeft]>
+          <div class="card-image">
+            <img
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-za8VRmF8yBnCjBmhe1RB1QLVQDeniM.png"
+              alt="NGO Partners"
+              class="stat-image"
+            />
+            <div class="image-overlay">
+              <i class="fas fa-hands-helping"></i>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Listed NGOs</h3>
+            <div class="count-display">
+              <span class="count-number">{{ animatedNgoCount }}</span>
+              <div class="count-animation">
+                <i class="fas fa-arrow-up"></i>
+                <span>+12 this week</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span class="status-badge active">Active Partners</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hotel Card -->
+        <div class="stat-card hotel-card" [@slideInUp]>
+          <div class="card-image">
+            <img
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-za8VRmF8yBnCjBmhe1RB1QLVQDeniM.png"
+              alt="Hotel Partners"
+              class="stat-image"
+            />
+            <div class="image-overlay">
+              <i class="fas fa-building"></i>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Partner Hotels</h3>
+            <div class="count-display">
+              <span class="count-number">{{ animatedHotelCount }}</span>
+              <div class="count-animation">
+                <i class="fas fa-arrow-up"></i>
+                <span>+8 this week</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span class="status-badge active">Food Donors</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Donor Card -->
+        <div class="stat-card donor-card" [@slideInRight]>
+          <div class="card-image">
+            <img
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-za8VRmF8yBnCjBmhe1RB1QLVQDeniM.png"
+              alt="Active Donors"
+              class="stat-image"
+            />
+            <div class="image-overlay">
+              <i class="fas fa-hand-holding-heart"></i>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Active Donors</h3>
+            <div class="count-display">
+              <span class="count-number">{{ animatedDonorCount }}</span>
+              <div class="count-animation">
+                <i class="fas fa-arrow-up"></i>
+                <span>+15 this week</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span class="status-badge active">Community Heroes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Food Journey Animation -->
+    <div class="food-journey-section">
+      <h2 class="section-title">Food Journey</h2>
+      <div class="journey-container">
+        <div
+          class="journey-step"
+          [@fadeInUp]="{ value: '', params: { delay: '0ms' } }"
+        >
+          <div class="step-icon donation">
+            <i class="fas fa-utensils"></i>
+          </div>
+          <h4>Food Donated</h4>
+          <p>Restaurants & Hotels donate excess food</p>
+          <div class="step-number">1</div>
+        </div>
+
+        <div class="journey-arrow">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+
+        <div
+          class="journey-step"
+          [@fadeInUp]="{ value: '', params: { delay: '200ms' } }"
+        >
+          <div class="step-icon collection">
+            <i class="fas fa-truck"></i>
+          </div>
+          <h4>Food Collected</h4>
+          <p>NGOs collect food from donation points</p>
+          <div class="step-number">2</div>
+        </div>
+
+        <div class="journey-arrow">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+
+        <div
+          class="journey-step"
+          [@fadeInUp]="{ value: '', params: { delay: '400ms' } }"
+        >
+          <div class="step-icon distribution">
+            <i class="fas fa-hands"></i>
+          </div>
+          <h4>Food Distributed</h4>
+          <p>Meals reach those who need them most</p>
+          <div class="step-number">3</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Impact Visualization -->
+    <div class="impact-section">
+      <h2 class="section-title">Today's Impact</h2>
+      <div class="impact-grid">
+        <div
+          class="impact-card meals"
+          [@bounceIn]="{ value: '', params: { delay: '0ms' } }"
+        >
+          <div class="impact-icon">
+            <i class="fas fa-apple-alt"></i>
+          </div>
+          <div class="impact-value">{{ todayMeals }}</div>
+          <div class="impact-label">Meals Served Today</div>
+          <div class="impact-visual">
+            <div class="progress-circle">
+              <div
+                class="progress-fill"
+                [style.transform]="
+                  'rotate(' + (todayMeals / 2000) * 360 + 'deg)'
+                "
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="impact-card people"
+          [@bounceIn]="{ value: '', params: { delay: '200ms' } }"
+        >
+          <div class="impact-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="impact-value">{{ peopleFed }}</div>
+          <div class="impact-label">People Fed Today</div>
+          <div class="impact-visual">
+            <div class="people-icons">
+              <i
+                class="fas fa-user"
+                *ngFor="let person of peopleArray"
+                [@fadeIn]="{
+                  value: '',
+                  params: { delay: person * 100 + 'ms' }
+                }"
+              ></i>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="impact-card waste"
+          [@bounceIn]="{ value: '', params: { delay: '400ms' } }"
+        >
+          <div class="impact-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <div class="impact-value">{{ wasteReduced }}kg</div>
+          <div class="impact-label">Waste Prevented</div>
+          <div class="impact-visual">
+            <div class="waste-meter">
+              <div
+                class="meter-fill"
+                [style.height]="(wasteReduced / 1000) * 100 + '%'"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Activity Feed -->
+    <div class="activity-feed-section">
+      <h2 class="section-title">Live Activity Feed</h2>
+      <div class="activity-container">
+        <div
+          class="activity-item"
+          *ngFor="let activity of liveActivities; let i = index"
+          [@slideInFromRight]="{ value: '', params: { delay: i * 100 + 'ms' } }"
+        >
+          <div class="activity-avatar">
+            <img
+              [src]="activity.avatar"
+              [alt]="activity.name"
+              class="avatar-img"
+            />
+            <div class="activity-type-badge" [ngClass]="activity.type">
+              <i [class]="activity.typeIcon"></i>
+            </div>
+          </div>
+          <div class="activity-content">
+            <div class="activity-header">
+              <span class="activity-name">{{ activity.name }}</span>
+              <span class="activity-action">{{ activity.action }}</span>
+            </div>
+            <div class="activity-details">{{ activity.details }}</div>
+            <div class="activity-time">
+              <i class="fas fa-clock"></i>
+              {{ activity.time }}
+            </div>
+          </div>
+          <div class="activity-image">
+            <img [src]="activity.foodImage" alt="Food" class="food-thumbnail" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="cta-section">
+      <div class="cta-content">
+        <h2>Join the Movement</h2>
+        <p>Be part of the change. Every meal matters, every action counts.</p>
+        <div class="cta-buttons">
+          <button class="cta-btn primary" (click)="joinAsNGO()">
+            <i class="fas fa-hands-helping"></i>
+            Join as NGO
+          </button>
+          <button class="cta-btn secondary" (click)="joinAsRestaurant()">
+            <i class="fas fa-utensils"></i>
+            Join as Restaurant
+          </button>
+        </div>
+      </div>
+      <div class="cta-visual">
+        <div class="floating-hearts">
+          <i
+            class="fas fa-heart"
+            *ngFor="let heart of hearts"
+            [style.animation-delay]="heart.delay"
+            [style.left]="heart.left"
+            [style.font-size]="heart.size"
+          ></i>
         </div>
       </div>
     </div>
   </div>
-</section>
+</body>

@@ -1,0 +1,345 @@
+<body>
+  <app-navbar></app-navbar>
+
+  <div class="contact-container">
+    <!-- Hero Section -->
+    <div class="contact-hero">
+      <div class="hero-background">
+        <div class="floating-elements">
+          <div
+            class="floating-icon"
+            *ngFor="let icon of floatingIcons; let i = index"
+            [style.animation-delay]="i * 0.8 + 's'"
+          >
+            <i [class]="icon.class"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-envelope"></i>
+          <span>Get In Touch</span>
+        </div>
+        <h1 class="hero-title">Contact Us</h1>
+        <p class="hero-subtitle">
+          We're here to help you make a difference. Reach out to us for any
+          questions, support, or partnership opportunities.
+        </p>
+      </div>
+    </div>
+
+    <!-- Contact Methods Section -->
+    <div class="contact-methods-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">How Can We Help You?</h2>
+          <p class="section-subtitle">Choose the best way to reach us</p>
+        </div>
+
+        <div class="contact-methods-grid">
+          <div
+            class="contact-method-card"
+            [@fadeInUp]="{ value: '', params: { delay: '0ms' } }"
+          >
+            <div class="method-icon email-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <h3>Email Us</h3>
+            <p>
+              Send us a detailed message and we'll get back to you within 24
+              hours
+            </p>
+            <div class="method-info">
+              <span class="info-label">Email:</span>
+              <span class="info-value">{{email}}</span>
+            </div>
+            <button class="method-btn email-btn" (click)="openEmailClient()">
+              <i class="fas fa-paper-plane"></i>
+              Send Email
+            </button>
+          </div>
+
+          <div
+            class="contact-method-card"
+            [@fadeInUp]="{ value: '', params: { delay: '200ms' } }"
+          >
+            <div class="method-icon phone-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <h3>Call Us</h3>
+            <p>Speak directly with our support team for immediate assistance</p>
+            <div class="method-info">
+              <span class="info-label">Phone:</span>
+              <span class="info-value">+91 98765 43210</span>
+            </div>
+            <div class="method-info">
+              <span class="info-label">Hours:</span>
+              <span class="info-value">9 AM - 6 PM (Mon-Fri)</span>
+            </div>
+            <button class="method-btn phone-btn" (click)="makeCall()">
+              <i class="fas fa-phone-alt"></i>
+              Call Now
+            </button>
+          </div>
+
+          <div
+            class="contact-method-card"
+            [@fadeInUp]="{ value: '', params: { delay: '400ms' } }"
+          >
+            <div class="method-icon location-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <h3>Visit Us</h3>
+            <p>
+              Come to our office for face-to-face discussions and partnerships
+            </p>
+            <div class="method-info">
+              <span class="info-label">Address:</span>
+              <span class="info-value"
+                >123 Charity Street, Gandhi Nagar, Nashik, Maharashtra
+                422305</span
+              >
+            </div>
+            <button class="method-btn location-btn" (click)="openMaps()">
+              <i class="fas fa-directions"></i>
+              Get Directions
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Form Section -->
+    <div class="contact-form-section">
+      <div class="container">
+        <div class="form-container">
+          <div class="form-header">
+            <h2>Send Us a Message</h2>
+            <p>Fill out the form below and we'll respond as soon as possible</p>
+          </div>
+
+          <form
+            class="contact-form"
+            (ngSubmit)="submitForm()"
+            #contactForm="ngForm"
+          >
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <div class="input-wrapper">
+                  <i class="fas fa-user input-icon"></i>
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    [(ngModel)]="formData.firstName"
+                    required
+                    class="form-input"
+                    placeholder="Enter your first name"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <div class="input-wrapper">
+                  <i class="fas fa-user input-icon"></i>
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    [(ngModel)]="formData.lastName"
+                    required
+                    class="form-input"
+                    placeholder="Enter your last name"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <div class="input-wrapper">
+                  <i class="fas fa-envelope input-icon"></i>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    [(ngModel)]="formData.email"
+                    required
+                    class="form-input"
+                    placeholder="Enter your email address"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <div class="input-wrapper">
+                  <i class="fas fa-phone input-icon"></i>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    [(ngModel)]="formData.phone"
+                    class="form-input"
+                    placeholder="Enter your phone number"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject *</label>
+              <div class="input-wrapper">
+                <i class="fas fa-tag input-icon"></i>
+                <select
+                  id="subject"
+                  name="subject"
+                  [(ngModel)]="formData.subject"
+                  required
+                  class="form-select"
+                >
+                  <option value="">Select a subject</option>
+                  <option value="general">General Inquiry</option>
+                  <option value="ngo-partnership">NGO Partnership</option>
+                  <option value="hotel-partnership">Hotel Partnership</option>
+                  <option value="technical-support">Technical Support</option>
+                  <option value="feedback">Feedback</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <div class="input-wrapper">
+                <i class="fas fa-comment input-icon"></i>
+                <textarea
+                  id="message"
+                  name="message"
+                  [(ngModel)]="formData.message"
+                  required
+                  class="form-textarea"
+                  rows="6"
+                  placeholder="Tell us how we can help you..."
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button
+                type="submit"
+                class="submit-btn"
+                [disabled]="!contactForm.form.valid || isSubmitting"
+              >
+                <span *ngIf="!isSubmitting">
+                  <i class="fas fa-paper-plane"></i>
+                  Send Message
+                </span>
+                <span *ngIf="isSubmitting">
+                  <i class="fas fa-spinner fa-spin"></i>
+                  Sending...
+                </span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-subtitle">Quick answers to common questions</p>
+        </div>
+
+        <div class="faq-grid">
+          <div
+            class="faq-item"
+            *ngFor="let faq of faqs; let i = index"
+            [@fadeInUp]="{ value: '', params: { delay: i * 100 + 'ms' } }"
+          >
+            <div class="faq-question" (click)="toggleFAQ(i)">
+              <h4>{{ faq.question }}</h4>
+              <i class="fas fa-chevron-down" [class.rotated]="faq.isOpen"></i>
+            </div>
+            <div class="faq-answer" [class.open]="faq.isOpen">
+              <p>{{ faq.answer }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Media Section -->
+    <div class="social-section">
+      <div class="container">
+        <div class="social-content">
+          <h2>Follow Us</h2>
+          <p>Stay connected with our mission and latest updates</p>
+
+          <div class="social-links">
+            <a
+              href="#"
+              class="social-link facebook"
+              (click)="openSocialMedia('facebook')"
+            >
+              <i class="fab fa-facebook-f"></i>
+              <span>Facebook</span>
+            </a>
+            <a
+              href="#"
+              class="social-link twitter"
+              (click)="openSocialMedia('twitter')"
+            >
+              <i class="fab fa-twitter"></i>
+              <span>Twitter</span>
+            </a>
+            <a
+              href="#"
+              class="social-link instagram"
+              (click)="openSocialMedia('instagram')"
+            >
+              <i class="fab fa-instagram"></i>
+              <span>Instagram</span>
+            </a>
+            <a
+              href="#"
+              class="social-link linkedin"
+              (click)="openSocialMedia('linkedin')"
+            >
+              <i class="fab fa-linkedin-in"></i>
+              <span>LinkedIn</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div
+      class="modal-overlay"
+      [class.show]="showSuccessModal"
+      (click)="closeSuccessModal()"
+    >
+      <div class="success-modal" [@bounceIn] (click)="$event.stopPropagation()">
+        <div class="modal-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h3>Message Sent Successfully!</h3>
+        <p>
+          Thank you for reaching out. We'll get back to you within 24 hours.
+        </p>
+        <button class="modal-btn" (click)="closeSuccessModal()">
+          <i class="fas fa-thumbs-up"></i>
+          Great!
+        </button>
+      </div>
+    </div>
+  </div>
+</body>

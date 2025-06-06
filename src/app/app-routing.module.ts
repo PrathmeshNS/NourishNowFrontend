@@ -19,8 +19,12 @@ import { AdminHotelAddedMealComponent } from './admin/admin-hotel-added-meal/adm
 import { AdminNgoHotelMealHistoryComponent } from './admin/admin-ngo-hotel-meal-history/admin-ngo-hotel-meal-history.component';
 import { UserWaitingScreenComponent } from './user-waiting-screen/user-waiting-screen.component';
 import { HotelNavbarComponent } from './hotel/hotel-navbar/hotel-navbar.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { DonationComponent } from './donation/donation.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/', pathMatch: 'full' },
   {
     path: '', component: DashboardComponent
   },
@@ -31,9 +35,18 @@ const routes: Routes = [
     path: 'verification', component: UserWaitingScreenComponent, pathMatch: 'full'
   },
   {
+    path: 'contact-us', component: ContactUsComponent, pathMatch: 'full'
+  },
+  {
+    path: 'about-us', component: AboutUsComponent, pathMatch: 'full'
+  },
+  {
+    path: 'donation', component: DonationComponent, pathMatch: 'full'
+  },
+  {
     path: "register", children: [
       {
-        path: 'ngo', component: NgoRegisterComponent
+        path: '', component: NgoRegisterComponent
       },
       {
         path: 'hotel', component: HotelRegisterComponent
@@ -91,7 +104,8 @@ const routes: Routes = [
         path: 'admin-history', component: AdminNgoHotelMealHistoryComponent
       },
     ]
-  }
+  },
+  { path: '**', redirectTo: '/' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

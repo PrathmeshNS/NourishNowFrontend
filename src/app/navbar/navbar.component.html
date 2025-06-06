@@ -1,34 +1,156 @@
-<nav class="navbar">
-  <div class="navbar-container">
-    <div class="navbar-brand">
-      <a href="#" class="logo">NourishHope</a>
+<nav class="navbar-container">
+  <div class="navbar-content">
+    <!-- Logo Section -->
+    <div class="navbar-logo">
+      <div class="logo-icon">
+        <i class="fas fa-heart"></i>
+      </div>
+      <span class="logo-text">NourishNow</span>
     </div>
-    
-    <button class="navbar-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    
-    <div class="navbar-menu" [class.active]="isMenuOpen">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a href="#" class="nav-link">Home</a>
-        </li>
+
+    <!-- Desktop Navigation -->
+    <div class="navbar-menu desktop-menu">
+      <ul class="nav-list">
         <li class="nav-item">
-          <a href="#" class="nav-link">Donate</a>
+          <a  [routerLink]="['/']"  class="nav-link" [class.active]="activeLink === 'home'" (click)="setActiveLink('home')">
+            <i class="fas fa-home nav-icon"></i>
+            <span>Home</span>
+          </a>
         </li>
+        
         <li class="nav-item">
-          <a href="#" class="nav-link">Contact Us</a>
+          <a  [routerLink]="['/donation']"  class="nav-link" [class.active]="activeLink === 'donate'" (click)="setActiveLink('donate')">
+            <i class="fas fa-hand-holding-heart nav-icon"></i>
+            <span>Donate</span>
+          </a>
         </li>
+        
         <li class="nav-item">
-          <a href="#" class="nav-link">About Us</a>
+          <a [routerLink]="['contact-us']" class="nav-link" [class.active]="activeLink === 'contact'" (click)="setActiveLink('contact')">
+            <i class="fas fa-envelope nav-icon"></i>
+            <span>Contact Us</span>
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a  [routerLink]="['about-us']"  class="nav-link" [class.active]="activeLink === 'about'" (click)="setActiveLink('about')">
+            <i class="fas fa-info-circle nav-icon"></i>
+            <span>About Us</span>
+          </a>
+        </li>
+        
+        <!-- Register Dropdown -->
+        <li class="nav-item dropdown" 
+            (mouseenter)="showDropdown = true" 
+            (mouseleave)="showDropdown = false">
+          <a class="nav-link dropdown-toggle" [class.active]="activeLink === 'register'">
+            <i class="fas fa-user-plus nav-icon"></i>
+            <span>Register</span>
+            <i class="fas fa-chevron-down dropdown-arrow" [class.rotated]="showDropdown"></i>
+          </a>
+          
+          <!-- Dropdown Menu -->
+          <div class="dropdown-menu" [class.show]="showDropdown" [@slideDown]>
+            <div class="dropdown-content">
+              <a class="dropdown-item ngo-register" (click)="registerAsNGO()">
+                <div class="dropdown-icon ngo-icon">
+                  <i class="fas fa-hands-helping"></i>
+                </div>
+                <div class="dropdown-text" [routerLink]="['./register/']" style="cursor: pointer;">
+                  <span class="dropdown-title" >NGO Register</span>
+                  <span class="dropdown-subtitle"  >Join as a charity organization</span>
+                </div>
+              </a>
+              
+              <div class="dropdown-divider"></div>
+              
+              <a  class="dropdown-item hotel-register" (click)="registerAsHotel()">
+                <div class="dropdown-icon hotel-icon">
+                  <i class="fas fa-building"></i>
+                </div>
+                <div class="dropdown-text" [routerLink]="['./register/hotel']" style="cursor: pointer;">
+                  <span class="dropdown-title">Hotel Register</span>
+                  <span class="dropdown-subtitle">Join as a food donor</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+        
+        <li class="nav-item">
+          <a  [routerLink]="['login']" class="nav-link login-btn" [class.active]="activeLink === 'login'" (click)="setActiveLink('login')">
+            <i class="fas fa-sign-in-alt nav-icon"></i>
+            <span>Login</span>
+          </a>
         </li>
       </ul>
-      <div class="navbar-auth">
-        <a href="#" class="auth-link register">Register</a>
-        <a [routerLink]="['login']" class="auth-link login">Login</a>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <div class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+      <div class="hamburger" [class.active]="mobileMenuOpen">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
     </div>
+  </div>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-menu" [class.open]="mobileMenuOpen" [@slideDownMobile]>
+    <ul class="mobile-nav-list">
+      <li class="mobile-nav-item">
+        <a  [routerLink]="['/']" class="mobile-nav-link" (click)="setActiveLink('home'); closeMobileMenu()">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      
+      <li class="mobile-nav-item">
+        <a  [routerLink]="['/']" class="mobile-nav-link" (click)="setActiveLink('donate'); closeMobileMenu()">
+          <i class="fas fa-hand-holding-heart"></i>
+          <span>Donate</span>
+        </a>
+      </li>
+      
+      <li class="mobile-nav-item">
+        <a  [routerLink]="['contact-us']" class="mobile-nav-link" (click)="setActiveLink('contact'); closeMobileMenu()">
+          <i class="fas fa-envelope"></i>
+          <span>Contact Us</span>
+        </a>
+      </li>
+      
+      <li class="mobile-nav-item">
+        <a  [routerLink]="['about-us']" class="mobile-nav-link" (click)="setActiveLink('about'); closeMobileMenu()">
+          <i class="fas fa-info-circle"></i>
+          <span>About Us</span>
+        </a>
+      </li>
+      
+      <!-- Mobile Register Section -->
+      <li class="mobile-nav-item register-section">
+        <div class="mobile-register-title">
+          <i class="fas fa-user-plus"></i>
+          <span>Register</span>
+        </div>
+        <div class="mobile-register-options">
+          <a  [routerLink]="['../register']" class="mobile-register-btn ngo" (click)="registerAsNGO(); closeMobileMenu()">
+            <i class="fas fa-hands-helping"></i>
+            <span>NGO Register</span>
+          </a>
+          <a  [routerLink]="['../register/hotel']"  class="mobile-register-btn hotel" (click)="registerAsHotel(); closeMobileMenu()">
+            <i class="fas fa-building"></i>
+            <span>Hotel Register</span>
+          </a>
+        </div>
+      </li>
+      
+      <li class="mobile-nav-item">
+        <a href="#" class="mobile-nav-link login" (click)="setActiveLink('login'); closeMobileMenu()">
+          <i class="fas fa-sign-in-alt"></i>
+          <span>Login</span>
+        </a>
+      </li>
+    </ul>
   </div>
 </nav>

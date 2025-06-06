@@ -1,31 +1,56 @@
 import { Component, HostListener } from '@angular/core';
+import { trigger, transition, style, animate } from '@angular/animations';
+
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
+  animations: [
+    trigger('slideDown', [
+      transition(':enter', [
+        style({ transform: 'translateY(-10px)', opacity: 0 }),
+        animate('0.3s ease-out', style({ transform: 'translateY(0)', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('0.2s ease-in', style({ transform: 'translateY(-10px)', opacity: 0 }))
+      ])
+    ]),
+    trigger('slideDownMobile', [
+      transition(':enter', [
+        style({ transform: 'translateY(-100%)', opacity: 0 }),
+        animate('0.3s ease-out', style({ transform: 'translateY(0)', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('0.2s ease-in', style({ transform: 'translateY(-100%)', opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class NavbarComponent {
-  isMenuOpen = false
-  isMobile = false
+  activeLink: string = 'home';
+  showDropdown: boolean = false;
+  mobileMenuOpen: boolean = false;
 
-  constructor() {
-    this.checkScreenSize()
+  setActiveLink(link: string): void {
+    this.activeLink = link;
   }
 
-  @HostListener("window:resize", ["$event"])
-  onResize() {
-    this.checkScreenSize()
+  toggleMobileMenu(): void {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
   }
 
-  checkScreenSize() {
-    this.isMobile = window.innerWidth < 768
-    if (!this.isMobile) {
-      this.isMenuOpen = false
-    }
+  closeMobileMenu(): void {
+    this.mobileMenuOpen = false;
   }
 
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen
+  registerAsNGO(): void {
+    console.log('Redirecting to NGO registration...');
+    // Add navigation logic here
+  }
+
+  registerAsHotel(): void {
+    console.log('Redirecting to Hotel registration...');
+    // Add navigation logic here
   }
 }

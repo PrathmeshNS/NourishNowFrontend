@@ -1,0 +1,492 @@
+<body>
+  <app-navbar></app-navbar>
+  
+  <div class="donate-container">
+    <!-- Hero Section -->
+    <div class="donate-hero">
+      <div class="hero-background">
+        <div class="floating-elements">
+          <div
+            class="floating-icon"
+            *ngFor="let icon of floatingIcons; let i = index"
+            [style.animation-delay]="i * 0.9 + 's'"
+          >
+            <i [class]="icon.class"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-heart"></i>
+          <span>Make a Difference</span>
+        </div>
+        <h1 class="hero-title">Support Our Mission</h1>
+        <p class="hero-subtitle">
+          Your donation helps us bridge the gap between food surplus and food
+          insecurity. Every contribution, no matter the size, makes a meaningful
+          impact in someone's life.
+        </p>
+        <div class="impact-preview">
+          <div class="impact-item">
+            <div class="impact-icon">
+              <i class="fas fa-utensils"></i>
+            </div>
+            <div class="impact-text">
+              <span class="impact-number">₹50</span>
+              <span class="impact-desc">feeds 5 people</span>
+            </div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="impact-text">
+              <span class="impact-number">₹200</span>
+              <span class="impact-desc">feeds a family</span>
+            </div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-icon">
+              <i class="fas fa-home"></i>
+            </div>
+            <div class="impact-text">
+              <span class="impact-number">₹500</span>
+              <span class="impact-desc">feeds a shelter</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Donation Form Section -->
+    <div class="donation-form-section">
+      <div class="container">
+        <div class="donation-wrapper">
+          <div class="donation-sidebar">
+            <div class="sidebar-content">
+              <h3>Why Donate to NourishNow?</h3>
+              <div class="reason-list">
+                <div
+                  class="reason-item"
+                  *ngFor="let reason of donationReasons; let i = index"
+                  [@fadeInUp]="{ value: '', params: { delay: i * 150 + 'ms' } }"
+                >
+                  <div class="reason-icon">
+                    <i [class]="reason.icon"></i>
+                  </div>
+                  <div class="reason-content">
+                    <h4>{{ reason.title }}</h4>
+                    <p>{{ reason.description }}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="trust-indicators">
+                <h4>Trusted & Secure</h4>
+                <div class="trust-badges">
+                  <div class="trust-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>SSL Secured</span>
+                  </div>
+                  <div class="trust-badge">
+                    <i class="fas fa-lock"></i>
+                    <span>256-bit Encryption</span>
+                  </div>
+                  <div class="trust-badge">
+                    <i class="fas fa-certificate"></i>
+                    <span>80G Tax Benefit</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="donation-form-container">
+            <div class="form-header">
+              <h2>Make Your Donation</h2>
+              <p>
+                Choose your contribution amount and help us feed more people
+              </p>
+            </div>
+
+            <form
+              class="donation-form"
+              (ngSubmit)="processDonation()"
+              #donationForm="ngForm"
+            >
+              <!-- Donation Type Selection -->
+              <div class="donation-type-section">
+                <h3>Donation Type</h3>
+                <div class="donation-types">
+                  <div
+                    class="type-option"
+                    [class.active]="donationData.type === 'one-time'"
+                    (click)="selectDonationType('one-time')"
+                  >
+                    <div class="type-icon">
+                      <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <span>One-time</span>
+                  </div>
+                  <div
+                    class="type-option"
+                    [class.active]="donationData.type === 'monthly'"
+                    (click)="selectDonationType('monthly')"
+                  >
+                    <div class="type-icon">
+                      <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <span>Monthly</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Amount Selection -->
+              <div class="amount-section">
+                <h3>Select Amount</h3>
+                <div class="amount-grid">
+                  <div
+                    class="amount-option"
+                    *ngFor="let amount of predefinedAmounts"
+                    [class.active]="donationData.amount === amount.value"
+                    (click)="selectAmount(amount.value)"
+                  >
+                    <div class="amount-value">₹{{ amount.value }}</div>
+                    <div class="amount-impact">{{ amount.impact }}</div>
+                  </div>
+                </div>
+
+                <div class="custom-amount">
+                  <label for="customAmount">Or enter custom amount</label>
+                  <div class="input-wrapper">
+                    <span class="currency-symbol">₹</span>
+                    <input
+                      type="number"
+                      id="customAmount"
+                      name="customAmount"
+                      [(ngModel)]="customAmountValue"
+                      (input)="onCustomAmountChange()"
+                      placeholder="Enter amount"
+                      min="10"
+                      class="custom-amount-input"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Personal Information -->
+              <div class="personal-info-section">
+                <h3>Your Information</h3>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="firstName">First Name *</label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      [(ngModel)]="donationData.firstName"
+                      required
+                      class="form-input"
+                      placeholder="Enter first name"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="lastName">Last Name *</label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      [(ngModel)]="donationData.lastName"
+                      required
+                      class="form-input"
+                      placeholder="Enter last name"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      [(ngModel)]="donationData.email"
+                      required
+                      class="form-input"
+                      placeholder="Enter email address"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      [(ngModel)]="donationData.phone"
+                      class="form-input"
+                      placeholder="Enter phone number"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="address">Address (for tax receipt)</label>
+                  <textarea
+                    id="address"
+                    name="address"
+                    [(ngModel)]="donationData.address"
+                    class="form-textarea"
+                    rows="3"
+                    placeholder="Enter your complete address"
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- Payment Method -->
+              <div class="payment-method-section">
+                <h3>Payment Method</h3>
+                <div class="payment-methods">
+                  <div
+                    class="payment-option"
+                    *ngFor="let method of paymentMethods"
+                    [class.active]="donationData.paymentMethod === method.id"
+                    (click)="selectPaymentMethod(method.id)"
+                  >
+                    <div class="payment-icon">
+                      <i [class]="method.icon"></i>
+                    </div>
+                    <span>{{ method.name }}</span>
+                    <div class="payment-badges" *ngIf="method.badges">
+                      <span class="badge" *ngFor="let badge of method.badges">{{
+                        badge
+                      }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Additional Options -->
+              <div class="additional-options">
+                <div class="checkbox-group">
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      [(ngModel)]="donationData.isAnonymous"
+                      name="isAnonymous"
+                    />
+                    <span class="checkmark"></span>
+                    Make this donation anonymous
+                  </label>
+                </div>
+
+                <div class="checkbox-group">
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      [(ngModel)]="donationData.sendUpdates"
+                      name="sendUpdates"
+                    />
+                    <span class="checkmark"></span>
+                    Send me updates about how my donation is being used
+                  </label>
+                </div>
+
+                <div class="checkbox-group">
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      [(ngModel)]="donationData.agreeTerms"
+                      name="agreeTerms"
+                      required
+                    />
+                    <span class="checkmark"></span>
+                    I agree to the
+                    <a href="#" class="terms-link">Terms & Conditions</a> and
+                    <a href="#" class="terms-link">Privacy Policy</a>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Donation Summary -->
+              <div class="donation-summary">
+                <div class="summary-header">
+                  <h4>Donation Summary</h4>
+                </div>
+                <div class="summary-details">
+                  <div class="summary-row">
+                    <span>Donation Amount:</span>
+                    <span class="amount">₹{{ donationData.amount }}</span>
+                  </div>
+                  <div
+                    class="summary-row"
+                    *ngIf="donationData.type === 'monthly'"
+                  >
+                    <span>Frequency:</span>
+                    <span>Monthly</span>
+                  </div>
+                  <div class="summary-row">
+                    <span>Processing Fee:</span>
+                    <span class="fee">₹{{ processingFee }}</span>
+                  </div>
+                  <div class="summary-row total">
+                    <span>Total Amount:</span>
+                    <span class="total-amount">₹{{ totalAmount }}</span>
+                  </div>
+                  <div class="tax-benefit">
+                    <i class="fas fa-info-circle"></i>
+                    <span>You'll receive 80G tax benefit certificate</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="form-actions">
+                <button
+                  type="submit"
+                  class="donate-btn"
+                  [disabled]="
+                    !donationForm.form.valid ||
+                    isProcessing ||
+                    !donationData.amount
+                  "
+                >
+                  <span *ngIf="!isProcessing">
+                    <i class="fas fa-heart"></i>
+                    Donate ₹{{ donationData.amount || 0 }}
+                  </span>
+                  <span *ngIf="isProcessing">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    Processing...
+                  </span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Impact Stories Section -->
+    <div class="impact-stories-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">See Your Impact in Action</h2>
+          <p class="section-subtitle">
+            Real stories from people whose lives have been touched by donations
+            like yours
+          </p>
+        </div>
+
+        <div class="stories-grid">
+          <div
+            class="story-card"
+            *ngFor="let story of impactStories; let i = index"
+            [@fadeInUp]="{ value: '', params: { delay: i * 200 + 'ms' } }"
+          >
+            <div class="story-image">
+              <div class="image-placeholder">
+                <i [class]="story.icon"></i>
+              </div>
+            </div>
+            <div class="story-content">
+              <h4>{{ story.title }}</h4>
+              <p>{{ story.description }}</p>
+              <div class="story-impact">
+                <span class="impact-label">Impact:</span>
+                <span class="impact-value">{{ story.impact }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transparency Section -->
+    <div class="transparency-section">
+      <div class="container">
+        <div class="transparency-content">
+          <div class="transparency-text">
+            <h2>Complete Transparency</h2>
+            <p>
+              We believe in being completely transparent about how your
+              donations are used. Here's exactly where your money goes:
+            </p>
+
+            <div class="fund-allocation">
+              <div
+                class="allocation-item"
+                *ngFor="let allocation of fundAllocation"
+              >
+                <div class="allocation-bar">
+                  <div
+                    class="allocation-fill"
+                    [style.width]="allocation.percentage + '%'"
+                    [style.background]="allocation.color"
+                  ></div>
+                </div>
+                <div class="allocation-details">
+                  <span class="allocation-label">{{ allocation.label }}</span>
+                  <span class="allocation-percent"
+                    >{{ allocation.percentage }}%</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="transparency-visual">
+            <div class="chart-container">
+              <div class="pie-chart">
+                <div class="chart-center">
+                  <span class="chart-title">Fund Usage</span>
+                  <span class="chart-subtitle">Transparent Allocation</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div
+      class="modal-overlay"
+      [class.show]="showSuccessModal"
+      (click)="closeSuccessModal()"
+    >
+      <div class="success-modal" [@bounceIn] (click)="$event.stopPropagation()">
+        <div class="modal-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h3>Thank You for Your Donation!</h3>
+        <p>
+          Your generous contribution of
+          <strong>₹{{ donationData.amount }}</strong> will help us feed
+          {{ calculateMealsFromDonation() }} people.
+        </p>
+        <div class="modal-details">
+          <div class="detail-item">
+            <i class="fas fa-receipt"></i>
+            <span>Tax receipt will be sent to your email</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-envelope"></i>
+            <span>You'll receive updates about your impact</span>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="modal-btn primary" (click)="shareSuccess()">
+            <i class="fas fa-share-alt"></i>
+            Share Your Good Deed
+          </button>
+          <button class="modal-btn secondary" (click)="closeSuccessModal()">
+            <i class="fas fa-home"></i>
+            Back to Home
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

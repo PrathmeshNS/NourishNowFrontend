@@ -35,6 +35,9 @@ import { AdminHotelAddedMealComponent } from './admin/admin-hotel-added-meal/adm
 import { AdminNgoHotelMealHistoryComponent } from './admin/admin-ngo-hotel-meal-history/admin-ngo-hotel-meal-history.component';
 import { VerifiedCardComponent } from './admin/verified-card/verified-card.component';
 import { UnverifiedCardComponent } from './admin/unverified-card/unverified-card.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { DonationComponent } from './donation/donation.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +65,10 @@ import { UnverifiedCardComponent } from './admin/unverified-card/unverified-card
     AdminHotelAddedMealComponent,
     AdminNgoHotelMealHistoryComponent,
     VerifiedCardComponent,
-    UnverifiedCardComponent,    
+    UnverifiedCardComponent,
+    ContactUsComponent,
+    AboutUsComponent,
+    DonationComponent,    
   ],
   imports: [
     BrowserModule,
