@@ -1,161 +1,255 @@
-body {
-    background: url("/assets/hotel-background.svg") no-repeat;
-    background-size: cover;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body::-webkit-scrollbar {
-    display: none;
+.container {
+    min-height: 100vh;
+    padding: 20px;
+    background: linear-gradient(135deg, #5e60ce 0%, #6930c3 100%);
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
 }
 
-.card-container {
-    backdrop-filter: blur(4px);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    min-height: 85vh;
-    padding: 40px 20px;
-    gap: 2rem;
+/* Responsive Grid Layout */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-.ngo-card {
-    flex: 1 1 300px;
-    max-width: 320px;
-    height: 450px;
-    background: none;
+.address-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
     border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.address-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.illustration {
+    height: 80px;
+    background: #e0f2fe;
+    border-radius: 12px;
     position: relative;
     overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+    position: absolute;
+}
+
+.icon-heart {
+    width: 24px;
+    height: 24px;
+    background: #ff6b6b;
+    border-radius: 50%;
+    top: 15px;
+    left: 15px;
+}
+
+.icon-egg {
+    width: 20px;
+    height: 28px;
+    background: linear-gradient(135deg, #fda4af 0%, #f9a8d4 100%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    top: 25px;
+    left: 50px;
+}
+
+.icon-circle {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #38bdf8;
+    border-radius: 50%;
+    bottom: 15px;
+    left: 25px;
+}
+
+.donate-button {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: #38bdf8;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(56, 189, 248, 0.3);
+}
+
+.card-content {
+    padding: 20px;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    border: 0.5px solid rgb(244, 244, 174);
-    color: rgb(0, 0, 0);
 }
 
-.logo-section {
-    padding: 40px 20px 20px;
-    text-align: center;
-    position: relative;
-    z-index: 2;
-    transition: all 0.4s ease;
-}
-
-.logo-icon img {
-    width: 114%;
-    max-width: 280px;
-    height: 100%;
-    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
-    max-height: 13rem;
-}
-
-img {
-    border-radius: 15px;
-}
-
-.title-section {
-    text-align: center;
-    position: relative;
-    z-index: 2;
-    transition: all 0.4s ease;
-}
-
-.ngo-name {
-    font-size: 32px;
-    font-weight: 300;
-    color: #131313;
-    margin: 0 0 10px;
-    letter-spacing: 1px;
-}
-
-.related-info {
-    padding: 10px 20px;
-    margin: calc(100% - 95%) 0 0 0;
-    display: flex;
-    flex-direction: column;
+.name {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 15px;
+    letter-spacing: -0.5px;
 }
 
 .contact-info {
-    color: rgb(0, 0, 0);
-    text-align: center;
-    animation: slideUp 0.6s ease forwards;
-}
-
-.contact-number {
-    font-size: 14px;
-    font-weight: 500;
-    color: #646464;
-    text-align: center;
-}
-
-.location-details {
     display: flex;
     justify-content: space-between;
-    font-size: 13px;
-    color: #293a45;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.city,
-.pincode {
+.label {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.value {
+    font-size: 16px;
+    color: white;
+    font-weight: 600;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.address-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.address-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.address-item.full-width {
+    grid-column: 1 / -1;
+}
+
+.address-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.address-label {
+    display: block;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 5px;
     font-weight: 500;
 }
 
-/* ------------------ Responsive Enhancements ------------------ */
-
-@media (max-width: 1024px) {
-    .card-container {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
+.address-value {
+    display: block;
+    font-size: 16px;
+    color: white;
+    font-weight: 600;
 }
 
+.card-footer {
+    padding: 15px;
+    text-align: center;
+}
+
+.decorative-line {
+    width: 60px;
+    height: 3px;
+    background: #38bdf8;
+    border-radius: 2px;
+    margin: 0 auto;
+}
+
+/* Animation delay for staggered appearance */
+.address-card:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.address-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.address-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.address-card:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.address-card:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .card-container {
-        flex-direction: column;
-        gap: 1.5rem;
-        padding: 30px 15px;
+    .cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
     }
 
-    .ngo-card {
-        max-width: 72%;
-        height: 100%;
-        width: 70%;
-        max-height: 22rem;
-    }
-
-    .logo-section {
-        padding: 30px 10px 15px;
-    }
-
-    .ngo-name {
-        font-size: 24px;
-    }
-
-    .action-buttons {
-        flex-direction: column;
-    }
-
-    .accept-btn,
-    .reject-btn {
-        width: 100%;
+    .name {
+        font-size: 22px;
     }
 }
 
 @media (max-width: 480px) {
-    .ngo-name {
-        font-size: 20px;
+    .container {
+        padding: 15px;
     }
 
-    .logo-icon img {
-        max-width: 13rem;
-        height: 100%;
+    .cards-grid {
+        grid-template-columns: 1fr;
     }
 
-    .address-text,
-    .contact-number,
-    .city,
-    .pincode {
-        font-size: 12px;
+    .address-grid {
+        gap: 10px;
+    }
+
+    .address-item {
+        padding: 12px;
     }
 }

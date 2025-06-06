@@ -18,6 +18,7 @@ import { AdminNgoCheckComponent } from './admin/admin-ngo-check/admin-ngo-check.
 import { AdminHotelAddedMealComponent } from './admin/admin-hotel-added-meal/admin-hotel-added-meal.component';
 import { AdminNgoHotelMealHistoryComponent } from './admin/admin-ngo-hotel-meal-history/admin-ngo-hotel-meal-history.component';
 import { UserWaitingScreenComponent } from './user-waiting-screen/user-waiting-screen.component';
+import { HotelNavbarComponent } from './hotel/hotel-navbar/hotel-navbar.component';
 
 const routes: Routes = [
   {

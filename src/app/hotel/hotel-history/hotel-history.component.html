@@ -1,29 +1,72 @@
-<body>
-  <app-hotel-navbar></app-hotel-navbar>
-  <div class="container">
-    <h2 class="thank-you-heading">Thank For Contributing</h2>
-    <div class="content-card">
+<app-hotel-history></app-hotel-history>
 
-      <table class="contributions-table">
-        <thead>
-          <tr>
-            <th>Sr. No.</th>
-            <th>Date</th>
-            <th>Ngo Name</th>
-            <th>Type</th>
-            <th>Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let contribution of contributions">
-            <td>{{ contribution.id }}.</td>
-            <td>{{ contribution.date }}</td>
-            <td>{{ contribution.ngoName }}</td>
-            <td>{{ contribution.type }}</td>
-            <td>{{ contribution.time }}</td>
-          </tr>
-        </tbody>
-      </table>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Thanks For Contributing</h2>
+      <div class="title-underline"></div>
+    </div>
+
+    <div class="card-content">
+      <!-- Desktop Table View -->
+      <div class="desktop-view">
+        <table>
+          <thead>
+            <tr>
+              <th>Sr. No.</th>
+              <th>Date</th>
+              <th>Ngo Name</th>
+              <th>Type</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let item of contributionData; let i = index"
+              [ngClass]="{ 'even-row': i % 2 === 0 }"
+            >
+              <td>{{ item.srNo }}.</td>
+              <td>{{ item.date }}</td>
+
+              <td>
+                <i class="material-symbol-outlined"> </i> {{ item.ngoName }}
+              </td>
+              <td>
+                <span class="badge">{{ item.type }}</span>
+              </td>
+              <td>{{ item.time }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Mobile Card View -->
+      <div class="mobile-view">
+        <div class="mobile-card" *ngFor="let item of contributionData">
+          <div class="mobile-card-header">
+            <div class="mobile-card-number">
+              <span>{{ item.srNo }}</span>
+            </div>
+            <div class="mobile-card-name">{{ item.ngoName }}</div>
+            <div class="mobile-card-badge">{{ item.type }}</div>
+          </div>
+          <div class="mobile-card-details">
+            <div class="detail-item">
+              <span class="detail-label">Date:</span>
+              <span class="detail-value">{{ item.date }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Time:</span>
+              <span class="detail-value">{{ item.time }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</body>
+
+  <!-- Decorative Elements -->
+  <div class="decoration decoration-1"></div>
+  <div class="decoration decoration-2"></div>
+  <div class="decoration decoration-3"></div>
+</div>

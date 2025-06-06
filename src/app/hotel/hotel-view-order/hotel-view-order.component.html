@@ -1,273 +1,253 @@
-<body>
-  <div class="nav-bar">
-  <app-hotel-navbar></app-hotel-navbar>
+<app-hotel-navbar></app-hotel-navbar>
+
+<div class="ngo-cards-container">
+  <!-- Background Elements -->
+  <div class="bg-decoration bg-decoration-1"></div>
+  <div class="bg-decoration bg-decoration-2"></div>
+  <div class="bg-decoration bg-decoration-3"></div>
+
+  <div class="cards-wrapper">
+    <!-- <div class="section-header">
+      <h1 class="section-title">
+        <span class="title-icon">🏢</span>
+        <span class="title-text">Partner NGOs</span>
+      </h1>
+      <p class="section-subtitle">Connect with verified NGOs in your area to make a difference</p>
+    </div> -->
+
+    <div class="cards-grid">
+      <!-- NGO Card -->
+      <div 
+        class="ngo-card" 
+        *ngFor="let ngo of ngoList; let i = index"
+        [class.featured]="ngo.featured">
+        
+        <!-- Card Background -->
+        <div class="card-background">
+          <img [src]="ngo.backgroundImage" [alt]="ngo.name + ' background'" class="bg-image">
+          <div class="card-overlay"></div>
+        </div>
+
+        <!-- Default Content (Always Visible) -->
+        <div class="card-content default-content">
+          <!-- NGO Illustration -->
+          <div class="ngo-illustration">
+            <div class="illustration-container">
+              <!-- People Illustration -->
+              <div class="people-group">
+                <div class="person person-1">
+                  <div class="person-body">
+                    <div class="person-head"></div>
+                    <div class="person-torso"></div>
+                  </div>
+                  <div class="held-item globe">
+                    <div class="globe-lines">
+                      <div class="globe-line horizontal"></div>
+                      <div class="globe-line vertical"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="person person-2">
+                  <div class="person-body">
+                    <div class="person-head"></div>
+                    <div class="person-torso"></div>
+                  </div>
+                </div>
+
+                <div class="person person-3">
+                  <div class="person-body">
+                    <div class="person-head"></div>
+                    <div class="person-torso"></div>
+                  </div>
+                </div>
+
+                <div class="person person-4">
+                  <div class="person-body">
+                    <div class="person-head"></div>
+                    <div class="person-torso"></div>
+                  </div>
+                  <div class="held-item donate-sign">
+                    <span class="donate-text">DONATE</span>
+                    <div class="money-bag">
+                      <span class="dollar-sign">$</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Central Heart -->
+              <div class="central-heart">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" 
+                        fill="#ff6b6b"/>
+                </svg>
+                <div class="heart-pulse"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NGO Basic Info -->
+          <div class="ngo-basic-info">
+            <h3 class="ngo-name">{{ngo.name}}</h3>
+            <div class="ngo-badges">
+              <span class="badge verified" *ngIf="ngo.verified">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <polyline points="20,6 9,17 4,12"/>
+                </svg>
+                Verified
+              </span>
+              <span class="badge rating">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/>
+                </svg>
+                {{ngo.rating}}
+              </span>
+              <span class="badge category">{{ngo.category}}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hover Content (Shown on Hover) -->
+        <div class="card-content hover-content">
+          <!-- Action Buttons -->
+          <div class="action-buttons">
+            <button 
+              class="action-btn accept-btn"
+              (click)="acceptNgo(ngo)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <polyline points="20,6 9,17 4,12"/>
+              </svg>
+              <span>ACCEPT</span>
+            </button>
+            
+            <button 
+              class="action-btn reject-btn"
+              (click)="rejectNgo(ngo)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+              <span>REJECT</span>
+            </button>
+          </div>
+
+          <!-- Detailed Information -->
+          <div class="detailed-info">
+            <div class="info-section">
+              <h4 class="info-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                Complete Address:
+              </h4>
+              <p class="info-content">{{ngo.address}}</p>
+            </div>
+
+            <div class="info-section">
+              <h4 class="info-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+                Contact No:
+              </h4>
+              <p class="info-content">
+                <a href="tel:{{ngo.phone}}" class="phone-link">{{ngo.phone}}</a>
+              </p>
+            </div>
+
+            <div class="info-row">
+              <div class="info-section">
+                <h4 class="info-title">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M3 21h18"/>
+                    <path d="M5 21V7l8-4v18"/>
+                    <path d="M19 21V9.5l-6-2.7"/>
+                  </svg>
+                  City:
+                </h4>
+                <p class="info-content">{{ngo.city}}</p>
+              </div>
+
+              <div class="info-section">
+                <h4 class="info-title">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="9" y1="9" x2="15" y2="9"/>
+                    <line x1="9" y1="12" x2="15" y2="12"/>
+                    <line x1="9" y1="15" x2="15" y2="15"/>
+                  </svg>
+                  Pincode:
+                </h4>
+                <p class="info-content">{{ngo.pincode}}</p>
+              </div>
+            </div>
+
+            <!-- Additional Info -->
+            <div class="additional-info">
+              <div class="stats-row">
+                <div class="stat-item">
+                  <span class="stat-number">{{ngo.totalDonations}}</span>
+                  <span class="stat-label">Donations</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-number">{{ngo.peopleHelped}}</span>
+                  <span class="stat-label">People Helped</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-number">{{ngo.yearsActive}}</span>
+                  <span class="stat-label">Years Active</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Status Indicator -->
+        <div class="status-indicator" [class]="'status-' + ngo.status" *ngIf="ngo.status !== 'pending'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <polyline *ngIf="ngo.status === 'accepted'" points="20,6 9,17 4,12"/>
+            <g *ngIf="ngo.status === 'rejected'">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Featured Badge -->
+        <div class="featured-badge" *ngIf="ngo.featured">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/>
+          </svg>
+          Featured
+        </div>
+      </div>
+    </div>
+
+    <!-- Load More Button -->
+    <div class="load-more-section" *ngIf="hasMoreNgos">
+      <button class="load-more-btn" (click)="loadMoreNgos()" [disabled]="isLoading">
+        <span *ngIf="!isLoading">Load More NGOs</span>
+        <span *ngIf="isLoading" class="loading-spinner"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" [class.show]="showToast" [class]="'toast-' + toastType">
+    <div class="toast-content">
+      <div class="toast-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <polyline *ngIf="toastType === 'success'" points="20,6 9,17 4,12"/>
+          <g *ngIf="toastType === 'error'">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="15" y1="9" x2="9" y2="15"/>
+            <line x1="9" y1="9" x2="15" y2="15"/>
+          </g>
+        </svg>
+      </div>
+      <span class="toast-message">{{toastMessage}}</span>
+    </div>
+  </div>
 </div>
-<div class="card-container">
-  <div class="ngo-card" onclick="this.classList.toggle('active')">
-    <!-- Logo Section -->
-    <div class="logo-section">
-      <div class="logo-icon">
-        <img src="./assets/HomePage.svg" alt="" />
-      </div>
-    </div>
-
-    <!-- Title Section -->
-    <div class="title-section">
-      <h1 class="ngo-name">Sambhaj Ngo</h1>
-    </div>
-
-    <!-- Hover Content -->
-    <div class="hover-content">
-      <!-- Action Buttons -->
-      
-      <div class="action-buttons">
-        <button class="accept-btn" (click)="onAccept()">Accept</button>
-        <button class="reject-btn" (click)="onReject()">Reject</button>
-      </div>
-
-      <!-- Contact Information -->
-      <div class="contact-info">
-        <div class="address-section">
-          <p class="address-label">Complete Address :</p>
-          <p class="address-text">Sambhaji Chauk, Burud Galli, Vinchur</p>
-        </div>
-
-        <div class="contact-details">
-          <p class="contact-number">Contact No. : 9359519620</p>
-        </div>
-
-        <div class="location-details">
-          <span class="city">City : Nashik</span>
-          <span class="pincode">Pincode : 422305</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="ngo-card"  onclick="this.classList.toggle('active')">
-    <!-- Logo Section -->
-    <div class="logo-section">
-      <div class="logo-icon">
-        <img src="./assets/HomePage.svg" alt="" />
-      </div>
-    </div>
-
-    <!-- Title Section -->
-    <div class="title-section">
-      <h1 class="ngo-name">Sambhaj Ngo</h1>
-    </div>
-
-    <!-- Hover Content -->
-    <div class="hover-content">
-      <!-- Action Buttons -->
-      <div class="action-buttons">
-        <button class="accept-btn" (click)="onAccept()">Accept</button>
-        <button class="reject-btn" (click)="onReject()">Reject</button>
-      </div>
-
-      <!-- Contact Information -->
-      <div class="contact-info">
-        <div class="address-section">
-          <p class="address-label">Complete Address :</p>
-          <p class="address-text">Sambhaji Chauk, Burud Galli, Vinchur</p>
-        </div>
-
-        <div class="contact-details">
-          <p class="contact-number">Contact No. : 9359519620</p>
-        </div>
-
-        <div class="location-details">
-          <span class="city">City : Nashik</span>
-          <span class="pincode">Pincode : 422305</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="ngo-card"  onclick="this.classList.toggle('active')">
-    <!-- Logo Section -->
-    <div class="logo-section">
-      <div class="logo-icon">
-        <img src="./assets/HomePage.svg" alt="" />
-      </div>
-    </div>
-
-    <!-- Title Section -->
-    <div class="title-section">
-      <h1 class="ngo-name">Sambhaj Ngo</h1>
-    </div>
-
-    <!-- Hover Content -->
-    <div class="hover-content">
-      <!-- Action Buttons -->
-      <div class="action-buttons">
-        <button class="accept-btn" (click)="onAccept()">Accept</button>
-        <button class="reject-btn" (click)="onReject()">Reject</button>
-      </div>
-
-      <!-- Contact Information -->
-      <div class="contact-info">
-        <div class="address-section">
-          <p class="address-label">Complete Address :</p>
-          <p class="address-text">Sambhaji Chauk, Burud Galli, Vinchur</p>
-        </div>
-
-        <div class="contact-details">
-          <p class="contact-number">Contact No. : 9359519620</p>
-        </div>
-
-        <div class="location-details">
-          <span class="city">City : Nashik</span>
-          <span class="pincode">Pincode : 422305</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-   <div class="ngo-card" onclick="this.classList.toggle('active')">
-    <!-- Logo Section -->
-    <div class="logo-section">
-      <div class="logo-icon">
-        <img src="./assets/HomePage.svg" alt="" />
-      </div>
-    </div>
-
-    <!-- Title Section -->
-    <div class="title-section">
-      <h1 class="ngo-name">Sambhaj Ngo</h1>
-    </div>
-
-    <!-- Hover Content -->
-    <div class="hover-content">
-      <!-- Action Buttons -->
-      
-      <div class="action-buttons">
-        <button class="accept-btn" (click)="onAccept()">Accept</button>
-        <button class="reject-btn" (click)="onReject()">Reject</button>
-      </div>
-
-      <!-- Contact Information -->
-      <div class="contact-info">
-        <div class="address-section">
-          <p class="address-label">Complete Address :</p>
-          <p class="address-text">Sambhaji Chauk, Burud Galli, Vinchur</p>
-        </div>
-
-        <div class="contact-details">
-          <p class="contact-number">Contact No. : 9359519620</p>
-        </div>
-
-        <div class="location-details">
-          <span class="city">City : Nashik</span>
-          <span class="pincode">Pincode : 422305</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-   <div class="ngo-card" onclick="this.classList.toggle('active')">
-    <!-- Logo Section -->
-    <div class="logo-section">
-      <div class="logo-icon">
-        <img src="./assets/HomePage.svg" alt="" />
-      </div>
-    </div>
-
-    <!-- Title Section -->
-    <div class="title-section">
-      <h1 class="ngo-name">Sambhaj Ngo</h1>
-    </div>
-
-    <!-- Hover Content -->
-    <div class="hover-content">
-      <!-- Action Buttons -->
-      
-      <div class="action-buttons">
-        <button class="accept-btn" (click)="onAccept()">Accept</button>
-        <button class="reject-btn" (click)="onReject()">Reject</button>
-      </div>
-
-      <!-- Contact Information -->
-      <div class="contact-info">
-        <div class="address-section">
-          <p class="address-label">Complete Address :</p>
-          <p class="address-text">Sambhaji Chauk, Burud Galli, Vinchur</p>
-        </div>
-
-        <div class="contact-details">
-          <p class="contact-number">Contact No. : 9359519620</p>
-        </div>
-
-        <div class="location-details">
-          <span class="city">City : Nashik</span>
-          <span class="pincode">Pincode : 422305</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-   <div class="ngo-card" onclick="this.classList.toggle('active')">
-    <!-- Logo Section -->
-    <div class="logo-section">
-      <div class="logo-icon">
-        <img src="./assets/HomePage.svg" alt="" />
-      </div>
-    </div>
-
-    <!-- Title Section -->
-    <div class="title-section">
-      <h1 class="ngo-name">Sambhaj Ngo</h1>
-    </div>
-
-    <!-- Hover Content -->
-    <div class="hover-content">
-      <!-- Action Buttons -->
-      
-      <div class="action-buttons">
-        <button class="accept-btn" (click)="onAccept()">Accept</button>
-        <button class="reject-btn" (click)="onReject()">Reject</button>
-      </div>
-
-      <!-- Contact Information -->
-      <div class="contact-info">
-        <div class="address-section">
-          <p class="address-label">Complete Address :</p>
-          <p class="address-text">Sambhaji Chauk, Burud Galli, Vinchur</p>
-        </div>
-
-        <div class="contact-details">
-          <p class="contact-number">Contact No. : 9359519620</p>
-        </div>
-
-        <div class="location-details">
-          <span class="city">City : Nashik</span>
-          <span class="pincode">Pincode : 422305</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-</div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const cards = document.querySelectorAll(".ngo-card");
-
-    cards.forEach((card) => {
-      card.addEventListener("click", function (e) {
-        // Close other cards
-        cards.forEach((c) => {
-          if (c !== card) c.classList.remove("active");
-        });
-
-        // Toggle current card
-        card.classList.toggle("active");
-      });
-    });
-  });
-</script>
-
-</body>
