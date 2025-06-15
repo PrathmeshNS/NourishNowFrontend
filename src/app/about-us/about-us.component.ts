@@ -1,5 +1,6 @@
 import { Component, type OnInit } from "@angular/core"
 import { trigger, transition, style, animate } from "@angular/animations"
+import { Router } from "@angular/router"
 
 interface TimelineItem {
   year: string
@@ -8,12 +9,15 @@ interface TimelineItem {
 }
 
 interface TeamMember {
+  id: number
   name: string
   role: string
   bio: string
+  photo?: string
   icon: string
+  linkedin?: string
+  twitter?: string
 }
-
 interface ImpactStat {
   icon: string
   value: string
@@ -98,42 +102,67 @@ export class AboutUsComponent {
 
   teamMembers: TeamMember[] = [
     {
-      name: "Priya Sharma",
-      role: "Founder & CEO",
-      bio: "Passionate about social impact and technology. 10+ years in nonprofit sector.",
+      id: 1,
+      name: "Prathmesh N S",
+      role: "CEO & Founder",
+      bio: "Visionary leader driving innovative solutions for community well-being and sustainable growth, with a decade of impact-driven experience.",
+      photo: "assets/company-holders/me.png", // Add your image path here
       icon: "fas fa-user-tie",
+      linkedin: "prathmesh_n_s",
+      twitter: "prathmeshns",
     },
     {
-      name: "Rahul Patel",
+      id: 2,
+      name: "Darshan Jadhav",
       role: "CTO",
-      bio: "Tech enthusiast building scalable solutions for social good. Former software architect.",
+      bio: "Tech enthusiast focused on building scalable solutions for food accessibility.",
+      photo: "assets/company-holders/darshan.png", // Add your image path here
       icon: "fas fa-laptop-code",
+      linkedin: "michael-chen",
+      twitter: "michaelchen",
     },
     {
-      name: "Anita Desai",
-      role: "Head of Partnerships",
-      bio: "Expert in building meaningful relationships with NGOs and food industry partners.",
-      icon: "fas fa-handshake",
-    },
-    {
-      name: "Vikram Singh",
-      role: "Operations Manager",
-      bio: "Ensures smooth food collection and distribution operations across all cities.",
+      id: 3,
+      name: "Vaishnavi Pawar",
+      role: "Head of Operations",
+      bio: "Operations expert ensuring smooth delivery of nutritious meals to communities.",
+      photo: "assets/company-holders/vaishnavi.png", // Add your image path here
       icon: "fas fa-cogs",
+      linkedin: "emily-rodriguez",
+      twitter: "emilyrodriguez",
     },
     {
-      name: "Meera Joshi",
-      role: "Community Manager",
-      bio: "Builds and nurtures our community of donors, volunteers, and beneficiaries.",
-      icon: "fas fa-users",
+      id: 4,
+      name: "Rushikesh Khandare",
+      role: "Designer",
+      bio: "Creative designer passionate about crafting visually engaging and user-friendly experiences.",
+      photo: "assets/company-holders/rushi.png", // Add your image path here
+      icon: "fas fa-apple-alt",
+      linkedin: "david-kim",
+      twitter: "davidkim",
     },
     {
-      name: "Arjun Kumar",
-      role: "Data Analyst",
-      bio: "Tracks impact metrics and optimizes food distribution using data-driven insights.",
-      icon: "fas fa-chart-line",
+      id: 5,
+      name: "Pratiksha Sonar",
+      role: "Cloud Support",
+      bio: "Dedicated cloud support specialist focused on ensuring seamless cloud operations and reliable technical assistance.",
+      photo: "assets/company-holders/pratiksha.png", // Add your image path here
+      icon: "fas fa-apple-alt",
+      linkedin: "david-kim",
+      twitter: "davidkim",
+    },
+    {
+      id: 6,
+      name: "Soham Sonawane",
+      role: "Developer",
+      bio: "Passionate developer committed to building efficient, scalable, and user-centric software solutions.",
+      photo: "assets/company-holders/soham.png", // Add your image path here
+      icon: "fas fa-apple-alt",
+      linkedin: "david-kim",
+      twitter: "davidkim",
     },
   ]
+
 
   impactStats: ImpactStat[] = [
     {
@@ -241,7 +270,7 @@ export class AboutUsComponent {
     },
   ]
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     // Component initialization
@@ -250,6 +279,13 @@ export class AboutUsComponent {
   navigateToRegister(type: string): void {
     // Navigate to registration page based on type
     console.log(`Navigating to ${type} registration`)
+    if (type === 'ngo') {
+      this.router.navigate(['/register'])
+    }
+    if (type === 'donor') {
+      this.router.navigate(['./register/hotel'])
+    }
+
   }
 
   subscribeNewsletter(): void {
@@ -264,9 +300,23 @@ export class AboutUsComponent {
       alert("Thank you for subscribing to our newsletter!")
     }, 2000)
   }
+  openSocialProfile(memberName: string, platform: string) {
+    const member = this.teamMembers.find((m) => m.name === memberName)
+    if (!member) return
 
-  openSocialProfile(name: string, platform: string): void {
-    // Open social media profile
-    console.log(`Opening ${platform} profile for ${name}`)
+    let url = ""
+    switch (platform) {
+      case "linkedin":
+        url = `https://linkedin.com/in/${member.linkedin}`
+        break
+      case "twitter":
+        url = `https://twitter.com/${member.twitter}`
+        break
+    }
+
+    if (url) {
+      window.open(url, "_blank")
+    }
   }
+
 }

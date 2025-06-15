@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { AvailableFood } from 'src/app/entity/AvailableFood';
+import { AvailableFoodServiceService } from 'src/app/service/available-food-service.service';
+import { UserServiceService } from 'src/app/service/user-service.service';
+import { __values } from 'tslib';
 
 interface FoodItem {
   name: string;
-  category: string;
 }
-
 
 @Component({
   selector: 'app-hotel-add-meal',
@@ -13,11 +15,18 @@ interface FoodItem {
 })
 export class HotelAddMealComponent {
   newFoodItem: string = '';
+
+  avaiableFood: AvailableFood = {
+    aId: 0,
+    dateTime: '',
+    foodItem: [],
+    approxPersonCanEat: 0,
+    typeOfProviding: '',
+    hotelUsers: this.availableFoodService.hotel
+}
+
   foodItems: FoodItem[] = [
-    { name: 'Rice', category: 'Grains' },
-    { name: 'Curry', category: 'Main Course' },
-    { name: 'Bread', category: 'Bakery' },
-    { name: 'Rice', category: 'Grains' }
+    { name: 'Rice' },{ name: 'Curry'},{ name: 'Bread' },{ name: 'Rice' }
   ];
 
   deliveryType: string = 'delivery';
@@ -33,19 +42,17 @@ export class HotelAddMealComponent {
   toastMessage: string = '';
   toastType: 'success' | 'error' = 'success';
 
-  constructor() { }
+  constructor(private availableFoodService:AvailableFoodServiceService) { }
 
   addFoodItem(): void {
     if (this.newFoodItem.trim()) {
       this.isLoading = true;
-
       // Simulate API call
       setTimeout(() => {
-        const category = this.getFoodCategory(this.newFoodItem.trim());
         this.foodItems.push({
           name: this.newFoodItem.trim(),
-          category: category
         });
+        console.log(this.foodItems)
 
         this.newFoodItem = '';
         this.isLoading = false;
@@ -62,10 +69,8 @@ export class HotelAddMealComponent {
 
   saveEdit(index: number): void {
     if (this.editingValue.trim()) {
-      const category = this.getFoodCategory(this.editingValue.trim());
       this.foodItems[index] = {
         name: this.editingValue.trim(),
-        category: category
       };
       this.cancelEdit();
       this.showToastMessage('Food item updated successfully!', 'success');
@@ -113,14 +118,25 @@ export class HotelAddMealComponent {
 
     // Simulate API call
     setTimeout(() => {
-      const donationData = {
-        foodItems: this.foodItems,
-        deliveryType: this.deliveryType,
-        servingSize: this.servingSize,
-        timestamp: new Date().toISOString()
-      };
+      
+      this.avaiableFood.foodItem =  this.foodItems.map(item =>item.name)
+      this.avaiableFood.approxPersonCanEat = this.servingSize;
+      this.avaiableFood.typeOfProviding = this.deliveryType;
+      
+      const hotelId = localStorage.getItem("hId");
 
-      console.log('Food donation submitted:', donationData);
+      if (hotelId != null) {
+        this.avaiableFood.hotelUsers.id = Number.parseInt(hotelId);
+      }
+      
+      this.availableFoodService.addAvailableFood(this.avaiableFood).subscribe({
+        next:(value)=> {
+          console.log(value)
+        },
+        error:(err) =>{
+          console.log(err)
+        },
+      })
 
       this.isSubmitting = false;
       this.showToastMessage('Food donation submitted successfully! Thank you for your contribution.', 'success');
@@ -128,29 +144,6 @@ export class HotelAddMealComponent {
       // Reset form after successful submission
       this.resetForm();
     }, 2000);
-  }
-
-  private getFoodCategory(foodName: string): string {
-    const categories: { [key: string]: string[] } = {
-      'Grains': ['rice', 'wheat', 'quinoa', 'barley', 'oats'],
-      'Vegetables': ['potato', 'tomato', 'onion', 'carrot', 'spinach', 'cabbage'],
-      'Fruits': ['apple', 'banana', 'orange', 'mango', 'grapes'],
-      'Dairy': ['milk', 'cheese', 'yogurt', 'butter'],
-      'Protein': ['chicken', 'fish', 'eggs', 'beans', 'lentils'],
-      'Bakery': ['bread', 'cake', 'cookies', 'pastry'],
-      'Main Course': ['curry', 'soup', 'stew', 'pasta', 'pizza'],
-      'Snacks': ['chips', 'crackers', 'nuts', 'popcorn']
-    };
-
-    const lowerFoodName = foodName.toLowerCase();
-
-    for (const [category, items] of Object.entries(categories)) {
-      if (items.some(item => lowerFoodName.includes(item))) {
-        return category;
-      }
-    }
-
-    return 'Other';
   }
 
   private showToastMessage(message: string, type: 'success' | 'error'): void {

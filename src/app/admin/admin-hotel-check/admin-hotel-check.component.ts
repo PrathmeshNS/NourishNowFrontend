@@ -1,18 +1,9 @@
 import { Component, EventEmitter, Output } from "@angular/core"
 import { NavbarClickService } from "../service/navbar-click.service";
+import { UserServiceService } from "src/app/service/user-service.service";
+import { Users } from "src/app/entity/Users";
 
 
-interface CardData {
-  id: string;
-  registrationNo: string;
-  name: string
-  email: string;
-  contactNo: string;
-  fullAddress: string;
-  city: string;
-  pincode: string;
-  dateOfJoining: string;
-}
 
 @Component({
   selector: 'app-admin-hotel-check',
@@ -24,10 +15,16 @@ export class AdminHotelCheckComponent {
   verified: boolean = true;
   myLink: string = ''
 
-  constructor(private navClick: NavbarClickService) {
+  private hotelUser: Users[] = [];
+
+  constructor(private navClick: NavbarClickService, private userService: UserServiceService) {
     this.checkNavbarClick()
   }
 
+  ngOnInit() {
+    this.getAllhotel()
+    this.getAllVerfiedHotel();
+  }
 
   toggleTheme() {
     this.isDarkMode = !this.isDarkMode;
@@ -52,7 +49,7 @@ export class AdminHotelCheckComponent {
 
   private changeCard(linkDataValue: String) {
     console.log(linkDataValue)
-    if (linkDataValue === "hotelverified" || linkDataValue === "verified") {
+    if (linkDataValue === "HotelVerified" ) {
       this.verified = true
     }
     else {
@@ -60,50 +57,33 @@ export class AdminHotelCheckComponent {
     }
   }
 
-  cards: CardData[] = [
-    {
-      id: '8',
-      registrationNo: '87sadf32v520.x',
-      name:"Samaj Kalyan",
-      email: 'kinara@gmail.com',
-      contactNo: '7951******',
-      fullAddress: 'Samaj Kalyan, Adgaon.',
-      city: 'Nashik',
-      pincode: '422003',
-      dateOfJoining: '2-march-2015'
-    },
-    {
-      id: '2',
-      registrationNo: '87456dafsd45123ffdgdf',
-      name:"Tarangan",
-      email: 'tarangan@gmail.com',
-      contactNo: '8288******',
-      fullAddress: 'Sambhaji Chauk, Burud Galli, Vinchur',
-      city: 'Nashik',
-      pincode: '420123',
-      dateOfJoining: '28-march-2025'
-    },
-    {
-      id: '10',
-      registrationNo: '32d3wde1321dsf32',
-      name: "MyWish",
-      email: 'my.wish@gmail.com',
-      contactNo: '8745******',
-      fullAddress: 'Wish Nagar, Wish Wadi, Wish.',
-      city: 'Wish',
-      pincode: '143143',
-      dateOfJoining: '28-may-2025'
-    },
-    {
-      id: '23',
-      registrationNo: '1434dsfsd42dfdsd',
-      name: "Pranvi",
-      email: 'pranvi@gmail.com',
-      contactNo: '852******',
-      fullAddress: 'Sambhaji Chauk, Burud Galli, Vinchur',
-      city: 'Nashik',
-      pincode: '422305',
-      dateOfJoining: '08-may-2025'
+  private getAllhotel() {
+    this.userService.getAllHotel().subscribe({
+      next: (value) => {
+        this.hotelUser = value;
+      },
+    })
+  }
+
+  getAllVerfiedHotel() {
+    const verifiedHotel: Users[] = []
+    for (let index = 0; index < this.hotelUser.length; index++) {
+      if (this.hotelUser[index].status.toString() === 'TRUE') {
+        verifiedHotel.push(this.hotelUser[index])
+      }
     }
-  ];
+    console.log(verifiedHotel)
+    return verifiedHotel;
+  }
+
+  getAllUnVerfiedHotel() {
+    const unVerifiedHotel: Users[] = []
+    for (let index = 0; index < this.hotelUser.length; index++) {
+      if (this.hotelUser[index].status.toString() === 'FALSE') {
+        unVerifiedHotel.push(this.hotelUser[index])
+      }
+    }
+    console.log(unVerifiedHotel)
+    return unVerifiedHotel;
+  }
 }

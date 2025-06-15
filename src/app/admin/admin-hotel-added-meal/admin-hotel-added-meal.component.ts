@@ -1,4 +1,6 @@
 import { Component, Inject, Renderer2, type OnInit, } from "@angular/core"
+import { AvailableFood } from "src/app/entity/AvailableFood";
+import { AvailableFoodServiceService } from "src/app/service/available-food-service.service";
 
 @Component({
   selector: 'app-admin-hotel-added-meal',
@@ -9,7 +11,9 @@ export class AdminHotelAddedMealComponent {
 
   isDarkMode = false;
 
-  hotels=
+  availableFood: AvailableFood[] = [];
+
+  hotels =
     [
       {
         name: 'Grand Palace Hotel',
@@ -35,11 +39,23 @@ export class AdminHotelAddedMealComponent {
       }
     ];
 
+  constructor(private availableFoodService: AvailableFoodServiceService) { }
 
   toggleTheme() {
     this.isDarkMode = !this.isDarkMode;
     document.documentElement.setAttribute('data-theme', this.isDarkMode ? 'dark' : 'light');
   }
 
+
+  getAllAvailableFood() {
+    this.availableFoodService.getAvailableFood().subscribe({
+      next: (value) => {
+        this.availableFood = value;
+      },
+      error: (err) => {
+        console.log(err)
+      },
+    })
+  }
 
 }

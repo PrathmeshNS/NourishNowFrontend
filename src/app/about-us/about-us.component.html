@@ -1,7 +1,6 @@
 <body>
+  <app-navbar></app-navbar>
 
-    <app-navbar></app-navbar>
-    
   <div class="about-container">
     <!-- Hero Section -->
     <div class="about-hero">
@@ -170,8 +169,17 @@
             [@fadeInUp]="{ value: '', params: { delay: i * 150 + 'ms' } }"
           >
             <div class="member-avatar">
-              <div class="avatar-placeholder">
-                <i [class]="member.icon"></i>
+              <div class="avatar-container">
+                <img
+                  [src]="
+                    member.photo || '/placeholder.svg?height=120&width=120'
+                  "
+                  [alt]="member.name"
+                  class="avatar-image"
+                />
+                <div class="avatar-fallback" *ngIf="!member.photo">
+                  <i [class]="member.icon"></i>
+                </div>
               </div>
               <div class="member-social">
                 <a

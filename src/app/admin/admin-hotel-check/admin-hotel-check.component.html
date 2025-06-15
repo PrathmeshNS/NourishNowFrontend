@@ -1,16 +1,19 @@
-<div class="app-container" [class.dark-mode]="isDarkMode">
-  <app-admin-navbar (themeToggle)="toggleTheme()"></app-admin-navbar>
-  <main class="main-content">
-    <div *ngIf="verified then verifiedHotel; else unVerifiedHotel">
+<div class="admin-layout">
+  <!-- Navbar -->
+  <app-admin-navbar class="admin-navbar" (themeToggle)="toggleTheme()"></app-admin-navbar>
 
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="content-body">
+      <div *ngIf="verified; then verifiedHotel; else unVerifiedHotel"></div>
     </div>
   </main>
 </div>
 
 <ng-template #verifiedHotel>
-  <app-verified-card></app-verified-card>
+  <app-verified-card [verifiedUser]="getAllVerfiedHotel()"></app-verified-card>
 </ng-template>
 
 <ng-template #unVerifiedHotel>
-  <app-unverified-card [cardData]="cards"></app-unverified-card>
+  <app-unverified-card [unVerifiedUser]="getAllUnVerfiedHotel()"></app-unverified-card>
 </ng-template>

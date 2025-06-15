@@ -179,9 +179,8 @@
                 </div>
                 <div
                   class="error-message"
-                  *ngIf="emailInput.invalid && emailInput.touched"
-                >
-                  Please enter a valid email address
+                  *ngIf="emailInput.invalid && emailInput.touched">
+                    Please enter a valid email address
                 </div>
               </div>
 
@@ -248,7 +247,7 @@
                     type="text"
                     id="registerNo"
                     name="registerNo"
-                    [(ngModel)]="registerData.registerNo"
+                    [(ngModel)]="registerData.registrationNo"
                     placeholder="NGO registration number"
                     class="form-input"
                     required
@@ -274,8 +273,7 @@
                 </div>
                 <div
                   class="error-message"
-                  *ngIf="registerNoInput.invalid && registerNoInput.touched"
-                >
+                  *ngIf="registerNoInput.invalid && registerNoInput.touched">
                   Registration number is required
                 </div>
               </div>

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { History } from 'src/app/entity/History';
+import { HistoryServiceService } from 'src/app/service/history-service.service';
 
 export interface DonationHistory {
   srNo: number;
@@ -18,72 +20,15 @@ export interface DonationHistory {
 export class AdminNgoHotelMealHistoryComponent {
   isDarkMode = false;
 
-  donationHistory: DonationHistory[] = [
-    {
-      srNo: 1,
-      hotelName: 'Grand Palace Hotel',
-      ngoName: 'Food For All NGO',
-      date: '2024-01-15',
-      time: '14:30',
-      type: 'Pickup'
-    },
-    {
-      srNo: 2,
-      hotelName: 'Royal Inn Restaurant',
-      ngoName: 'Helping Hands Foundation',
-      date: '2024-01-15',
-      time: '16:45',
-      type: 'Delivery'
-    },
-    {
-      srNo: 3,
-      hotelName: 'Luxury Suites Hotel',
-      ngoName: 'Care & Share Organization',
-      date: '2024-01-16',
-      time: '12:15',
-      type: 'Pickup'
-    },
-    {
-      srNo: 4,
-      hotelName: 'City Center Hotel',
-      ngoName: 'Meal Bridge NGO',
-      date: '2024-01-16',
-      time: '18:20',
-      type: 'Delivery'
-    },
-    {
-      srNo: 5,
-      hotelName: 'Heritage Hotel',
-      ngoName: 'Community Kitchen',
-      date: '2024-01-17',
-      time: '13:00',
-      type: 'Pickup'
-    },
-    {
-      srNo: 6,
-      hotelName: 'Business Hotel',
-      ngoName: 'Food Rescue Initiative',
-      date: '2024-01-17',
-      time: '15:30',
-      type: 'Delivery'
-    },
-    {
-      srNo: 7,
-      hotelName: 'Garden View Resort',
-      ngoName: 'Nourish Network',
-      date: '2024-01-18',
-      time: '11:45',
-      type: 'Pickup'
-    },
-    {
-      srNo: 8,
-      hotelName: 'Metro Plaza Hotel',
-      ngoName: 'Hope Foundation',
-      date: '2024-01-18',
-      time: '17:10',
-      type: 'Delivery'
-    }
-  ];
+  history: History[] = [];
+
+
+  constructor(private historyService:HistoryServiceService){}
+
+  ngOnInit() {
+    this.getAllHistory();
+  }
+
 
   // Method to get CSS class based on type
   getTypeClass(type: string): string {
@@ -104,6 +49,17 @@ export class AdminNgoHotelMealHistoryComponent {
   toggleTheme() {
     this.isDarkMode = !this.isDarkMode;
     document.documentElement.setAttribute('data-theme', this.isDarkMode ? 'dark' : 'light');
+  }
+
+  private getAllHistory() {
+    this.historyService.getAllHistory().subscribe({
+      next:(value) =>{
+        this.history = value;
+      },
+      error:(err) =>{
+        console.log(err)
+      },
+    })
   }
 
 

@@ -1,170 +1,114 @@
-<!-- Header -->
-<header class="header">
-  <div class="header-left">
-    <button
-      class="menu-toggle"
-      (click)="toggleSidebar()"
-      [class.active]="sidebarOpen"
-    >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <h1 class="logo">Admin Panel</h1>
-  </div>
-
-  <div class="header-center">
-    <div class="search-container">
-      <input type="text" placeholder="Search..." class="search-input" />
-      <button class="search-btn">
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-        >
-          <circle cx="11" cy="11" r="8"></circle>
-          <path d="m21 21-4.35-4.35"></path>
-        </svg>
+<div class="admin-layout" [class.dark-mode]="isDarkMode">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <button class="mobile-menu-btn" (click)="toggleMobileMenu()">
+        <span class="hamburger-icon">☰</span>
       </button>
+      <h1 class="logo">Admin Panel</h1>
     </div>
-  </div>
 
-  <div class="header-right">
-    <button class="theme-toggle" (click)="onThemeToggle()">
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-      >
-        <circle cx="12" cy="12" r="5"></circle>
-        <line x1="12" y1="1" x2="12" y2="3"></line>
-        <line x1="12" y1="21" x2="12" y2="23"></line>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-        <line x1="1" y1="12" x2="3" y2="12"></line>
-        <line x1="21" y1="12" x2="23" y2="12"></line>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-      </svg>
-    </button>
-
-    <button class="notification-btn">
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-      >
-        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-      </svg>
-      <span class="notification-badge">3</span>
-    </button>
-
-    <div class="user-profile">
-      <div class="user-avatar">
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
+    <div class="header-center">
+      <div class="search-container">
+        <input
+          type="text"
+          placeholder="Search"
+          class="search-input"
+          [(ngModel)]="searchQuery"
+          (input)="onSearch($event)"
+          (keyup.enter)="onSearch($event)"
+        />
+        <button
+          class="search-btn"
+          (click)="onSearch({ target: { value: searchQuery } })"
         >
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-          <circle cx="12" cy="7" r="4"></circle>
-        </svg>
-      </div>
-      <div class="user-info">
-        <span class="user-name">Welcome Admin!!</span>
-        <span class="user-date">{{todayDate| date}}</span>
+          <span class="search-icon">🔍</span>
+        </button>
+        <button
+          *ngIf="searchQuery"
+          class="clear-search-btn"
+          (click)="clearSearch()"
+        >
+          ✕
+        </button>
       </div>
     </div>
-  </div>
-</header>
 
-<!-- Sidebar -->
-<nav class="sidebar" [class.open]="sidebarOpen">
-  <div class="sidebar-content">
-    <ul class="nav-menu">
-      <li class="nav-item" [class.active]="activeItem === 'home'">
-        <a
-          [routerLink]="['/admin']"
-          class="nav-link"
-          (click)="setActive('home')"
-        >
-          <span class="nav-text"> 🏠 Home</span>
-        </a>
-      </li>
+    <div class="header-right">
+      <button
+        class="theme-toggle"
+        (click)="toggleTheme()"
+        [title]="isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'"
+      >
+        <span class="theme-icon">{{ isDarkMode ? "☀️" : "🌙" }}</span>
+      </button>
 
-      <li class="nav-item" [class.active]="activeItem === 'hotel'">
-        <a [routerLink]="['./admin-hotel-verified']" class="nav-link" (click)="setActive('hotel')">
-          <span class="nav-text"> 🏨 Hotel</span>
-        </a>
-        <ul class="sub-menu" *ngIf="activeItem === 'hotel'">
-          <li>
-            <a class="sub-link" (click)="subLink('verified')">Verified</a>
-          </li>
-          <li>
-            <a class="sub-link" (click)="subLink('unVerified')">UnVerified</a>
-          </li>
-        </ul>
-      </li>
+      <button class="notification-btn" title="Notifications">
+        <span class="notification-icon">🔔</span>
+        <span class="notification-badge">3</span>
+      </button>
 
-      <li class="nav-item" [class.active]="activeItem === 'ngo'">
-        <a [routerLink]="['./admin-ngo-verified']" class="nav-link" (click)="setActive('ngo')">
-          <span class="nav-text"> ❤️ Ngo</span>
-        </a>
-        <ul class="sub-menu" *ngIf="activeItem === 'ngo'">
-          <li>
-            <a (click)="subLink('verified')" class="sub-link">Verified</a>
-          </li>
-          <li>
-            <a (click)="subLink('unVerified')" class="sub-link">UnVerified</a>
-          </li>
-        </ul>
-      </li>
+      <div class="user-profile">
+        <div class="user-avatar">
+          <span>👤</span>
+        </div>
+        <div class="user-info">
+          <span class="user-name">welcome Admin!!!</span>
+          <span class="user-date">{{ getCurrentDate() }}</span>
+        </div>
+      </div>
+    </div>
+  </header>
 
-      <li class="nav-item" [class.active]="activeItem === 'meal'">
-        <a
-          [routerLink]="['./admin-hotel-meal']"
-          class="nav-link"
-          (click)="setActive('meal')"
-        >
-          <span class="nav-text"> 🍽️ Available Meal</span>
-        </a>
-      </li>
+  <!-- Sidebar -->
+  <aside
+    class="sidebar"
+    [class.collapsed]="isSidebarCollapsed"
+    [class.mobile-open]="isMobileMenuOpen"
+  >
+    <nav class="sidebar-nav">
+      <ul class="nav-list">
+        <li *ngFor="let item of menuItems; let i = index" class="nav-item">
+          <!-- Main Navigation Link -->
+          <div
+            class="nav-link"
+            [class.active]="item.isActive"
+            [class.has-dropdown]="item.hasDropdown"
+            (click)="selectMenuItem(i, $event)"
+          >
+            <span class="nav-icon">{{ item.icon }}</span>
+            <span class="nav-label">{{ item.label }}</span>
+            <span
+              *ngIf="item.hasDropdown"
+              class="dropdown-arrow"
+              [class.rotated]="item.isOpen"
+            >
+              ▼
+              <!-- Dropdown Menu -->
+            </span>
+            <div
+              *ngIf="item.hasDropdown"
+              class="dropdown-menu"
+              [class.show]="item.isOpen"
+            >
+              <div
+                *ngFor="let dropdownItem of item.dropdownItems"
+                class="dropdown-link"
+                (click)="selectDropdownItem(i, dropdownItem, $event)"
+              >
+                <span class="dropdown-label">{{ dropdownItem.label }}</span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </aside>
 
-      <li class="nav-item" [class.active]="activeItem === 'history'">
-        <a
-          [routerLink]="['./admin-history']"
-          class="nav-link"
-          (click)="setActive('history')"
-        >
-          <span class="nav-text"> 🕐 History</span>
-        </a>
-      </li>
-
-      <li class="nav-item" [class.active]="activeItem === 'donation'">
-        <a
-          [routerLink]="['/admin']"
-          class="nav-link"
-          (click)="setActive('donation')"
-        >
-          <span class="nav-text"> 🎁 Donation</span>
-        </a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-<!-- Overlay for mobile -->
-<div
-  class="sidebar-overlay"
-  [class.active]="sidebarOpen"
-  (click)="closeSidebar()"
-></div>
+  <!-- Mobile Overlay -->
+  <div
+    class="mobile-overlay"
+    [class.active]="isMobileMenuOpen"
+    (click)="closeMobileMenu()"
+  ></div>
+</div>

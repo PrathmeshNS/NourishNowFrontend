@@ -18,7 +18,6 @@ import { AdminNgoCheckComponent } from './admin/admin-ngo-check/admin-ngo-check.
 import { AdminHotelAddedMealComponent } from './admin/admin-hotel-added-meal/admin-hotel-added-meal.component';
 import { AdminNgoHotelMealHistoryComponent } from './admin/admin-ngo-hotel-meal-history/admin-ngo-hotel-meal-history.component';
 import { UserWaitingScreenComponent } from './user-waiting-screen/user-waiting-screen.component';
-import { HotelNavbarComponent } from './hotel/hotel-navbar/hotel-navbar.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { DonationComponent } from './donation/donation.component';
@@ -92,16 +91,16 @@ const routes: Routes = [
         path: '', component: AdminScreenComponent, pathMatch: 'full'
       },
       {
-        path: 'admin-hotel-verified', component: AdminHotelCheckComponent
+        path: 'hotel-verified', component: AdminHotelCheckComponent
       },
       {
-        path: 'admin-ngo-verified', component: AdminNgoCheckComponent
+        path: 'ngo-verified', component: AdminNgoCheckComponent
       },
       {
-        path: 'admin-hotel-meal', component: AdminHotelAddedMealComponent
+        path: 'available-meal', component: AdminHotelAddedMealComponent
       },
       {
-        path: 'admin-history', component: AdminNgoHotelMealHistoryComponent
+        path: 'history', component: AdminNgoHotelMealHistoryComponent
       },
     ]
   },

@@ -45,7 +45,7 @@
         <div class="stat-card ngo-card" [@slideInLeft]>
           <div class="card-image">
             <img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-za8VRmF8yBnCjBmhe1RB1QLVQDeniM.png"
+              src="assets/dashboard-ngo.jpg"
               alt="NGO Partners"
               class="stat-image"
             />
@@ -72,7 +72,7 @@
         <div class="stat-card hotel-card" [@slideInUp]>
           <div class="card-image">
             <img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-za8VRmF8yBnCjBmhe1RB1QLVQDeniM.png"
+              src="assets/dashboard-hotel.jpg"
               alt="Hotel Partners"
               class="stat-image"
             />
@@ -99,7 +99,7 @@
         <div class="stat-card donor-card" [@slideInRight]>
           <div class="card-image">
             <img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-za8VRmF8yBnCjBmhe1RB1QLVQDeniM.png"
+              src="assets/dashboard-doner.webp"
               alt="Active Donors"
               class="stat-image"
             />
@@ -286,11 +286,11 @@
         <h2>Join the Movement</h2>
         <p>Be part of the change. Every meal matters, every action counts.</p>
         <div class="cta-buttons">
-          <button class="cta-btn primary" (click)="joinAsNGO()">
+          <button class="cta-btn primary" (click)="joinAsNGO()" [routerLink]="['./register']">
             <i class="fas fa-hands-helping"></i>
             Join as NGO
           </button>
-          <button class="cta-btn secondary" (click)="joinAsRestaurant()">
+          <button class="cta-btn secondary" (click)="joinAsRestaurant()" [routerLink]="['./register/hotel']">
             <i class="fas fa-utensils"></i>
             Join as Restaurant
           </button>

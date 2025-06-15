@@ -1,35 +1,35 @@
 import { Component, Inject, Renderer2 } from '@angular/core';
 import { NavbarClickService } from '../service/navbar-click.service';
+import { UserServiceService } from 'src/app/service/user-service.service';
+import { Users } from 'src/app/entity/Users';
 
-interface CardData {
-  id: string;
-  registrationNo: string;
-  name: string
-  email: string;
-  contactNo: string;
-  fullAddress: string;
-  city: string;
-  pincode: string;
-  dateOfJoining: string;
-}
+
 
 @Component({
   selector: 'app-admin-ngo-check',
   templateUrl: './admin-ngo-check.component.html',
   styleUrls: ['./admin-ngo-check.component.css']
 })
+  
 export class AdminNgoCheckComponent {
   isDarkMode = false;
   verified: boolean = true;
   myLink: string = ""
+
+  private ngoUser: Users[] = [];
+
 
   toggleTheme() {
     this.isDarkMode = !this.isDarkMode;
     document.documentElement.setAttribute('data-theme', this.isDarkMode ? 'dark' : 'light');
   }
 
-  constructor(private navClick: NavbarClickService) {
+  constructor(private navClick: NavbarClickService, private userService: UserServiceService) {
     this.checkNavbarClick()
+  }
+
+  ngOnInit() {
+    this.getAllNgo()
   }
 
   private checkNavbarClick() {
@@ -58,29 +58,36 @@ export class AdminNgoCheckComponent {
   }
 
 
-  cards: CardData[] = [
-    {
-      id: '8',
-      registrationNo: '87sadf32v520.x',
-      name: "Sambhaj",
-      email: 'sambhaj@gmail.com',
-      contactNo: '7951******',
-      fullAddress: 'New Delhi, Delhi.',
-      city: 'Delhi',
-      pincode: '865452',
-      dateOfJoining: '5-march-2015'
-    },
-    {
-      id: '2',
-      registrationNo: '87456dafsd45123ffdgdf',
-      name: "XYZ",
-      email: 'xya@gmail.com',
-      contactNo: '8288******',
-      fullAddress: 'Xyz Nagar, Xyz Road, Xyz',
-      city: 'XYZ',
-      pincode: '451232',
-      dateOfJoining: '28-may-2025'
-    },
-  ];
+  private getAllNgo() {
+    this.userService.getAllNgo().subscribe({
+      next: (value) => {
+        this.ngoUser = value;
+      },
+      error: (err) => {
+        console.log(err)
+      },
+    })
+  }
+
+  getAllVerifiedNgo() {
+    const verifiedNgo: Users[] = [];
+    for (let index = 0; index < this.ngoUser.length; index++) {
+      if (this.ngoUser[index].status.toString() === 'TRUE') {
+        verifiedNgo.push(this.ngoUser[index])
+      }
+    }
+    return verifiedNgo
+  }
+
+  getAllUnVerifiedNgo() {
+    const unVerifiedNgo: Users[] = [];
+    for (let index = 0; index < this.ngoUser.length; index++) {
+      if (this.ngoUser[index].status.toString() === 'FALSE') {
+        unVerifiedNgo.push(this.ngoUser[index])
+      }
+    }
+    return unVerifiedNgo
+  }
+
 
 }

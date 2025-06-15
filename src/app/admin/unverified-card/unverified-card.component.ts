@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core"
+import { Users } from "src/app/entity/Users";
 
 interface CardData {
   id: string;
@@ -18,18 +19,19 @@ interface CardData {
   styleUrls: ['./unverified-card.component.css']
 })
 export class UnverifiedCardComponent {
-  @Input() cardData: CardData[] = [];
+  
+  @Input() unVerifiedUser: Users[] = [];
 
-  trackByFn(index: number, item: CardData): string {
+  trackByFn(index: number, item: Users): number {
     return item.id;
   }
 
-  acceptRequest(id: string) {
+  acceptRequest(id: number) {
     console.log('Accepting request:', id);
     // Implement accept logic
   }
 
-  declineRequest(id: string) {
+  declineRequest(id: number) {
     console.log('Declining request:', id);
     // Implement decline logic
   }

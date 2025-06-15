@@ -189,6 +189,6 @@ export class DashboardComponent {
   }
 
   joinAsRestaurant(): void {
-    alert('Redirecting to Restaurant registration...');
+    alert('Redirecting to hotel registration...');
   }
 }

@@ -93,7 +93,6 @@
               <div class="item-content">
                 <div class="item-name" *ngIf="editingIndex !== i">
                   <span class="food-name">{{item.name}}</span>
-                  <span class="food-category">{{item.category}}</span>
                 </div>
                 
                 <div class="edit-input" *ngIf="editingIndex === i">
@@ -186,7 +185,7 @@
                     [(ngModel)]="deliveryType"
                     name="deliveryType"
                     class="config-select">
-                    <option value="pickup">Pickup Only</option>
+                    <option value="pick">Pickup Only</option>
                     <option value="delivery">Home Delivery</option>
                     <option value="both">Both Options</option>
                   </select>

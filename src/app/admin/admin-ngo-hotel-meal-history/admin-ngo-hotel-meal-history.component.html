@@ -16,7 +16,7 @@
         <div class="table-header">
           <div class="table-info">
             <span class="total-records"
-              >Total Records: {{ donationHistory.length }}</span
+              >Total Records: {{ history.length }}</span
             >
           </div>
           <div class="legend">
@@ -45,21 +45,21 @@
             </thead>
             <tbody>
               <tr
-                *ngFor="let record of donationHistory; let i = index"
+                *ngFor="let record of history; let i = index"
                 class="table-row"
                 [class.even-row]="i % 2 === 1"
               >
-                <td class="sr-no">{{ record.srNo }}</td>
+                <td class="sr-no">{{ i }}</td>
                 <td class="hotel-name">
                   <div class="hotel-info">
                     <i class="material-symbols-outlined">room_service</i>
-                    <span>{{ record.hotelName }}</span>
+                    <span>{{ record.hotelUsers.name }}</span>
                   </div>
                 </td>
                 <td class="ngo-name">
                   <div class="ngo-info">
                     <i class="material-symbols-outlined">concierge</i>
-                    <span>{{ record.ngoName }}</span>
+                    <span>{{ record.ngoUsers.name }}</span>
                   </div>
                 </td>
                 <td class="date">{{ formatDate(record.date) }}</td>
@@ -67,16 +67,16 @@
                 <td class="type">
                   <span
                     class="type-badge"
-                    [ngClass]="getTypeClass(record.type)"
+                    [ngClass]="getTypeClass(record.typeOfProviding)"
                   >
                     <i class="material-icons">
                       {{
-                        record.type === "Pickup"
+                        record.typeOfProviding === "Pick"
                           ? "local_shipping"
                           : "delivery_dining"
                       }}
                     </i>
-                    {{ record.type }}
+                    {{ record.typeOfProviding }}
                   </span>
                 </td>
               </tr>
@@ -85,7 +85,7 @@
         </div>
 
         <!-- Empty state (if no records) -->
-        <div class="empty-state" *ngIf="donationHistory.length === 0">
+        <div class="empty-state" *ngIf="history.length === 0">
           <i class="material-icons">inbox</i>
           <h3>No donation history found</h3>
           <p>Start tracking donations to see them here</p>

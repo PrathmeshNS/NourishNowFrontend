@@ -4,7 +4,7 @@ import { Users } from "./Users";
 export interface AvailableFood{
     aId: number,
     dateTime: string,
-    description: string,
+    foodItem: string[],
     approxPersonCanEat: number,
     typeOfProviding: string
     

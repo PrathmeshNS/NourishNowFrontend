@@ -1,16 +1,23 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Users } from 'src/app/entity/Users';
+import { ReviewStatus } from 'src/app/enums/ReviewStatus';
+import { UserRole } from 'src/app/enums/UserRole';
+import { NgoServiceService } from 'src/app/service/ngo-service.service';
+import { UserServiceService } from 'src/app/service/user-service.service';
 
 
 interface RegisterData {
   name: string;
   email: string;
   password: string;
-  registerNo: string;
+  registrationNo: string;
   address: string;
   contactNo: string;
   city: string;
-  pincode: string; // Added pincode field
+  pincode: number; // Added pincode field
   website: string;
+  dateOfJoining: string;
 }
 
 @Component({
@@ -24,19 +31,20 @@ export class NgoRegisterComponent {
     name: '',
     email: '',
     password: '',
-    registerNo: '',
     address: '',
+    registrationNo: '',
+    dateOfJoining: '',
     contactNo: '',
+    website: '',
     city: '',
-    pincode: '', // Added pincode initialization
-    website: ''
+    pincode: 0,
   };
 
   showPassword: boolean = false;
   isLoading: boolean = false;
   acceptTerms: boolean = false;
 
-  constructor() { }
+  constructor(private ngoService: NgoServiceService, private router:Router) { }
 
   onRegister(): void {
     if (this.isFormValid()) {
@@ -44,12 +52,21 @@ export class NgoRegisterComponent {
 
       // Simulate API call
       setTimeout(() => {
-        console.log('Registration attempt:', this.registerData);
+
+        this.ngoService.registerNgo(this.registerData).subscribe({
+          next: (value) => {
+            console.log(value)
+            alert('Registration successful! Please check your email for verification.');
+            // this.router.navigate(['../login'])
+          },
+          error: (err) => {
+            alert(err.error)
+          },
+        });
+        console.log(this.registerData)
+
         this.isLoading = false;
 
-        // Handle successful registration here
-        // For example: this.router.navigate(['/verification']);
-        alert('Registration successful! Please check your email for verification.');
 
         // Reset form
         this.resetForm();
@@ -65,7 +82,7 @@ export class NgoRegisterComponent {
     event.preventDefault();
     console.log('Navigate to login');
     // Handle navigation to login page
-    // For example: this.router.navigate(['/login']);
+    this.router.navigate(['../login']);
     alert('Navigating to login page...');
   }
 
@@ -74,7 +91,7 @@ export class NgoRegisterComponent {
       this.registerData.name &&
       this.registerData.email &&
       this.registerData.password &&
-      this.registerData.registerNo &&
+      this.registerData.registrationNo &&
       this.registerData.address &&
       this.registerData.contactNo &&
       this.registerData.city &&
@@ -88,12 +105,13 @@ export class NgoRegisterComponent {
       name: '',
       email: '',
       password: '',
-      registerNo: '',
       address: '',
+      registrationNo: '',
+      dateOfJoining: '',
       contactNo: '',
+      website: '',
       city: '',
-      pincode: '', // Reset pincode
-      website: ''
+      pincode: 0,
     };
     this.acceptTerms = false;
     this.showPassword = false;

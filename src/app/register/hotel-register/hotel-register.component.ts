@@ -1,41 +1,47 @@
 import { Component } from '@angular/core';
+import { HotelServiceService } from 'src/app/service/hotel-service.service';
+
 
 interface RegisterData {
   name: string;
   email: string;
   password: string;
-  registerNo: string;
+  registrationNo: string;
   address: string;
   contactNo: string;
   city: string;
-  pincode: string; // Added pincode field
+  pincode: number; // Added pincode field
   website: string;
+  dateOfJoining: string;
 }
+
+
 @Component({
   selector: 'app-hotel-register',
   templateUrl: './hotel-register.component.html',
   styleUrls: ['./hotel-register.component.css']
 })
-  
+
 export class HotelRegisterComponent {
-  
+
   registerData: RegisterData = {
     name: '',
     email: '',
     password: '',
-    registerNo: '',
+    registrationNo: '',
     address: '',
     contactNo: '',
     city: '',
-    pincode: '', // Added pincode initialization
-    website: ''
-  };
+    pincode: 0,
+    website: '',
+    dateOfJoining: ''
+  }
 
   showPassword: boolean = false;
   isLoading: boolean = false;
   acceptTerms: boolean = false;
 
-  constructor() { }
+  constructor(private hotelService: HotelServiceService) { }
 
   onRegister(): void {
     if (this.isFormValid()) {
@@ -44,6 +50,12 @@ export class HotelRegisterComponent {
       // Simulate API call
       setTimeout(() => {
         console.log('Registration attempt:', this.registerData);
+
+        this.hotelService.registerHotel(this.registerData).subscribe({
+          next: (value) => {
+
+          },
+        })
         this.isLoading = false;
 
         // Handle successful registration here
@@ -73,10 +85,11 @@ export class HotelRegisterComponent {
       this.registerData.name &&
       this.registerData.email &&
       this.registerData.password &&
-      this.registerData.registerNo &&
+      this.registerData.registrationNo &&
       this.registerData.address &&
       this.registerData.contactNo &&
       this.registerData.city &&
+      this.registerData.dateOfJoining &&
       this.registerData.pincode && // Added pincode validation
       this.acceptTerms
     );
@@ -87,12 +100,13 @@ export class HotelRegisterComponent {
       name: '',
       email: '',
       password: '',
-      registerNo: '',
+      registrationNo: '',
       address: '',
       contactNo: '',
       city: '',
-      pincode: '', // Reset pincode
-      website: ''
+      pincode: 0, // Reset pincode
+      website: '',
+      dateOfJoining: ''
     };
     this.acceptTerms = false;
     this.showPassword = false;

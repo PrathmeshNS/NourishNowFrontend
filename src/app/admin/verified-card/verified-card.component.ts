@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core"
+import { Users } from "src/app/entity/Users";
 
 interface CardData {
   id: string;
@@ -17,6 +18,8 @@ interface CardData {
   styleUrls: ['./verified-card.component.css']
 })
 export class VerifiedCardComponent {
+
+  @Input() verifiedUser: Users[] = [];
 
   cards: CardData[] = [
     {

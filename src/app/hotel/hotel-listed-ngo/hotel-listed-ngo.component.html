@@ -1,7 +1,7 @@
 <app-hotel-navbar></app-hotel-navbar>
 <div class="container">
   <div class="cards-grid">
-    <div class="address-card" *ngFor="let card of addressCards">
+    <div class="address-card" *ngFor="let card of ngoUsers">
       <div class="card-header">
         <div class="illustration">
           <div class="icon icon-heart"></div>
@@ -34,7 +34,7 @@
           
           <div class="address-item full-width">
             <span class="address-label">ADDRESS</span>
-            <span class="address-value">{{ card.fullAddress }}</span>
+            <span class="address-value">{{ card.address }}</span>
           </div>
         </div>
       </div>
@@ -42,6 +42,7 @@
       <div class="card-footer">
         <div class="decorative-line"></div>
       </div>
+
     </div>
   </div>
 </div>

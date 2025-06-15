@@ -6,9 +6,9 @@
 </div>
 
 <ng-template #verifiedNgo>
-  <app-verified-card></app-verified-card>
+  <app-verified-card [verifiedUser]="getAllVerifiedNgo()"></app-verified-card>
 </ng-template>
 
 <ng-template #unVerifiedNgo>
-  <app-unverified-card [cardData]="cards"></app-unverified-card>
+  <app-unverified-card [unVerifiedUser]="getAllUnVerifiedNgo()"></app-unverified-card>
 </ng-template>

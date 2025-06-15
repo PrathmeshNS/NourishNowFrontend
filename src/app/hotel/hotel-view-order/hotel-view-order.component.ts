@@ -1,4 +1,7 @@
 import { Component, HostListener } from '@angular/core';
+import { TemporaryMealBookingDetails } from 'src/app/entity/TemporaryMealBookingDetails';
+import { TemporaryMealDetailsServiceService } from 'src/app/service/temporary-meal-details-service.service';
+import { UserServiceService } from 'src/app/service/user-service.service';
 
 interface NGO {
   id: string;
@@ -23,6 +26,9 @@ interface NGO {
   styleUrls: ['./hotel-view-order.component.css']
 })
 export class HotelViewOrderComponent {
+
+  tempMealDetails: TemporaryMealBookingDetails[] = [];
+
   ngoList: NGO[] = [
     {
       id: '1',
@@ -82,7 +88,7 @@ export class HotelViewOrderComponent {
       featured: false,
       status: 'pending',
       backgroundImage: '/placeholder.svg?height=400&width=350',
-      
+
       yearsActive: 5
     },
   ];
@@ -93,9 +99,10 @@ export class HotelViewOrderComponent {
   toastMessage: string = '';
   toastType: 'success' | 'error' = 'success';
 
-  constructor() { }
+  constructor(private temporaryMealService: TemporaryMealDetailsServiceService, private userService:UserServiceService) { }
 
   ngOnInit(): void {
+    this.getTemporaryMealbooked(this.userService.userService.id)
     // Initialize component
   }
 
@@ -163,5 +170,16 @@ export class HotelViewOrderComponent {
     setTimeout(() => {
       this.showToast = false;
     }, 3000);
+  }
+
+  getTemporaryMealbooked(hotelId: number) {
+    this.temporaryMealService.getHotelBookedMealById(hotelId).subscribe({
+      next: (value) => {
+        console.log("From",value)
+      },
+      error: (err) => {
+        console.log(err)
+      },
+    })
   }
 }
