@@ -252,7 +252,8 @@ export class AdminNavbarComponent {
     if (label.toString() == 'Ngo') {
       this.router.navigate(['../admin/ngo-verified']);
     }
-    if (label.toString() == ' History') {
+    if (label.toString() == 'History') {
+      console.log("ihsd")
       this.router.navigate(['../admin/history']);
     }
     if (label.toString() == 'Available Meal') {

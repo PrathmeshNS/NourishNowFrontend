@@ -1,6 +1,6 @@
 .card-section {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 0 0 18%;
 }
 
 .section-header {
@@ -474,6 +474,7 @@
         font-size: 0.8rem;
     }
 }
+
 /* Main Content */
 .main-content {
     grid-area: main;

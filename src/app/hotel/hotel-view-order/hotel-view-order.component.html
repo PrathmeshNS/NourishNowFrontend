@@ -11,12 +11,12 @@
       <!-- NGO Card -->
       <div 
         class="ngo-card" 
-        *ngFor="let ngo of ngoList; let i = index"
-        [class.featured]="ngo.featured">
+        *ngFor="let tempMeal of tempMealDetails; let i = index"
+        >
         
         <!-- Card Background -->
         <div class="card-background">
-          <img [src]="ngo.backgroundImage" [alt]="ngo.name + ' background'" class="bg-image">
+          <img [src]="" [alt]=" ' background'" class="bg-image">
           <div class="card-overlay"></div>
         </div>
 
@@ -81,9 +81,9 @@
 
           <!-- NGO Basic Info -->
           <div class="ngo-basic-info">
-            <h3 class="ngo-name">{{ngo.name}}</h3>
+            <h3 class="ngo-name">{{tempMeal.ngoUsers.name}}</h3>
             <div class="ngo-badges">
-              <span class="badge verified" *ngIf="ngo.verified">
+              <span class="badge verified" *ngIf="tempMeal.ngoUsers.status">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                   <polyline points="20,6 9,17 4,12"/>
                 </svg>
@@ -93,9 +93,9 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                   <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/>
                 </svg>
-                {{ngo.rating}}
+                <!-- {{t.rating}} -->
               </span>
-              <span class="badge category">{{ngo.category}}</span>
+              <!-- <span class="badge category">{{ngo.category}}</span> -->
             </div>
           </div>
         </div>
@@ -106,7 +106,7 @@
           <div class="action-buttons">
             <button 
               class="action-btn accept-btn"
-              (click)="acceptNgo(ngo)">
+              (click)="acceptNgo(tempMeal)">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <polyline points="20,6 9,17 4,12"/>
               </svg>
@@ -115,7 +115,7 @@
             
             <button 
               class="action-btn reject-btn"
-              (click)="rejectNgo(ngo)">
+              (click)="rejectNgo(tempMeal)">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <line x1="18" y1="6" x2="6" y2="18"/>
                 <line x1="6" y1="6" x2="18" y2="18"/>
@@ -134,7 +134,7 @@
                 </svg>
                 Complete Address:
               </h4>
-              <p class="info-content">{{ngo.address}}</p>
+              <p class="info-content">{{tempMeal.ngoUsers.address}}</p>
             </div>
 
             <div class="info-section">
@@ -145,7 +145,7 @@
                 Contact No:
               </h4>
               <p class="info-content">
-                <a href="tel:{{ngo.phone}}" class="phone-link">{{ngo.phone}}</a>
+                <a href="tel:{{tempMeal.ngoUsers.contactNo}}" class="phone-link">{{tempMeal.ngoUsers.contactNo}}</a>
               </p>
             </div>
 
@@ -159,7 +159,7 @@
                   </svg>
                   City:
                 </h4>
-                <p class="info-content">{{ngo.city}}</p>
+                <p class="info-content">{{tempMeal.ngoUsers.city}}</p>
               </div>
 
               <div class="info-section">
@@ -172,7 +172,7 @@
                   </svg>
                   Pincode:
                 </h4>
-                <p class="info-content">{{ngo.pincode}}</p>
+                <p class="info-content">{{tempMeal.ngoUsers.pincode}}</p>
               </div>
             </div>
 
@@ -180,8 +180,8 @@
             <div class="additional-info">
               <div class="stats-row">
                 <div class="stat-item">
-                  <span class="stat-number">{{ngo.yearsActive}}</span>
-                  <span class="stat-label">Years Active</span>
+                  <span class="stat-number">{{tempMeal.ngoUsers.dateOfJoining}}</span>
+                  <span class="stat-label">FromActive</span>
                 </div>
               </div>
             </div>
@@ -189,25 +189,15 @@
         </div>
 
         <!-- Status Indicator -->
-        <div class="status-indicator" [class]="'status-' + ngo.status" *ngIf="ngo.status !== 'pending'">
+        <div class="status-indicator" [class]="'status-' + tempMeal.mealBookingStatus" *ngIf="tempMeal.mealBookingStatus !== mealType.HOLDING">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <polyline *ngIf="ngo.status === 'accepted'" points="20,6 9,17 4,12"/>
-            <g *ngIf="ngo.status === 'rejected'">
+            <polyline *ngIf="tempMeal.mealBookingStatus === mealType.ACCEPTED" points="20,6 9,17 4,12"/>
+            <g *ngIf="tempMeal.mealBookingStatus === mealType.REJECTED">
               <line x1="18" y1="6" x2="6" y2="18"/>
               <line x1="6" y1="6" x2="18" y2="18"/>
             </g>
           </svg>
         </div>
-
-        <!-- Featured Badge -->
-        <div class="featured-badge" *ngIf="ngo.featured">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/>
-          </svg>
-          Featured
-        </div>
-      </div>
-    </div>
 
     <!-- Load More Button -->
     <div class="load-more-section" *ngIf="hasMoreNgos">

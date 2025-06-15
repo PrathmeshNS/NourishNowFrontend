@@ -29,7 +29,7 @@ export class UserServiceService {
 
   private api = "http://localhost:8080/user";
 
-  constructor(private http: HttpClient, private router:Router) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   getToken(user: Users): Observable<any> {
@@ -45,15 +45,15 @@ export class UserServiceService {
   }
 
 
-  public loginUser(users: Users): Observable<Users>{
+  public loginUser(users: Users): Observable<Users> {
     return this.http.post<Users>(this.api + "/login", users);
   }
 
-  getUserById(id: number): Observable<Users>{
+  getUserById(id: number): Observable<Users> {
     return this.http.get<Users>(`${this.api + 'get-by-id'} / ${id}`)
   }
 
-  public getAllHotel():Observable<Users[]>{
+  public getAllHotel(): Observable<Users[]> {
     return this.http.get<Users[]>(this.api + "/get-all-hotel");
   }
 
@@ -61,29 +61,25 @@ export class UserServiceService {
     return this.http.get<Users[]>(this.api + "/get-all-ngo");
   }
 
-  public getNoOfHotel():Observable<number>{
+  public getNoOfHotel(): Observable<number> {
     return this.http.get<number>(this.api + "/no-of-hotel");
   }
 
-  public getNoOfNgo():Observable<number> {
+  public getNoOfNgo(): Observable<number> {
     return this.http.get<number>(this.api + "/no-of-ngo");
   }
 
 
-  public getNoOfActiveHotel() :Observable<number> {
+  public getNoOfActiveHotel(): Observable<number> {
     return this.http.get<number>(this.api + "/no-of-active-hotel");
   }
-
-  public getAllVerifiedNgo()  :Observable<number>{
-    return this.http.get<number>(this.api + "/no-of-active-ngo");
-  }
-
+  
 
   public getAllUnVerifiedHotel(): Observable<number> {
     return this.http.get<number>(this.api + "/no-of-unactive-hotel");
   }
 
-  public getAllUnVerifiedNgo(): Observable<number>{
+  public getAllUnVerifiedNgo(): Observable<number> {
     return this.http.get<number>(this.api + "/no-of-unactive-ngo");
   }
 

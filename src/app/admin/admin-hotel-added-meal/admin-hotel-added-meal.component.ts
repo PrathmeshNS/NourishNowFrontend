@@ -1,4 +1,5 @@
 import { Component, Inject, Renderer2, type OnInit, } from "@angular/core"
+import { Router } from "@angular/router";
 import { AvailableFood } from "src/app/entity/AvailableFood";
 import { AvailableFoodServiceService } from "src/app/service/available-food-service.service";
 
@@ -39,7 +40,8 @@ export class AdminHotelAddedMealComponent {
       }
     ];
 
-  constructor(private availableFoodService: AvailableFoodServiceService) { }
+  constructor(private availableFoodService: AvailableFoodServiceService, private router: Router)
+  {this.checkUser()}
 
   toggleTheme() {
     this.isDarkMode = !this.isDarkMode;
@@ -58,4 +60,9 @@ export class AdminHotelAddedMealComponent {
     })
   }
 
+  private checkUser() {
+    if (localStorage.getItem("aId") == null) {
+      this.router.navigate(['../login'])
+    }
+  }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Users } from 'src/app/entity/Users';
 import { UserServiceService } from 'src/app/service/user-service.service';
 
@@ -12,7 +13,8 @@ export class HotelListedNgoComponent {
 
   ngoUsers: Users[] = [];
 
-  constructor(private userService: UserServiceService) {
+  constructor(private userService: UserServiceService, private router: Router) {
+    this.checkUser()
   }
   
   ngOnInit() {
@@ -30,5 +32,9 @@ export class HotelListedNgoComponent {
     })
   }
 
-
+  private checkUser() {
+    if (localStorage.getItem("hId") == null) {
+      this.router.navigate(['../login'])
+    }
+  }
 }

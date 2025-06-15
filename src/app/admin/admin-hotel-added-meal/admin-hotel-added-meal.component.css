@@ -1,21 +1,21 @@
-.app-container {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    transition: all 0.3s ease;
-}
-
-.app-container.dark-mode {
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    /* or whatever your navbar height is */
+    z-index: 1000;
+    background: inherit;
+    /* so it matches your navbar bg */
 }
 
 .main-content {
-    margin-left: 80px;
-    margin-top: 40px;
+    margin-top: 80px;
+    /* same height as header */
     padding: 2rem;
-    transition: margin-left 0.3s ease;
+    /* other styles */
 }
-
-
 /* Main Card Container */
 
 

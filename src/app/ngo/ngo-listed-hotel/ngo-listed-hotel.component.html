@@ -2,7 +2,7 @@
   <app-ngo-navbar></app-ngo-navbar>
   <div class="container">
     <div class="cards-grid">
-      <div class="address-card" *ngFor="let card of addressCards">
+      <div class="address-card" *ngFor="let card of getAllVerfiedHotel()">
         <div class="card-header">
           <div class="illustration">
             <div class="icon icon-heart"></div>
@@ -17,7 +17,7 @@
 
           <div class="contact-info">
             <span class="label">Contact No.</span>
-            <span class="value">{{ card.contactNo }}</span>
+            <span class="value">{{ card.contactNo}}</span>
           </div>
 
           <h3 class="section-title">Address Details</h3>
@@ -35,7 +35,7 @@
 
             <div class="address-item full-width">
               <span class="address-label">ADDRESS</span>
-              <span class="address-value">{{ card.fullAddress }}</span>
+              <span class="address-value">{{ card.address }}</span>
             </div>
           </div>
         </div>

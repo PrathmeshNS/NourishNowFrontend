@@ -14,8 +14,6 @@
     grid-template-columns: 280px 1fr;
     grid-template-rows: 70px 1fr;
     min-height: 100vh;
-    background: #f8fafc;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     transition: all 0.3s ease;
 }
 
@@ -419,135 +417,6 @@
     overflow-y: auto;
 }
 
-/* Dashboard Content */
-.dashboard-content {
-    height: 100%;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    max-width: 800px;
-    margin-bottom: 2rem;
-}
-
-/* Stats Cards */
-.stats-card {
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.stats-card:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    transform: translateY(-4px);
-}
-
-.ngo-card {
-    background: linear-gradient(135deg, #fce7f3 0%, #f3e8ff 100%);
-}
-
-.hotel-card {
-    background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
-}
-
-.admin-layout.dark-mode .ngo-card {
-    background: linear-gradient(135deg, #553c9a 0%, #7c3aed 100%);
-}
-
-.admin-layout.dark-mode .hotel-card {
-    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-}
-
-.card-header {
-    padding: 1.5rem 1.5rem 0;
-    text-align: center;
-}
-
-.card-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #374151;
-    margin: 0;
-}
-
-.admin-layout.dark-mode .card-title {
-    color: #ffffff;
-}
-
-.card-body {
-    padding: 1.5rem;
-}
-
-.stats-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-}
-
-.stat-item {
-    text-align: center;
-    flex: 1;
-}
-
-.stat-label {
-    display: block;
-    font-size: 0.875rem;
-    color: #6b7280;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-}
-
-.admin-layout.dark-mode .stat-label {
-    color: #e2e8f0;
-}
-
-.stat-number {
-    display: block;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #111827;
-    line-height: 1;
-}
-
-.admin-layout.dark-mode .stat-number {
-    color: #ffffff;
-}
-
-.avatar-row {
-    display: flex;
-    justify-content: center;
-    gap: 0.75rem;
-}
-
-.avatar-circle {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.7);
-    border: 2px solid rgba(255, 255, 255, 0.9);
-    transition: all 0.2s ease;
-    cursor: pointer;
-}
-
-.avatar-circle:hover {
-    background: rgba(255, 255, 255, 0.9);
-    transform: scale(1.05);
-}
-
-.admin-layout.dark-mode .avatar-circle {
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.admin-layout.dark-mode .avatar-circle:hover {
-    background: rgba(255, 255, 255, 0.3);
-}
-
 /* Debug Info */
 .debug-info {
     background: #f0f9ff;
@@ -656,21 +525,6 @@
         padding: 1rem;
     }
 
-    .stats-grid {
-        gap: 1rem;
-    }
-
-    .stats-card {
-        border-radius: 12px;
-    }
-
-    .card-body {
-        padding: 1rem;
-    }
-
-    .stat-number {
-        font-size: 2rem;
-    }
 }
 
 @media (max-width: 480px) {
@@ -695,14 +549,6 @@
         font-size: 1.25rem;
     }
 
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .avatar-circle {
-        width: 32px;
-        height: 32px;
-    }
 }
 
 /* Scrollbar Styling */

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from "@angular/core"
 import { NavbarClickService } from "../service/navbar-click.service";
 import { UserServiceService } from "src/app/service/user-service.service";
 import { Users } from "src/app/entity/Users";
+import { Router } from "@angular/router";
 
 
 
@@ -17,8 +18,9 @@ export class AdminHotelCheckComponent {
 
   private hotelUser: Users[] = [];
 
-  constructor(private navClick: NavbarClickService, private userService: UserServiceService) {
+  constructor(private navClick: NavbarClickService, private userService: UserServiceService,private router:Router) {
     this.checkNavbarClick()
+    this.checkUser()
   }
 
   ngOnInit() {
@@ -85,5 +87,11 @@ export class AdminHotelCheckComponent {
     }
     console.log(unVerifiedHotel)
     return unVerifiedHotel;
+  }
+
+  private checkUser() {
+    if (localStorage.getItem("aId") == null) {
+      this.router.navigate(['../login'])
+    }
   }
 }

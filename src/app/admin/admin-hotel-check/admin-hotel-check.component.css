@@ -15,17 +15,32 @@
     z-index: 1000;
 }
 
-.main-content {
-    grid-row: 2 / 3;
-    overflow-y: auto;
-    background: #f8fafc;
-    display: flex;
-    flex-direction: column;
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    z-index: 1000;
+    /* light mode background */
+    transition: background 0.3s ease;
 }
 
-/* Dark mode adjustments */
-.admin-layout.dark-mode .main-content {
+.app-container.dark-mode .header {
+    background: #2d3748;
+    /* dark mode background matching your navbar */
+}
+
+.main-content {
+    padding: 2rem;
+    /* light mode bg */
+    transition: background 0.3s ease;
+    margin: -2% 0 0 0;
+}
+
+.app-container.dark-mode .main-content {
     background: #1a202c;
+    /* dark mode bg */
 }
 
 .content-header {

@@ -1,39 +1,36 @@
 <div class="app-container" [class.dark-mode]="isDarkMode">
   <app-admin-navbar (themeToggle)="toggleTheme()"></app-admin-navbar>
+
   <main class="main-content">
-    
-    <!-- Main Content -->
-    <main class="main-content">
-      <div class="content-header">
-        <h2 class="page-title">Listed Things</h2>
-      </div>
-      
-      <div class="stats-grid">
-        <div 
-          *ngFor="let card of statsCards" 
-          class="stats-card"
-          [ngClass]="'stats-card--' + card.color"
-        >
-          <h3 class="card-title">{{card.title}}</h3>
-          
-          <div class="stats-row">
-            <div class="stat-item">
-              <span class="stat-label">Verified</span>
-              <span class="stat-value">{{card.verified}}</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-label">UnVerified</span>
-              <span class="stat-value">{{card.unverified}}</span>
-            </div>
+    <div class="content-header">
+      <h2 class="page-title">Listed Things</h2>
+    </div>
+
+    <div class="stats-grid">
+      <div
+        *ngFor="let card of statsCards"
+        class="stats-card"
+        [ngClass]="'stats-card--' + card.color"
+      >
+        <h3 class="card-title">{{ card.title }}</h3>
+
+        <div class="stats-row">
+          <div class="stat-item">
+            <span class="stat-label">Verified</span>
+            <span class="stat-value">{{ card.verified }}</span>
           </div>
-          
-          <div class="card-indicators">
-            <div class="indicator"></div>
-            <div class="indicator"></div>
-            <div class="indicator"></div>
+          <div class="stat-item">
+            <span class="stat-label">UnVerified</span>
+            <span class="stat-value">{{ card.unverified }}</span>
           </div>
         </div>
+
+        <div class="card-indicators">
+          <div class="indicator"></div>
+          <div class="indicator"></div>
+          <div class="indicator"></div>
+        </div>
       </div>
-    </main>
+    </div>
   </main>
 </div>

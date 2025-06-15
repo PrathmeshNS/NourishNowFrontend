@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AvailableFood } from 'src/app/entity/AvailableFood';
 import { AvailableFoodServiceService } from 'src/app/service/available-food-service.service';
 import { UserServiceService } from 'src/app/service/user-service.service';
@@ -42,7 +43,7 @@ export class HotelAddMealComponent {
   toastMessage: string = '';
   toastType: 'success' | 'error' = 'success';
 
-  constructor(private availableFoodService:AvailableFoodServiceService) { }
+  constructor(private availableFoodService:AvailableFoodServiceService, private router:Router) { this.checkUser()}
 
   addFoodItem(): void {
     if (this.newFoodItem.trim()) {
@@ -163,4 +164,11 @@ export class HotelAddMealComponent {
     this.newFoodItem = '';
     this.cancelEdit();
   }
+
+  private checkUser() {
+    if (localStorage.getItem("hId") == null) {
+      this.router.navigate(['../login']) 
+    }
+  }
+
 }

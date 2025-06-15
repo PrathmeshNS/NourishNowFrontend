@@ -1,8 +1,13 @@
 <div class="app-container" [class.dark-mode]="isDarkMode">
-  <app-admin-navbar (themeToggle)="toggleTheme()"></app-admin-navbar>
+
+  <header class="header">
+    <app-admin-navbar (themeToggle)="toggleTheme()"></app-admin-navbar>
+  </header>
+
   <main class="main-content">
     <div *ngIf="verified; then verifiedNgo; else unVerifiedNgo"></div>
   </main>
+
 </div>
 
 <ng-template #verifiedNgo>
@@ -10,5 +15,7 @@
 </ng-template>
 
 <ng-template #unVerifiedNgo>
-  <app-unverified-card [unVerifiedUser]="getAllUnVerifiedNgo()"></app-unverified-card>
+  <app-unverified-card
+    [unVerifiedUser]="getAllUnVerifiedNgo()"
+  ></app-unverified-card>
 </ng-template>

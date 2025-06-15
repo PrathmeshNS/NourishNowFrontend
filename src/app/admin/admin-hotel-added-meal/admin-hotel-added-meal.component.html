@@ -1,7 +1,9 @@
 <div class="app-container" [class.dark-mode]="isDarkMode">
-  <app-admin-navbar (themeToggle)="toggleTheme()"></app-admin-navbar>
+  <header class="header">
+    <app-admin-navbar (themeToggle)="toggleTheme()"></app-admin-navbar>
+  </header>
   <main class="main-content">
-    <div class="card-container" >
+    <div class="card-container">
       <div class="card" *ngFor="let hotel of hotels">
         <!-- Header with gradient background -->
         <div class="card-header">

@@ -1,5 +1,8 @@
 <div class="app-container" [class.dark-mode]="isDarkMode">
-  <app-admin-navbar (themeToggle)="toggleTheme()"></app-admin-navbar>
+  <header class="header">
+    <app-admin-navbar (themeToggle)="toggleTheme()"></app-admin-navbar>
+  </header>
+
   <main class="main-content">
     <div class="history-container">
       <div class="header-section">

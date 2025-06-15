@@ -16,19 +16,15 @@ export class HistoryServiceService {
     return this.http.post(this.api + "add-history", history);
   }
 
-  getHisoryById(hId: number) {
-    return this.http.get(`${this.api + 'find-history'} / ${hId}`)
-  }
-
   getAllHistory():Observable<History[]>{
     return this.http.get<History[]>(this.api + "get-all-history")
   }
 
-  getHotelHistory(hotelId: number) {
-    return this.http.get(`${this.api + 'get-hotel-history'} / ${hotelId}`)
+  getHotelHistory(hotelId: number) :Observable<History[]>{
+    return this.http.get<History[]>(`${this.api + 'get-hotel-history'} / ${hotelId}`)
   }
 
-  getNgoHistory(ngoId: number) {
-    return this.http.get(`${this.api + 'get-ngo-history'} / ${ngoId}`)
+  getNgoHistory(ngoId: number) :Observable<History[]> {
+    return this.http.get<History[]>(`${this.api + 'get-ngo-history'} / ${ngoId}`)
   }
 }

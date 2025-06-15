@@ -1,18 +1,29 @@
-.app-container {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    transition: all 0.3s ease;
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    z-index: 1000;
+
+    transition: background 0.3s ease;
 }
 
-.app-container.dark-mode {
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+.app-container.dark-mode .header {
+    background: #d1d6e0;
+    /* dark mode background matching your navbar */
 }
 
 .main-content {
-    margin-left: 280px;
-    margin-top: 80px;
+    margin: 80px 0 0 15%;
     padding: 2rem;
-    transition: margin-left 0.3s ease;
+
+    transition: background 0.3s ease;
+}
+
+.app-container.dark-mode .main-content {
+    background: #1a202c;
+    /* dark mode bg */
 }
 
 /* Main Container */
@@ -20,7 +31,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    min-height: 100vh;
+    min-height: 50vh;
 }
 
 /* Header Section */

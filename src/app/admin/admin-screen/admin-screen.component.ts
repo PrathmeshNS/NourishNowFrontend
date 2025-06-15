@@ -21,15 +21,15 @@ export class AdminScreenComponent {
   adminName = 'Admin!!!';
   currentDate = 'Jun 2, 2025';
   isDarkMode = false;
-  verifiedNgo:any = 0
+  verifiedNgo: any = 0
   verifiedHotel: any = 0;
   unverifiedNgo = 0
   unverifiedHotel = 0
 
 
 
-  constructor(private userService: UserServiceService) {
-
+  constructor(private userService: UserServiceService, private router: Router) {
+    this.checkUser()
   }
 
   ngOnInit() {
@@ -130,5 +130,11 @@ export class AdminScreenComponent {
   callAllMethod() {
     this.getNoOfHotel()
     this.getNoOfNgo()
+  }
+
+  private checkUser() {
+    if (localStorage.getItem("aId") == null) {
+      this.router.navigate(['../login'])
+    }
   }
 }

@@ -1,4 +1,7 @@
 import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+import { TemporaryMealBookingDetails } from 'src/app/entity/TemporaryMealBookingDetails';
+import { TemporaryMealDetailsServiceService } from 'src/app/service/temporary-meal-details-service.service';
 
 @Component({
   selector: 'app-ngo-book-meal',
@@ -7,19 +10,36 @@ import { Component, HostListener } from '@angular/core';
 })
 export class NgoBookMealComponent {
 
-  menuItems: string[] = [
-    'Varn bhat',
-    'Papad',
-    'Lonch',
-    'Shev bhaji',
-    'Masale bhat',
-    'Pahner tikka'
-  ];
+  temporaryMeal: TemporaryMealBookingDetails[] = [];
 
-  address: string = 'Sambhaji Chauk, Burud Galli, Vinchur';
-  contactNumber: string = '93595******';
-  city: string = 'Nashik';
-  pincode: string = '422305';
+  private id = 0;
 
-  constructor() { }
+  constructor(private router: Router, private temporaryMealService: TemporaryMealDetailsServiceService) {
+    this.checkUser()
+    this.getAllBooking()
+  }
+
+  private checkUser() {
+    if (localStorage.getItem("nId") == null) {
+      this.router.navigate(['../login'])
+    }
+    else {
+      const str = localStorage.getItem('nId');
+      if (str != null) {
+        this.id = Number.parseInt(str)
+      }
+    }
+  }
+
+  getAllBooking() {
+    this.temporaryMealService.getNgoBookedMealById(this.id).subscribe({
+      next: (value) => {
+        this.temporaryMeal = value;
+      },
+      error: (err) => {
+        console.log(err)
+      },
+    })
+  }
+
 }

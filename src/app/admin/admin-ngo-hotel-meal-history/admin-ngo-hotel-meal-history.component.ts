@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { History } from 'src/app/entity/History';
 import { HistoryServiceService } from 'src/app/service/history-service.service';
 
@@ -23,7 +24,9 @@ export class AdminNgoHotelMealHistoryComponent {
   history: History[] = [];
 
 
-  constructor(private historyService:HistoryServiceService){}
+  constructor(private historyService: HistoryServiceService, private router: Router) {
+    this.checkUser()
+  }
 
   ngOnInit() {
     this.getAllHistory();
@@ -62,5 +65,10 @@ export class AdminNgoHotelMealHistoryComponent {
     })
   }
 
+  private checkUser() {
+    if (localStorage.getItem("aId") == null) {
+      this.router.navigate(['../login'])
+    }
+  }
 
 }

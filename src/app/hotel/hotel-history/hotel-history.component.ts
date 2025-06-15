@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { History } from 'src/app/entity/History';
 import { HistoryServiceService } from 'src/app/service/history-service.service';
 
@@ -9,11 +10,15 @@ import { HistoryServiceService } from 'src/app/service/history-service.service';
 })
 export class HotelHistoryComponent {
 
+  private id = 0;
+
   contributions: History[] = []
 
   filteredContributions: History[] = [];
   searchTerm: string = '';
   filterType: string = 'all';
+
+
 
   contributionTypes = [
     { value: 'all', label: 'All Types' },
@@ -25,14 +30,14 @@ export class HotelHistoryComponent {
     console.log("get Calleed")
   }
   
-  constructor(private historyservice: HistoryServiceService) {
+  constructor(private historyservice: HistoryServiceService,private router:Router) {
+    this.checkUser()
     this.getAllHistory();
-    console.log("get Calleed o")
    }
 
 
   getAllHistory() {
-    this.historyservice.getAllHistory().subscribe({
+    this.historyservice.getHotelHistory(this.id).subscribe({
       next: (value) => {
         this.contributions = value;
         this.filteredContributions = [...this.contributions];
@@ -87,5 +92,15 @@ export class HotelHistoryComponent {
     return new Set(this.contributions.map(c => c.typeOfProviding)).size;
   }
 
+  private checkUser() {
+    if (localStorage.getItem("hId") == null) {
+      this.router.navigate(['../login'])
+    }
+    else {
+      const str = localStorage.getItem('hId');
+      if (str != null)
+        this.id = Number.parseInt(str)
+    }
+  }
 
 }

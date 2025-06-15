@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-
-interface AddressCard {
-  name: string;
-  contactNo: string;
-  city: string;
-  pincode: string;
-  fullAddress: string;
-}
+import { Router } from '@angular/router';
+import { History } from 'src/app/entity/History';
+import { Users } from 'src/app/entity/Users';
+import { HistoryServiceService } from 'src/app/service/history-service.service';
+import { UserServiceService } from 'src/app/service/user-service.service';
 
 @Component({
   selector: 'app-ngo-listed-hotel',
@@ -14,34 +11,48 @@ interface AddressCard {
   styleUrls: ['./ngo-listed-hotel.component.css']
 })
 export class NgoListedHotelComponent {
-  addressCards: AddressCard[] = [
-    {
-      name: 'Sambhaji Ngo',
-      contactNo: '93595******',
-      city: 'Nashik',
-      pincode: '422305',
-      fullAddress: 'Sambhaji Chauk, Panchvati, Nashik'
-    },
-    {
-      name: 'World Heri',
-      contactNo: '7965******',
-      city: 'Vdsfsdf',
-      pincode: '456789',
-      fullAddress: 'Sambhaji Chauk, Panchvati, Nashik'
-    },
-    {
-      name: 'World Heri',
-      contactNo: '7965******',
-      city: 'Vdsfsdf',
-      pincode: '456789',
-      fullAddress: 'Sambhaji Chauk, Panchvati, Nashik'
-    },
-    {
-      name: 'Sambhaji Ngo',
-      contactNo: '93595******',
-      city: 'Nashik',
-      pincode: '422305',
-      fullAddress: 'Sambhaji Chauk, Panchvati, Nashik'
+
+  private hotelUser: Users[] = [];
+  ngoId = 0;
+
+  constructor(private router: Router, private userService: UserServiceService) {
+    this.checkUser()
+    this.getAllVerfiedHotel()
+  }
+
+  private getAllHotel() {
+    this.userService.getAllHotel().subscribe({
+      next: (value) => {
+        this.hotelUser = value;
+      },
+      error: (err) => {
+
+      },
+    })
+  }
+
+
+  private checkUser() {
+    if (localStorage.getItem("nId") == null) {
+      this.router.navigate(['../login'])
     }
-  ];
+    else {
+      const str = localStorage.getItem("nId")
+      if (str != null) {
+        this.ngoId = Number.parseInt(str);
+      }
+    }
+  }
+
+  getAllVerfiedHotel() {
+    this.getAllHotel()
+    const verifiedHotel: Users[] = []
+    for (let index = 0; index < this.hotelUser.length; index++) {
+      if (this.hotelUser[index].status.toString() === 'TRUE') {
+        verifiedHotel.push(this.hotelUser[index])
+      }
+    }
+    console.log(verifiedHotel)
+    return verifiedHotel;
+  }
 }

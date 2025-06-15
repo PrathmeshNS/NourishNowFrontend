@@ -1,4 +1,5 @@
 import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { AvailableFood } from 'src/app/entity/AvailableFood';
 import { TemporaryMealBookingDetails } from 'src/app/entity/TemporaryMealBookingDetails';
 import { Users } from 'src/app/entity/Users';
@@ -43,8 +44,9 @@ export class NgoAvailableFoodComponent {
   
   isLoading: boolean = false;
 
-  constructor(private availableFoodService: AvailableFoodServiceService, private temporaryMealService: TemporaryMealDetailsServiceService) {
+  constructor(private availableFoodService: AvailableFoodServiceService, private temporaryMealService: TemporaryMealDetailsServiceService, private router:Router) {
     this.getAllAvailableFood()
+    this.checkUser()
   }
 
   requestFood(index: number): void {
@@ -75,8 +77,6 @@ export class NgoAvailableFoodComponent {
     }, 2000);
   }
 
-
-
   getAllAvailableFood() {
     this.availableFoodService.getAvailableFood().subscribe({
       next: (value) => {
@@ -87,5 +87,11 @@ export class NgoAvailableFoodComponent {
         console.log("Erro  : ", err)
       },
     })
+  }
+
+  private checkUser() {
+    if (localStorage.getItem("nId") == null) {
+      this.router.navigate(['../login'])
+    }
   }
 }

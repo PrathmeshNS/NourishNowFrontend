@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
-
-interface Contribution {
-  id: number;
-  date: string;
-  ngoName: string;
-  type: string;
-  time: string;
-}
+import { Router } from '@angular/router';
+import { History } from 'src/app/entity/History';
+import { HistoryServiceService } from 'src/app/service/history-service.service';
 
 
 @Component({
@@ -16,36 +11,51 @@ interface Contribution {
 })
 export class NgoHistoryComponent {
 
-  contributions: Contribution[] = [
-    { id: 1, date: "28-05-2025", ngoName: "Sambhaj Ngo", type: "Pick", time: "22:05:50" },
-    { id: 2, date: "08-05-2025", ngoName: "Sambhaj Ngo", type: "Delivered", time: "22:05:50" },
-    { id: 3, date: "17-08-2025", ngoName: "Sambhaj Ngo", type: "Pick", time: "22:05:50" },
-    { id: 4, date: "08-09-2025", ngoName: "Sambhaj Ngo", type: "Delivered", time: "22:05:50" }
-  ];
+  contributions: History[] = []
 
-  filteredContributions: Contribution[] = [];
+  filteredContributions: History[] = [];
   searchTerm: string = '';
   filterType: string = 'all';
+
+  private id = 0;
 
   contributionTypes = [
     { value: 'all', label: 'All Types' },
     { value: 'pick', label: 'Pick' },
-    { value: 'drop', label: 'Drop' },
+    { value: 'delivery', label: 'Delivery' },
   ];
 
   ngOnInit(): void {
-    this.filteredContributions = [...this.contributions];
+    console.log("get Calleed")
+  }
+
+  constructor(private historyservice: HistoryServiceService, private router: Router) {
+    this.checkUser()
+    this.getAllHistory();
+  }
+
+
+  getAllHistory() {
+    this.historyservice.getNgoHistory(this.id).subscribe({
+      next: (value) => {
+        this.contributions = value;
+        this.filteredContributions = [...this.contributions];
+      },
+      error: (err) => {
+        console.log("error: ", err)
+      },
+    })
   }
 
   applyFilters(): void {
     this.filteredContributions = this.contributions.filter(contribution => {
       const matchesSearch =
-        contribution.ngoName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        contribution.type.toLowerCase().includes(this.searchTerm.toLowerCase());
+        contribution.ngoUsers.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        contribution.typeOfProviding.toLowerCase().includes(this.searchTerm.toLowerCase());
 
       const matchesFilter =
         this.filterType === 'all' ||
-        contribution.type.toLowerCase() === this.filterType.toLowerCase();
+        contribution.typeOfProviding.toLowerCase() === this.filterType.toLowerCase();
 
       return matchesSearch && matchesFilter;
     });
@@ -73,10 +83,23 @@ export class NgoHistoryComponent {
   }
 
   getTotalNgos(): number {
-    return new Set(this.contributions.map(c => c.ngoName)).size;
+    return new Set(this.contributions.map(c => c.ngoUsers.name)).size;
   }
 
   getTotalTypes(): number {
-    return new Set(this.contributions.map(c => c.type)).size;
+    return new Set(this.contributions.map(c => c.typeOfProviding)).size;
   }
+
+  private checkUser() {
+    if (localStorage.getItem("nId") == null) {
+      this.router.navigate(['../login'])
+    }
+    else {
+      const str = localStorage.getItem('nId')
+      if (str != null) {
+        this.id = Number.parseInt(str);
+      }
+    }
+  }
+
 }
