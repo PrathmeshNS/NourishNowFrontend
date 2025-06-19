@@ -33,11 +33,11 @@ export class NgoListedHotelComponent {
 
 
   private checkUser() {
-    if (localStorage.getItem("nId") == null) {
+    if (sessionStorage.getItem("nId") == null) {
       this.router.navigate(['../login'])
     }
     else {
-      const str = localStorage.getItem("nId")
+      const str = JSON.parse(sessionStorage.getItem("nId")!)
       if (str != null) {
         this.ngoId = Number.parseInt(str);
       }
@@ -52,7 +52,6 @@ export class NgoListedHotelComponent {
         verifiedHotel.push(this.hotelUser[index])
       }
     }
-    console.log(verifiedHotel)
     return verifiedHotel;
   }
 }

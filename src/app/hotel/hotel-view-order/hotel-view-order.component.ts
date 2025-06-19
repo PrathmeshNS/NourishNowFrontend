@@ -41,14 +41,22 @@ export class HotelViewOrderComponent {
   constructor(private temporaryMealService: TemporaryMealDetailsServiceService, private userService:UserServiceService) { }
 
   ngOnInit(): void {
-    this.getTemporaryMealbooked(this.userService.userService.id)  
+    this.getTemporaryMealbooked(JSON.parse(sessionStorage.getItem("hId")!))  
   }
 
   acceptNgo(tempMeal: TemporaryMealBookingDetails): void {
     // Always allow accepting
     tempMeal.mealBookingStatus = this.mealType.ACCEPTED;
-    this.showToastMessage(`${tempMeal.ngoUsers.name} has been accepted successfully!`, 'success');
-
+    
+    this.temporaryMealService.addTemporaryMeal(JSON.parse(sessionStorage.getItem("hId")!)).subscribe({
+      next:(value)=> {
+        console.log(value)
+        this.showToastMessage(`${tempMeal.ngoUsers.name} has been accepted successfully!`, 'success');
+      },
+      error:(err)=>{
+        console.log(err)
+      },
+    })
     // Handle accept logic here
     console.log('NGO accepted:', tempMeal.tmdId);
   }

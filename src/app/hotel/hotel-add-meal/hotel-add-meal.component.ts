@@ -124,7 +124,7 @@ export class HotelAddMealComponent {
       this.avaiableFood.approxPersonCanEat = this.servingSize;
       this.avaiableFood.typeOfProviding = this.deliveryType;
       
-      const hotelId = localStorage.getItem("hId");
+      const hotelId = JSON.parse(sessionStorage.getItem("hId")!);
 
       if (hotelId != null) {
         this.avaiableFood.hotelUsers.id = Number.parseInt(hotelId);
@@ -166,7 +166,7 @@ export class HotelAddMealComponent {
   }
 
   private checkUser() {
-    if (localStorage.getItem("hId") == null) {
+    if (sessionStorage.getItem("hId") == null) {
       this.router.navigate(['../login']) 
     }
   }

@@ -93,11 +93,11 @@ export class HotelHistoryComponent {
   }
 
   private checkUser() {
-    if (localStorage.getItem("hId") == null) {
+    if (sessionStorage.getItem("hId") == null) {
       this.router.navigate(['../login'])
     }
     else {
-      const str = localStorage.getItem('hId');
+      const str = JSON.parse(sessionStorage.getItem('hId')!);
       if (str != null)
         this.id = Number.parseInt(str)
     }

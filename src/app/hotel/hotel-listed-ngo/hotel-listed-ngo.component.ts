@@ -33,7 +33,7 @@ export class HotelListedNgoComponent {
   }
 
   private checkUser() {
-    if (localStorage.getItem("hId") == null) {
+    if (sessionStorage.getItem("hId") == null) {
       this.router.navigate(['../login'])
     }
   }

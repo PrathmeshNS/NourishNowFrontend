@@ -14,8 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     constructor(private router: Router) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const token = localStorage.getItem('token');
-
+        const token = sessionStorage.getItem('token');
         if (token) {
             request = request.clone({
                 setHeaders: {
@@ -25,25 +24,21 @@ export class AuthInterceptor implements HttpInterceptor {
         }
         return next.handle(request).pipe(
             catchError((error: HttpErrorResponse) => {
-                this.logOutUser();
                 if (error.status === 401) {
                     // token expired or invalid
-                    this.router.navigate(['/login']);
+                    // this.router.navigate(['/login']);
                 }
                 if (error.status === 403) {
                     // token expired or invalid
+                    sessionStorage.clear()
                     this.router.navigate(['/login']);
                 }
                 if (error.status === 404) {
                     // token expired or invalid
-                    this.router.navigate(['/login']);
+                    // this.router.navigate(['/login']);
                 }
                 return throwError(() => error);
             })
         );
-    }
-
-    private logOutUser() {
-        localStorage.clear()
     }
 }

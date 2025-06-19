@@ -63,8 +63,8 @@ export class NgoNavbarComponent {
   ];
 
   userProfile: UserProfile = {
-    name: 'John Doe',
-    email: 'john.doe@example.com',
+    name: 'Vaishnavi Pawar',
+    email: 'vaishnavi@example.com',
     role: 'NGO Volunteer',
     avatar: '' // Add avatar URL if available
   };

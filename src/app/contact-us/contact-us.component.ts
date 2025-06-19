@@ -149,10 +149,10 @@ export class ContactUsComponent {
 
   openSocialMedia(platform: string): void {
     const urls = {
-      facebook: 'https://facebook.com/nourishnow',
-      twitter: 'https://twitter.com/nourishnow',
-      instagram: 'https://instagram.com/nourishnow',
-      linkedin: 'https://linkedin.com/company/nourishnow'
+      // facebook: 'https://facebook.com/nourishnow',
+      // twitter: 'https://twitter.com/nourishnow',
+      // instagram: 'https://instagram.com/nourishnow',
+      // linkedin: 'https://linkedin.com/company/nourishnow'
     };
 
     if (urls[platform as keyof typeof urls]) {

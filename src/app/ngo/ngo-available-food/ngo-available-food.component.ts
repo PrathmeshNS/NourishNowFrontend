@@ -9,12 +9,10 @@ import { UserRole } from 'src/app/enums/UserRole';
 import { AvailableFoodServiceService } from 'src/app/service/available-food-service.service';
 import { TemporaryMealDetailsServiceService } from 'src/app/service/temporary-meal-details-service.service';
 
-interface Address {
-  street: string;
-  city: string;
-  state: string;
-  pincode: string;
-  landmark: string;
+export interface TemporaryMealBookingDetailsTemp{
+  mealBookingStatus: MealBookingStatus.HOLDING,
+  food: AvailableFood,
+    ngoUsers: Users
 }
 
 @Component({
@@ -41,30 +39,29 @@ export class NgoAvailableFoodComponent {
     role: UserRole.NGO,
     status: ReviewStatus.TRUE
   };
-  
+
   isLoading: boolean = false;
 
-  constructor(private availableFoodService: AvailableFoodServiceService, private temporaryMealService: TemporaryMealDetailsServiceService, private router:Router) {
+  constructor(private availableFoodService: AvailableFoodServiceService, private temporaryMealService: TemporaryMealDetailsServiceService, private router: Router) {
     this.getAllAvailableFood()
     this.checkUser()
   }
 
   requestFood(index: number): void {
     this.isLoading = true;
-    const ngoId = localStorage.getItem("nId");
+    const ngoId = JSON.parse(sessionStorage.getItem("nId")!);
 
     if (ngoId != null)
       this.userDetails.id = Number.parseInt(ngoId);
-    const temporaryMeal: TemporaryMealBookingDetails = {
-      tmdId: 0,
-      mealBookingStatus: MealBookingStatus.ACCEPTED,
+    const temporaryMeal: TemporaryMealBookingDetailsTemp = {
+      mealBookingStatus: MealBookingStatus.HOLDING,
       food: this.availableFood[index],
-      ngoUsers:this.userDetails
+      ngoUsers: this.userDetails
     }
 
     this.temporaryMealService.addTemporaryMeal(temporaryMeal).subscribe({
       next: (value) => {
-        console.log("from Next : ",value)
+        console.log("from Next : ", value)
       },
       error: (err) => {
         console.log("from Error : ", err)
@@ -90,7 +87,7 @@ export class NgoAvailableFoodComponent {
   }
 
   private checkUser() {
-    if (localStorage.getItem("nId") == null) {
+    if (sessionStorage.getItem("nId") == null) {
       this.router.navigate(['../login'])
     }
   }

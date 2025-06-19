@@ -90,7 +90,7 @@ export class AdminHotelCheckComponent {
   }
 
   private checkUser() {
-    if (localStorage.getItem("aId") == null) {
+    if (sessionStorage.getItem("aId") == null) {
       this.router.navigate(['../login'])
     }
   }

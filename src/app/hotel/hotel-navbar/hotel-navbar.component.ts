@@ -62,9 +62,9 @@ export class HotelNavbarComponent {
   ];
 
   userProfile: UserProfile = {
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    role: 'NGO Volunteer',
+    name: 'Darshan',
+    email: 'darshan@example.com',
+    role: 'Hotel Volunteer',
     avatar: '' // Add avatar URL if available
   };
 

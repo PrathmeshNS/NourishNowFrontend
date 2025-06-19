@@ -37,7 +37,7 @@ export class UserServiceService {
       tap((response: any) => {
         console.log(response)
         user = response.user
-        localStorage.setItem('token', response.token);
+        sessionStorage.setItem('token', response.token);
         this.storeUserId(response.user.id, response.user.role);
         this.navigateUser(response.user.role);
       })
@@ -86,13 +86,13 @@ export class UserServiceService {
 
   private storeUserId(id: Number, role: UserRole) {
     if (role.toString() == 'HOTEL') {
-      localStorage.setItem('hId', id.toString())
+      sessionStorage.setItem('hId', id.toString())
     }
     if (role.toString() == 'NGO') {
-      localStorage.setItem('nId', id.toString())
+      sessionStorage.setItem('nId', id.toString())
     }
     if (role.toString() == 'ADMIN') {
-      localStorage.setItem('aId', id.toString())
+      sessionStorage.setItem('aId', id.toString())
     }
   }
 
@@ -107,7 +107,7 @@ export class UserServiceService {
     }
     if (role.toString() == 'ADMIN') {
       console.log('Navigate to Admin DashBoard');
-      this.router.navigate(['./admin']);
+      this.router.navigate(['./admin']);    
     }
   }
 }

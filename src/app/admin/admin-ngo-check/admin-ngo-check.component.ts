@@ -91,7 +91,7 @@ export class AdminNgoCheckComponent {
   }
 
   private checkUser() {
-    if (localStorage.getItem("aId") == null) {
+    if (sessionStorage.getItem("aId") == null) {
       this.router.navigate(['../login'])
     }
   }

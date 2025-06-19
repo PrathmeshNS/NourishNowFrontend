@@ -15,19 +15,18 @@ export class NgoBookMealComponent {
   private id = 0;
 
   constructor(private router: Router, private temporaryMealService: TemporaryMealDetailsServiceService) {
+   
     this.checkUser()
     this.getAllBooking()
   }
 
   private checkUser() {
-    if (localStorage.getItem("nId") == null) {
-      this.router.navigate(['../login'])
+    const str = JSON.parse(sessionStorage.getItem('nId')!);
+    if (str != null) {
+      this.id = Number.parseInt(str)
     }
-    else {
-      const str = localStorage.getItem('nId');
-      if (str != null) {
-        this.id = Number.parseInt(str)
-      }
+    if (JSON.parse(sessionStorage.getItem("nId")!)) {
+      // this.router.navigate(['../login'])
     }
   }
 
