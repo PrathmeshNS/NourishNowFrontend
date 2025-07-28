@@ -20,11 +20,11 @@ export class HistoryServiceService {
     return this.http.get<History[]>(this.api + "get-all-history")
   }
 
-  getHotelHistory(hotelId: number) :Observable<History[]>{
-    return this.http.get<History[]>(`${this.api + 'get-hotel-history'} / ${hotelId}`)
+  getHotelHistory(hotelId: number): Observable<History[]>{
+    return this.http.get<History[]>(`${this.api + 'get-hotel-history'}/${hotelId}`)
   }
 
   getNgoHistory(ngoId: number) :Observable<History[]> {
-    return this.http.get<History[]>(`${this.api + 'get-ngo-history'} / ${ngoId}`)
+    return this.http.get<History[]>(`${this.api + 'get-ngo-history'}/${ngoId}`)
   }
 }

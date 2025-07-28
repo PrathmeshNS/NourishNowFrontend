@@ -1,0 +1,108 @@
+<div class="profile-upload-container">
+  <div class="upload-card">
+    <div class="card-header">
+      <h2 class="card-title">Upload Profile Image</h2>
+      <p class="card-subtitle">Choose a photo to represent your profile</p>
+    </div>
+
+    <div class="card-body">
+      <!-- Current Profile Image -->
+      <div class="current-image-section" *ngIf="currentProfileImage">
+        <h3>Current Profile Image</h3>
+        <div class="current-image-container">
+          <img [src]="currentProfileImage" alt="Current profile" class="current-image">
+        </div>
+      </div>
+
+      <!-- Upload Section -->
+      <div class="upload-section">
+        <!-- Drag and Drop Area -->
+        <div 
+          class="drop-zone"
+          [class.drag-over]="false"
+          (dragover)="onDragOver($event)"
+          (dragleave)="onDragLeave($event)"
+          (drop)="onDrop($event)"
+          (click)="triggerFileInput()">
+          
+          <div class="drop-zone-content" *ngIf="!previewUrl">
+            <div class="upload-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17,8 12,3 7,8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+            </div>
+            <p class="drop-text">Drag and drop your image here</p>
+            <p class="drop-subtext">or click to browse files</p>
+            <p class="file-requirements">Supports: JPEG, PNG, GIF, WebP (Max 5MB)</p>
+          </div>
+
+          <!-- Image Preview -->
+          <div class="image-preview" *ngIf="previewUrl">
+            <img [src]="previewUrl" alt="Preview" class="preview-image">
+            <button type="button" class="remove-btn" (click)="removeImage(); $event.stopPropagation()">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Hidden File Input -->
+        <input 
+          type="file" 
+          id="fileInput" 
+          class="file-input" 
+          accept="image/*" 
+          (change)="onFileSelected($event)">
+
+        <!-- Upload Progress -->
+        <div class="progress-section" *ngIf="isUploading">
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="uploadProgress"></div>
+          </div>
+          <p class="progress-text">Uploading... {{uploadProgress}}%</p>
+        </div>
+
+        <!-- Messages -->
+        <div class="message error-message" *ngIf="errorMessage">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="15" y1="9" x2="9" y2="15"></line>
+            <line x1="9" y1="9" x2="15" y2="15"></line>
+          </svg>
+          {{errorMessage}}
+        </div>
+
+        <div class="message success-message" *ngIf="successMessage">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22,4 12,14.01 9,11.01"></polyline>
+          </svg>
+          {{successMessage}}
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button 
+            type="button" 
+            class="btn btn-secondary" 
+            (click)="resetForm()"
+            [disabled]="isUploading">
+            Cancel
+          </button>
+          <button 
+            type="button" 
+            class="btn btn-primary" 
+            (click)="uploadImage()"
+            [disabled]="!selectedFile || isUploading">
+            <span *ngIf="!isUploading">Upload Image</span>
+            <span *ngIf="isUploading">Uploading...</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

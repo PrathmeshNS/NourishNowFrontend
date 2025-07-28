@@ -21,6 +21,7 @@ import { UserWaitingScreenComponent } from './user-waiting-screen/user-waiting-s
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { DonationComponent } from './donation/donation.component';
+import { ProfileUploadScreenComponent } from './profile-upload-screen/profile-upload-screen.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -32,6 +33,9 @@ const routes: Routes = [
   },
   {
     path: 'verification', component: UserWaitingScreenComponent, pathMatch: 'full'
+  },
+  {
+    path: 'profile', component: ProfileUploadScreenComponent, pathMatch: 'full'
   },
   {
     path: 'contact-us', component: ContactUsComponent, pathMatch: 'full'

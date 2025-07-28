@@ -39,6 +39,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { DonationComponent } from './donation/donation.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { ProfileUploadScreenComponent } from './profile-upload-screen/profile-upload-screen.component';
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     UnverifiedCardComponent,
     ContactUsComponent,
     AboutUsComponent,
-    DonationComponent,    
+    DonationComponent,
+    ProfileUploadScreenComponent,    
   ],
   imports: [
     BrowserModule,

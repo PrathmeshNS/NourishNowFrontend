@@ -39,7 +39,7 @@ export class UserServiceService {
         user = response.user
         sessionStorage.setItem('token', response.token);
         this.storeUserId(response.user.id, response.user.role);
-        this.navigateUser(response.user.role);
+        this.navigateUser(response.user.role, response.user.status);
       })
     );
   }
@@ -73,14 +73,14 @@ export class UserServiceService {
   public getNoOfActiveHotel(): Observable<number> {
     return this.http.get<number>(this.api + "/no-of-active-hotel");
   }
-  
+
 
   public getAllUnVerifiedHotel(): Observable<number> {
-    return this.http.get<number>(this.api + "/no-of-unactive-hotel");
+    return this.http.get<number>(this.api+"/no-of-unactive-hotel");
   }
 
   public getAllUnVerifiedNgo(): Observable<number> {
-    return this.http.get<number>(this.api + "/no-of-unactive-ngo");
+    return this.http.get<number>(this.api+"/no-of-unactive-ngo");
   }
 
 
@@ -96,18 +96,20 @@ export class UserServiceService {
     }
   }
 
-  private navigateUser(role: UserRole) {
-    if (role.toString() == 'HOTEL') {
-      console.log('Navigate to Hotel DashBaord');
-      this.router.navigate(['./hotel']);
-    }
-    if (role.toString() == 'NGO') {
-      console.log('Navigate to Ngo DashBoard');
-      this.router.navigate(['./ngo']);
-    }
-    if (role.toString() == 'ADMIN') {
-      console.log('Navigate to Admin DashBoard');
-      this.router.navigate(['./admin']);    
+  private navigateUser(role: UserRole, status: ReviewStatus) {
+    if (status) {
+      if (role.toString() == 'HOTEL') {
+        console.log('Navigate to Hotel DashBaord');
+        this.router.navigate(['./hotel']);
+      }
+      if (role.toString() == 'NGO') {
+        console.log('Navigate to Ngo DashBoard');
+        this.router.navigate(['./ngo']);
+      }
+      if (role.toString() == 'ADMIN') {
+        console.log('Navigate to Admin DashBoard');
+        this.router.navigate(['./admin']);
+      }
     }
   }
 }
